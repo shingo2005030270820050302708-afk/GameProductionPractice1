@@ -6,6 +6,7 @@
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance,
     _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);
     ChangeWindowMode(true);
    
 
@@ -23,9 +24,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance,
         ClearDrawScreen();
         UpdateInput();
         SceneManagerUpdate();
-        DrawInput();
         if (CheckHitKey(KEY_INPUT_ESCAPE)) break;
-        DrawExtendGraph(0, 0, SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4, GetDrawScreen(), FALSE);
         ScreenFlip();
     }
 
