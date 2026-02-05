@@ -79,6 +79,11 @@ void StepTitleScene()
 	{
 		ChangeScene(SCENE_PLAY);
 	}
+	// Xキー入力（タイトル到着後のみ）
+	if (g_TitleArrived && IsTriggerKey(KEY_X))
+	{
+		ChangeScene(SCENE_OPTION);
+	}
 }
 
 void UpdateTitleScene()
