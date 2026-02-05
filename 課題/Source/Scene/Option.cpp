@@ -33,8 +33,6 @@ int g_SEFont = -1;
 int g_BGMGauge = -1;
 int g_SEGauge = -1;
 
-// ‰æ‘œƒnƒ“ƒhƒ‹
-int g_BGHandle = 0;
 
 
 void InitOptionScene()

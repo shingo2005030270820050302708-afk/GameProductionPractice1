@@ -3,6 +3,7 @@
 #include <math.h>
 #include "SceneManager.h"
 #include "../Input/Input.h"
+#include "../GameSetting/GameSetting.h"
 
 // タイトルの位置
 #define TITLE_POS_X (900)
@@ -18,6 +19,8 @@
 #define TITLE_GRAVITY   0.15f
 #define TITLE_MAX_SPEED 3.0f
 
+int g_BGHandle = -1;
+
 // PressZKye点滅用変数
 float g_PressZKeyAlpha = 0.0f;	// アルファ値
 float g_PressZKeyRadian = 0.0f;	// cos関数に渡すラジアン値
@@ -29,6 +32,8 @@ int   g_TitleArrived = 0;
 
 void InitTitleScene()
 {
+	g_BGHandle = LoadGraph("Data/BG/game-forest-dots3.png");
+
 	g_PressZKeyAlpha = 0.0f;
 	g_PressZKeyRadian = 0.0f;
 
@@ -87,17 +92,19 @@ void UpdateTitleScene()
 
 void DrawTitleScene()
 {
+	DrawGraph(0, 0, g_BGHandle, FALSE);
+
+
 	const char* titleText = "課題Git";
 	int titleWidth = GetDrawStringWidth(titleText, strlen(titleText));
-	int titleX = (640 - titleWidth) / 2;
-
+	int titleX = (SCREEN_WIDTH - titleWidth) / 2;
 	DrawString(titleX, (int)g_TitlePosY, titleText, GetColor(255, 255, 255));
 
 	if (g_TitleArrived)
 	{
 		const char* pressText = "Press Z Button";
 		int pressWidth = GetDrawStringWidth(pressText, strlen(pressText));
-		int pressX = (640 - pressWidth) / 2;
+		int pressX = (SCREEN_WIDTH - pressWidth) / 2;
 
 		int alpha = (int)(g_PressZKeyAlpha * 255);
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
@@ -106,7 +113,13 @@ void DrawTitleScene()
 	}
 }
 
+
 void FinTitleScene()
 {
-	// フォント解放は不要になったので何もしない
+	if (g_BGHandle != -1)
+	{
+		DeleteGraph(g_BGHandle);
+		g_BGHandle = -1;
+	}
+
 }
