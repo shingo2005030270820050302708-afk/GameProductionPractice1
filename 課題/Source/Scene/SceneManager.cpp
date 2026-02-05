@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 #include <DxLib.h>
 #include "TitleScene.h"
+#include "PlayScene.h"
 
 
 Scene g_NowScene = SCENE_TITLE;

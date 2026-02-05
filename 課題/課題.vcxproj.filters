@@ -27,7 +27,11 @@
     <ClCompile Include="Source\Input\Input.cpp">
       <Filter>Source\Input</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\Scene\Option.cpp">
+=======
+    <ClCompile Include="Source\Scene\PlayScene.cpp">
+>>>>>>> 13fd2d653cf71d4f666bb9fd33b5f6f685b48e65
       <Filter>Source\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +48,11 @@
     <ClInclude Include="Source\Input\Input.h">
       <Filter>Source\Input</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\Scene\Option.h">
+=======
+    <ClInclude Include="Source\Scene\PlayScene.h">
+>>>>>>> 13fd2d653cf71d4f666bb9fd33b5f6f685b48e65
       <Filter>Source\Scene</Filter>
     </ClInclude>
   </ItemGroup>
