@@ -86,6 +86,10 @@ void StepTitleScene()
 	{
 		ChangeScene(SCENE_PLAY);
 	}
+	if (CheckHitKey(KEY_INPUT_X))
+	{
+		ChangeScene(SCENE_OPTION);
+	}
 }
 
 void UpdateTitleScene()
