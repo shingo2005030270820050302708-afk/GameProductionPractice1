@@ -21,6 +21,8 @@ void UpdateInput()
     // キーボード入力
   
     if (CheckHitKey(KEY_INPUT_Z))     g_InputState |= KEY_Z;
+    if (CheckHitKey(KEY_INPUT_C))   g_InputState |= KEY_C;
+
  
 }
 

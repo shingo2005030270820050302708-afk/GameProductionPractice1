@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "TitleScene.h"
-#includeÅ@"../Scene/Option.h"
+#include "../Scene/Option.h"
 #include <math.h>
 #include "SceneManager.h"
 #include "../Input/Input.h"
@@ -72,7 +72,7 @@ void StepOptionScene()
 
 void UpdateOptionScene()
 {
-	IsHitKey(KEY_C)
+	if (CheckHitKey(KEY_INPUT_C))
 	{
 		ChangeScene(SCENE_TITLE);
 	}
@@ -91,4 +91,3 @@ void FinOptionScene()
 
 
 }
-

@@ -2,6 +2,7 @@
 #include <DxLib.h>
 #include "TitleScene.h"
 #include "PlayScene.h"
+#include "Option.h"
 
 
 Scene g_NowScene = SCENE_TITLE;
@@ -59,7 +60,7 @@ void InitScene()
 	{
 	case SCENE_TITLE: InitTitleScene(); break;
 	case SCENE_PLAY: InitPlayScene(); break;
-	case SCENE_OPTION: Init(); break;
+	case SCENE_OPTION: InitOptionScene(); break;
 	}
 }
 
@@ -69,7 +70,7 @@ void LoadScene()
 	{
 	case SCENE_TITLE: LoadTitleScene(); break;
 	case SCENE_PLAY: LoadPlayScene(); break;
-	case SCENE_OPTION: Load(); break;
+	case SCENE_OPTION: LoadOptionScene(); break;
 	}
 }
 
@@ -79,7 +80,7 @@ void StartScene()
 	{
 	case SCENE_TITLE: StartTitleScene(); break;
 	case SCENE_PLAY: StartPlayScene(); break;
-	case SCENE_OPTION: Start(); break;
+	case SCENE_OPTION: ; break;
 	}
 }
 
@@ -89,7 +90,7 @@ void StepScene()
 	{
 	case SCENE_TITLE: StepTitleScene(); break;
 	case SCENE_PLAY: StepPlayScene(); break;
-	case SCENE_OPTION: Step(); break;
+	case SCENE_OPTION: ; break;
 	}
 }
 
@@ -99,7 +100,7 @@ void UpdateScene()
 	{
 	case SCENE_TITLE: UpdateTitleScene(); break;
 	case SCENE_PLAY: UpdatePlayScene(); break;
-	case SCENE_OPTION: Update(); break;
+	case SCENE_OPTION: UpdateOptionScene(); break;
 	}
 }
 
@@ -116,7 +117,6 @@ void DrawScene()
 		break;
 
 	case SCENE_OPTION:
-		DrawGame();
 		break;
 	case SCENE_PLAY:
 		DrawPlayScene();
@@ -131,7 +131,7 @@ void FinScene()
 	{
 	case SCENE_TITLE: FinTitleScene(); break;
 	case SCENE_PLAY: FinPlayScene(); break;
-	case SCENE_OPTION: FinGameOverScene(); break;
+	case SCENE_OPTION: ; break;
 	
 	}
 }

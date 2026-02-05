@@ -32,6 +32,10 @@ void StepPlayScene()
 
 void UpdatePlayScene()
 {
+	if (CheckHitKey(KEY_INPUT_C))
+	{
+		ChangeScene(SCENE_OPTION);
+	}
 }
 
 void DrawPlayScene()

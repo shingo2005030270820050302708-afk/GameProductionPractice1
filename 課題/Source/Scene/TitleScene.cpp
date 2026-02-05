@@ -1,30 +1,22 @@
 #include "DxLib.h"
 #include "TitleScene.h"
-#include "../Input/Input.h"
 #include <math.h>
 #include "SceneManager.h"
+#include "../Input/Input.h"
 
 // タイトルの位置
-#define TITLE_POS_X (40)
-#define TITLE_POS_Y (60)
+#define TITLE_POS_X (900)
+#define TITLE_POS_Y (200)
 
 // PressZKeyの位置
-#define PRESS_Z_KEY_POS_X (40)
-#define PRESS_Z_KEY_POS_Y (350)
+#define PRESS_Z_KEY_POS_X (900)
+#define PRESS_Z_KEY_POS_Y (300)
 
 // PressZKeyの点滅スピード
 #define PRESS_Z_KEY_BLINK_SPEED (0.04f)
 
 #define TITLE_GRAVITY   0.15f
 #define TITLE_MAX_SPEED 3.0f
-
-
-
-int g_TitleFont = -1;
-
-// 画像ハンドル
-int g_TitleHandle = 0;
-int g_PressZKeyHandle = 0;
 
 // PressZKye点滅用変数
 float g_PressZKeyAlpha = 0.0f;	// アルファ値
@@ -37,8 +29,6 @@ int   g_TitleArrived = 0;
 
 void InitTitleScene()
 {
-	g_TitleHandle = 0;
-	g_PressZKeyHandle = 0;
 	g_PressZKeyAlpha = 0.0f;
 	g_PressZKeyRadian = 0.0f;
 
@@ -47,16 +37,13 @@ void InitTitleScene()
 	g_TitleArrived = 0;
 }
 
-
 void LoadTitleScene()
 {
-	
 }
 
 void StartTitleScene()
 {
 }
-
 
 void StepTitleScene()
 {
@@ -92,47 +79,34 @@ void StepTitleScene()
 	{
 		ChangeScene(SCENE_PLAY);
 	}
-
-
-
 }
-
 
 void UpdateTitleScene()
 {
-
 }
 
 void DrawTitleScene()
 {
 	const char* titleText = "課題Git";
-	int titleWidth = GetDrawStringWidthToHandle(titleText, strlen(titleText), g_TitleFont);
+	int titleWidth = GetDrawStringWidth(titleText, strlen(titleText));
 	int titleX = (640 - titleWidth) / 2;
 
-	DrawStringToHandle(titleX, (int)g_TitlePosY, titleText, GetColor(255, 255, 255), g_TitleFont);
+	DrawString(titleX, (int)g_TitlePosY, titleText, GetColor(255, 255, 255));
 
 	if (g_TitleArrived)
 	{
-		const char* pressText = "Press Z Button ";
-		int pressWidth = GetDrawStringWidthToHandle(pressText, strlen(pressText), g_TitleFont);
+		const char* pressText = "Press Z Button";
+		int pressWidth = GetDrawStringWidth(pressText, strlen(pressText));
 		int pressX = (640 - pressWidth) / 2;
 
 		int alpha = (int)(g_PressZKeyAlpha * 255);
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
-		DrawStringToHandle(pressX, PRESS_Z_KEY_POS_Y, pressText, GetColor(255, 255, 255), g_TitleFont);
+		DrawString(pressX, PRESS_Z_KEY_POS_Y, pressText, GetColor(255, 255, 255));
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 }
 
-
-
 void FinTitleScene()
 {
-	DeleteGraph(g_TitleHandle);
-	DeleteGraph(g_PressZKeyHandle);
-
-	// ▼ 解放
-	if (g_TitleFont != -1) DeleteFontToHandle(g_TitleFont);
-
+	// フォント解放は不要になったので何もしない
 }
-

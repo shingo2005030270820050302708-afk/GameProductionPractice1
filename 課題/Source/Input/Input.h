@@ -6,6 +6,7 @@ enum InputKey
 {
   
     KEY_Z = (1 << 0),      
+    KEY_C = (1 << 1),
    
 };
 
