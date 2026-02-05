@@ -17,7 +17,7 @@ void InitPlayScene()
 
 void LoadPlayScene()
 {
-	g_PlayHandle = LoadGraph("Data/.png");
+	g_PlayHandle = LoadGraph("Data/Play.png");
 	g_PlayerHandle = LoadGraph("Data/Player.png");
 	g_EnemyHandle = LoadGraph("Data/Enemy.png");
 }
