@@ -117,6 +117,7 @@ void DrawScene()
 		break;
 
 	case SCENE_OPTION:
+		DrawOptionScene();
 		break;
 	case SCENE_PLAY:
 		DrawPlayScene();

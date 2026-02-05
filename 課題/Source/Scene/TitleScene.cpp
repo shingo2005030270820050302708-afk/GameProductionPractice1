@@ -11,7 +11,7 @@
 
 // PressZKeyの位置
 #define PRESS_Z_KEY_POS_X (900)
-#define PRESS_Z_KEY_POS_Y (300)
+#define PRESS_Z_KEY_POS_Y (700)
 
 // PressZKeyの点滅スピード
 #define PRESS_Z_KEY_BLINK_SPEED (0.04f)
@@ -32,6 +32,8 @@ int   g_TitleArrived = 0;
 
 void InitTitleScene()
 {
+	SetFontSize(80);        // 大きい文字
+	SetFontThickness(8);    // 太字
 	g_BGHandle = LoadGraph("Data/BG/game-forest-dots3.png");
 
 	g_PressZKeyAlpha = 0.0f;
