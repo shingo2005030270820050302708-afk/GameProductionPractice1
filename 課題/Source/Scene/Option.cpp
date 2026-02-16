@@ -58,6 +58,11 @@ void StartOptionScene()
 void StepOptionScene()
 {
 
+	if (CheckHitKey(KEY_INPUT_C))
+	{
+		ChangeScene(SCENE_TITLE);
+	}
+
 }
 
 
