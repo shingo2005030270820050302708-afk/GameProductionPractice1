@@ -1,7 +1,7 @@
 #include "BackGround.h"
 
 BackGround::BackGround() {}
-BackGround::~BackGround() { Clear(); }
+BackGround::~BackGround() { Fin(); }
 
 void BackGround::AddLayer(const std::string& path)
 {
@@ -72,7 +72,7 @@ void BackGround::DrawFullScreen(int layerIndex)
     );
 }
 
-void BackGround::Clear()
+void BackGround::Fin()
 {
     for (auto& layer : layers_)
     {

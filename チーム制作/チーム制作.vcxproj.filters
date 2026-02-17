@@ -22,6 +22,9 @@
     <Filter Include="Source\Camera">
       <UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Data\Camera\Camera.cpp">
       <Filter>Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Data\UI\UIManager.cpp">
+      <Filter>Source\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Data\Camera\Camera.h">
       <Filter>Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Data\UI\UIManager.h">
+      <Filter>Source\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

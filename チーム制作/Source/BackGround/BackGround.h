@@ -30,7 +30,7 @@ public:
     void DrawFullScreen(int layerIndex);
 
     // ‰ð•ú
-    void Clear();
+    void Fin();
 
 private:
     std::vector<BackGroundLayerData> layers_;

@@ -11,13 +11,11 @@ int WINAPI WinMain(
 )
 {
     
-    ChangeWindowMode(false);       
-    DxLib_Init();
-    SetMainWindowText("ロボット工場からの脱出");
-    SetWindowPosition(0, 0);
-    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);
-    SetMainWindowText("ロボット工場からの脱出");
-
+    ChangeWindowMode(true);       
+    DxLib_Init();//初期化ウィンドウの
+    SetMainWindowText("ロボット工場からの脱出");//タブの名前
+    SetWindowPosition(0, 0);//ウィンドウの初期位置
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);//ウィンドウの幅
     if (DxLib_Init() == -1) return -1;
     SetTransColor(TRANS_COLOR_R, TRANS_COLOR_G, TRANS_COLOR_B);
     SetDrawScreen(DX_SCREEN_BACK);
