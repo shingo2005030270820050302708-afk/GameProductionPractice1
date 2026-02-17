@@ -2,12 +2,23 @@
 #include "Player.h"
 #include "../Input/Input.h"
 
+//Player初期スポーン
 #define PLAYER_DEFAULT_POS_X (0.0f)
 #define PLAYER_DEFAULT_POS_Y (0.0f)
 
+// Playerの諸々のステータス
 #define PLAYER_MOVE_SPEED (4.0f)
 #define PLAYER_JUMP_POWER (11.25f)
 #define PLAYER_GRAVITY (0.4f)
+
+// マップ衝突判定用のプレイヤーサイズ補正
+#define PLAYER_MAP_COLLISION_OFFSET (0.05f)
+// 矩形判定の位置補正
+#define PLAYER_BOX_COLLISION_OFFSET_X (24)
+#define PLAYER_BOX_COLLISION_OFFSET_Y (20)
+// 矩形判定のサイズ
+#define PLAYER_BOX_COLLISION_WIDTH (20)
+#define PLAYER_BOX_COLLISION_HEIGHT (44)
 
 PlayerData g_PlayerData = { 0 };
 PlayerData g_PrevPlayerData = { 0 };
@@ -87,4 +98,14 @@ void FinPlayer()
 PlayerData* GetPlayer()
 {
     return &g_PlayerData;
+}
+
+void CalcBoxCollision(PlayerData player, float& x, float& y, float& w, float& h)
+{
+    x = player.isTurn ?
+        player.posX + PLAYER_WIDTH - player.boxCollision.posX - player.boxCollision.width :
+        player.posX + player.boxCollision.posX;
+    y = player.posY + player.boxCollision.posY;
+    w = player.boxCollision.width;
+    h = player.boxCollision.height;
 }

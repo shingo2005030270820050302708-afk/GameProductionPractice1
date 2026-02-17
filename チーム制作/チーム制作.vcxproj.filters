@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
 	<ItemGroup>
 		<Filter Include="Source">
 			<UniqueIdentifier>{ac49abf9-ec88-43c2-a446-151c98fc9d93}</UniqueIdentifier>
@@ -27,6 +28,9 @@
 		</Filter>
 		<Filter Include="Source\Input">
 			<UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Collision">
+			<UniqueIdentifier>{990f461b-bde1-49c5-9cf7-fc3c2eaf6125}</UniqueIdentifier>
 		</Filter>
 	</ItemGroup>
 
@@ -60,6 +64,9 @@
 		</ClCompile>
 		<ClCompile Include="Source\Input\Input.cpp">
 			<Filter>Source\Input</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Collision\Collision.cpp">
+			<Filter>Source\Collision</Filter>
 		</ClCompile>
 	</ItemGroup>
 
@@ -97,5 +104,9 @@
 		<ClInclude Include="Source\Input\Input.h">
 			<Filter>Source\Input</Filter>
 		</ClInclude>
+		<ClInclude Include="Source\Collision\Collision.h">
+			<Filter>Source\Collision</Filter>
+		</ClInclude>
 	</ItemGroup>
+
 </Project>

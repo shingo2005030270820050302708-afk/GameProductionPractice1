@@ -138,6 +138,7 @@
     <ClCompile Include="Data\Camera\Camera.cpp" />
     <ClCompile Include="Data\UI\UIManager.cpp" />
     <ClCompile Include="Source\BackGround\BackGround.cpp" />
+    <ClCompile Include="Source\Collision\Collision.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Map\MapBlock.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Data\Camera\Camera.h" />
     <ClInclude Include="Data\UI\UIManager.h" />
     <ClInclude Include="Source\BackGround\BackGround.h" />
+    <ClInclude Include="Source\Collision\Collision.h" />
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
     <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\Map\MapBlock.h" />
