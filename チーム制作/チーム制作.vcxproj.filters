@@ -22,8 +22,13 @@
     <Filter Include="Source\Camera">
       <UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Source\UI">
       <UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
+=======
+    <Filter Include="Source\Input">
+      <UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
+>>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,8 +56,13 @@
     <ClCompile Include="Data\Camera\Camera.cpp">
       <Filter>Source\Camera</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Data\UI\UIManager.cpp">
       <Filter>Source\UI</Filter>
+=======
+    <ClCompile Include="Source\Input\Input.cpp">
+      <Filter>Source\Input</Filter>
+>>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +93,13 @@
     <ClInclude Include="Data\Camera\Camera.h">
       <Filter>Source\Camera</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Data\UI\UIManager.h">
       <Filter>Source\UI</Filter>
+=======
+    <ClInclude Include="Source\Input\Input.h">
+      <Filter>Source\Input</Filter>
+>>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
     </ClInclude>
   </ItemGroup>
 </Project>
