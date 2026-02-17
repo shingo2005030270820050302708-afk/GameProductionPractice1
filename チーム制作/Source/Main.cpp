@@ -11,7 +11,7 @@ int WINAPI WinMain(
 )
 {
     
-    ChangeWindowMode(true);       
+    ChangeWindowMode(false);       
     DxLib_Init();
     SetMainWindowText("ロボット工場からの脱出");
     SetWindowPosition(0, 0);

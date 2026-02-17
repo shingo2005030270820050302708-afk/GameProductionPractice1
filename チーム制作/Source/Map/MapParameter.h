@@ -13,6 +13,11 @@ enum MapChipType
 {
     MAP_CHIP_NONE,
     NORMAL_BLOCK,
+    LEFT_BOTTOM,
+    RIGHT_BOTTOM,
+    LEFT_BLOCK,
+    RIGHT_BLOCK,
+    MIDDLE_BLOCK,
     BLOCK_TYPE_MAX
 };
 
@@ -28,6 +33,6 @@ struct BlockData
 
 struct MapChipData
 {
-    int mapChip = 0;       // 0=空マス, 1=ノーマルブロック
+    int mapChip = 0;       
     BlockData* data = nullptr;
 };

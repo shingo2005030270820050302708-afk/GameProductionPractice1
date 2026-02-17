@@ -34,6 +34,6 @@ public:
 
 private:
     std::vector<BackGroundLayerData> layers_;
-    const int BG_WIDTH = 960;
-    const int BG_HEIGHT = 480;
+    const int BG_WIDTH = 1600;
+    const int BG_HEIGHT = 900;
 };
