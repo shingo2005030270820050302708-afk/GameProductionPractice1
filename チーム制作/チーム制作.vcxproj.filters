@@ -1,105 +1,101 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{ac49abf9-ec88-43c2-a446-151c98fc9d93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Player">
-      <UniqueIdentifier>{635a0d66-af2a-4f1a-8b1b-47f4c7935fea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Map">
-      <UniqueIdentifier>{7f7bed4e-5035-48b1-89ec-8d338d02e783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Block">
-      <UniqueIdentifier>{cb1fde5d-a043-479a-b91f-6ea71bcf9200}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\GameSetting">
-      <UniqueIdentifier>{970035ae-f58f-42c4-abe6-72b2ad5549b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\BackGround">
-      <UniqueIdentifier>{1ad44c8b-7890-4718-8751-b677ed50e19b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Camera">
-      <UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="Source\UI">
-      <UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
-=======
-    <Filter Include="Source\Input">
-      <UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
->>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player\Character.cpp">
-      <Filter>Source\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player\Player.cpp">
-      <Filter>Source\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapBlock.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapChip.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapManager.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BackGround\BackGround.cpp">
-      <Filter>Source\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Camera\Camera.cpp">
-      <Filter>Source\Camera</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="Data\UI\UIManager.cpp">
-      <Filter>Source\UI</Filter>
-=======
-    <ClCompile Include="Source\Input\Input.cpp">
-      <Filter>Source\Input</Filter>
->>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Player\Character.h">
-      <Filter>Source\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player\Player.h">
-      <Filter>Source\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapParameter.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapBlock.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapChip.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapManager.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameSetting\GameSetting.h">
-      <Filter>Source\GameSetting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BackGround\BackGround.h">
-      <Filter>Source\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Camera\Camera.h">
-      <Filter>Source\Camera</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Data\UI\UIManager.h">
-      <Filter>Source\UI</Filter>
-=======
-    <ClInclude Include="Source\Input\Input.h">
-      <Filter>Source\Input</Filter>
->>>>>>> 9e584e49466de20f77c7ff3482e85e897539f354
-    </ClInclude>
-  </ItemGroup>
+	<ItemGroup>
+		<Filter Include="Source">
+			<UniqueIdentifier>{ac49abf9-ec88-43c2-a446-151c98fc9d93}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Player">
+			<UniqueIdentifier>{635a0d66-af2a-4f1a-8b1b-47f4c7935fea}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Map">
+			<UniqueIdentifier>{7f7bed4e-5035-48b1-89ec-8d338d02e783}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Block">
+			<UniqueIdentifier>{cb1fde5d-a043-479a-b91f-6ea71bcf9200}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\GameSetting">
+			<UniqueIdentifier>{970035ae-f58f-42c4-abe6-72b2ad5549b1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\BackGround">
+			<UniqueIdentifier>{1ad44c8b-7890-4718-8751-b677ed50e19b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Camera">
+			<UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\UI">
+			<UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Input">
+			<UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ClCompile Include="Source\Main.cpp">
+			<Filter>Source</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Player\Character.cpp">
+			<Filter>Source\Player</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Player\Player.cpp">
+			<Filter>Source\Player</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapBlock.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapChip.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapManager.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\BackGround\BackGround.cpp">
+			<Filter>Source\BackGround</Filter>
+		</ClCompile>
+		<ClCompile Include="Data\Camera\Camera.cpp">
+			<Filter>Source\Camera</Filter>
+		</ClCompile>
+		<ClCompile Include="Data\UI\UIManager.cpp">
+			<Filter>Source\UI</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Input\Input.cpp">
+			<Filter>Source\Input</Filter>
+		</ClCompile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ClInclude Include="Source\Player\Character.h">
+			<Filter>Source\Player</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Player\Player.h">
+			<Filter>Source\Player</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapParameter.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapBlock.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapChip.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapManager.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\GameSetting\GameSetting.h">
+			<Filter>Source\GameSetting</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\BackGround\BackGround.h">
+			<Filter>Source\BackGround</Filter>
+		</ClInclude>
+		<ClInclude Include="Data\Camera\Camera.h">
+			<Filter>Source\Camera</Filter>
+		</ClInclude>
+		<ClInclude Include="Data\UI\UIManager.h">
+			<Filter>Source\UI</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Input\Input.h">
+			<Filter>Source\Input</Filter>
+		</ClInclude>
+	</ItemGroup>
 </Project>
