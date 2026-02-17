@@ -100,12 +100,12 @@ PlayerData* GetPlayer()
     return &g_PlayerData;
 }
 
-void CalcBoxCollision(PlayerData player, float& x, float& y, float& w, float& h)
-{
-    x = player.isTurn ?
-        player.posX + PLAYER_WIDTH - player.boxCollision.posX - player.boxCollision.width :
-        player.posX + player.boxCollision.posX;
-    y = player.posY + player.boxCollision.posY;
-    w = player.boxCollision.width;
-    h = player.boxCollision.height;
-}
+//void CalcBoxCollision(PlayerData player, float& x, float& y, float& w, float& h)
+//{
+//    x = player.isTurn ?
+//        player.posX + PLAYER_WIDTH - player.boxCollision.posX - player.boxCollision.width :
+//        player.posX + player.boxCollision.posX;
+//    y = player.posY + player.boxCollision.posY;
+//    w = player.boxCollision.width;
+//    h = player.boxCollision.height;
+//}
