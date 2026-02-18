@@ -22,3 +22,5 @@ private:
     int scrollMarginX = 400; // 左右スクロール余白
     int scrollMarginY = 200; // 上下スクロール余白
 };
+
+extern Camera camera;

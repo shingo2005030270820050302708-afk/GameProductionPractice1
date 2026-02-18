@@ -32,3 +32,5 @@ void Camera::Update(const PlayerData& player) {
     if (x > mapWidth - screenWidth) x = mapWidth - screenWidth;
     if (y > mapHeight - screenHeight) y = mapHeight - screenHeight;
 }
+
+Camera camera;

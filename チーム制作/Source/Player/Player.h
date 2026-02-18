@@ -1,5 +1,6 @@
 #pragma once
 #include "../Map/MapParameter.h"
+#include "../Collision/Collision.h"
 
 #define PLAYER_WIDTH	(64.0f)
 #define PLAYER_HEIGHT	(64.0f)
