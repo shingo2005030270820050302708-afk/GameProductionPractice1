@@ -30,6 +30,6 @@ void FinMapManager()
 {
     for (int i = 0; i < BLOCK_MAX; i++)
     {
-        g_Blocks[i].active = false;
+        g_MapBlocks[i].active = false;
     }
 }

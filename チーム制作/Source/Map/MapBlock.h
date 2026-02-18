@@ -2,7 +2,7 @@
 #include "MapParameter.h"
 
 
-extern struct BlockData g_Blocks[BLOCK_MAX];
+extern struct BlockData g_MapBlocks[BLOCK_MAX];
 
 void InitMapBlock();
 void LoadMapBlock();
