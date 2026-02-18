@@ -125,6 +125,11 @@ void UpdateNormal(PlayerData& player)
     {
         g_PlayerData.state = PUSH;
     }
+
+    if (IsInputKey(KEY_X))
+    {
+        g_PlayerData.state = GRAB;
+    }
 }
 
 void UpdatePush(PlayerData& player)
@@ -138,6 +143,11 @@ void UpdateGrab(PlayerData& player)
     // 位置更新（移動はできる）
     player.posX += player.moveX;
     player.posY += player.moveY;
+
+    if (IsInputKey(KEY_X))
+    {
+        g_PlayerData.state = THROW;
+    }
 }
 
 void UpdateThrow(PlayerData& player)
