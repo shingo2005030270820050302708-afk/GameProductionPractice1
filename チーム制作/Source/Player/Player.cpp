@@ -120,6 +120,11 @@ void UpdateNormal(PlayerData& player)
     // à íuçXêV
     player.posX += player.moveX;
     player.posY += player.moveY;
+
+    if (IsInputKey(KEY_C))
+    {
+        g_PlayerData.state = PUSH;
+    }
 }
 
 void UpdatePush(PlayerData& player)
