@@ -5,7 +5,7 @@
 // マップ読み込み
 void LoadMapManager()
 {
-    LoadBlock();        // タイル画像読み込み
+    InitMapBlock();        // タイル画像読み込み
     LoadMapChipData();  // Map.bin 読み込み
     CreateMap();        // ブロック生成
 }
@@ -22,7 +22,7 @@ void UpdateMapManager()
 // 描画
 void DrawMapManager()
 {
-    DrawBlock();
+    DrawMapBlock();
 }
 
 // 終了処理

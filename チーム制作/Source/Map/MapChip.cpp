@@ -57,7 +57,7 @@ void CreateMap()
             if (type == MAP_CHIP_NONE) continue;
 
             VECTOR pos = VGet(x * MAP_CHIP_WIDTH, y * MAP_CHIP_HEIGHT, 0.0f);
-            BlockData* block = CreateBlock(type, pos);
+            BlockData* block = CreateMapBlock(type, pos);
 
             if (block != nullptr)
                 g_MapChip[y][x].data = block;

@@ -5,7 +5,7 @@
 #include "../Collision/Collision.h"
 
 BlockData g_Block[BLOCK_MAX];
-int g_BlockHandle[BLOCK_TYPE_MAX] = { 0 };
+int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
 void InitBlock()
 {
@@ -23,7 +23,7 @@ void InitBlock()
 }
 void LoadBlock()
 {
-    g_BlockHandle[NORMAL_BLOCK] = LoadGraph("Data/Block/Normal.png");
+    g_BlockHandle[B_NORMAL_BLOCK] = LoadGraph("Data/Block/Normal.png");
     g_BlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
@@ -127,7 +127,8 @@ void UpdateBlock()
         {
         case BLOCK_STAY:
         {
-            if(PlayerHitNormalBlockX,PlayerHitNormalBlockY)
+            if(PlayerHitNormalBlockX
+                ,PlayerHitNormalBlockY)
             {  // ãﬂÇ≠Çƒ Z Å® éùÇ¬
                 if (CheckHitKey(KEY_INPUT_Z))
                 {
@@ -164,21 +165,17 @@ void UpdateBlock()
         }
     }
 }
-        void DrawBlock()
+void DrawBlock()
+{
+    for (int i = 0; i < BLOCK_MAX; i++)
+    {
+        if (g_Block[i].active && g_Block[i].handle != -1)
         {
-        for (int i = 0; i < BLOCK_MAX; i++)
-        {
-            BlockData& b = g_Block[i];
-            if (!b.active) continue;
-
-            DrawGraph(
-                (int)(b.pos.x),
-                (int)(b.pos.y),
-                b.handle,
-                TRUE
-            );
+            DrawGraph((int)g_Block[i].pos.x,
+                (int)g_Block[i].pos.y, g_Block[i].handle, TRUE);
         }
     }
+}
     void FinBlock()
     {
         for (int i = 0; i < BLOCK_TYPE_MAX; i++)

@@ -4,7 +4,7 @@
 
 extern struct BlockData g_Blocks[BLOCK_MAX];
 
-void InitBlock();
-void LoadBlock();
-BlockData* CreateBlock(MapChipType type, VECTOR pos);
-void DrawBlock();
+void InitMapBlock();
+void LoadMapBlock();
+BlockData* CreateMapBlock(MapChipType type, VECTOR pos);
+void DrawMapBlock();

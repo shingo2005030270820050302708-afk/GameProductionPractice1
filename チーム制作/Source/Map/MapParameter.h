@@ -13,6 +13,7 @@ constexpr float MAP_CHIP_HEIGHT = 32.0f;
 enum MapChipType
 {
     MAP_CHIP_NONE,
+    MAP_CHIP,
     NORMAL_BLOCK,
     LEFT_BOTTOM,
     RIGHT_BOTTOM,

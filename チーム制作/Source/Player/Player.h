@@ -6,6 +6,16 @@
 #define PLAYER_HEIGHT	(64.0f)
 #define PLAYER_RADIUS	(32.0f)
 
+enum PlayerState
+{
+	NORMAL,
+	PUSH,
+	GRAB,
+	THROW,
+	DAMAGE,
+	DEAD
+};
+
 struct PlayerData
 {
 	bool active;								// ê∂ë∂ÉtÉâÉO
@@ -15,8 +25,13 @@ struct PlayerData
 	float posY;									// Yç¿ïW
 	float moveX;								// Xà⁄ìÆó 
 	float moveY;								// Yà⁄ìÆó 
+	int hp;
+	int maxHp;
 	int handle;
+
 	BoxCollision boxCollision;
+
+	PlayerState state;
 };
 
 void InitPlayer();
@@ -26,7 +41,12 @@ void StepPlayer();
 void UpdatePlayer();
 void DrawPlayer();
 void FinPlayer();
-
+void UpdateNormal(PlayerData& player);
+void UpdateGrab(PlayerData& player);
+void UpdatePush(PlayerData& player);
+void UpdateThrow(PlayerData& player);
+void UpdateDamage(PlayerData& player);
+void UpdateDead(PlayerData& player);
 PlayerData* GetPlayer();
 
 
