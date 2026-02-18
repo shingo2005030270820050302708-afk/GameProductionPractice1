@@ -15,7 +15,7 @@ void Camera::Update(const PlayerData& player) {
         x = player.posX - scrollMarginX;
     }
     else if (player.posX - x > screenWidth - scrollMarginX) {
-        x = player.posX - (screenWidth - scrollMarginX);
+        x = player.posX - (screenWidth - scrollMarginX);2
     }
 
     // è„â∫ÉXÉNÉçÅ[Éã
@@ -34,4 +34,4 @@ void Camera::Update(const PlayerData& player) {
 }
 
 Camera camera;
-//Ç±ÇÍ3
+//Ç±ÇÍ32
