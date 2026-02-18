@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "Player.h"
+#include "../Player/Player.h"
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
 
