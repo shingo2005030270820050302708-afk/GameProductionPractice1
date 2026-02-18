@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "MapParameter.h"
 #include "MapBlock.h"
+#include "../../Data/Camera/Camera.h"
 
 BlockData g_Blocks[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
@@ -51,11 +52,20 @@ BlockData* CreateBlock(MapChipType type, VECTOR pos)
     return nullptr;
 }
 // 描画
+
+extern Camera camera;
+extern BlockData g_Blocks[BLOCK_MAX]; 
+
 void DrawBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++) {
         if (g_Blocks[i].active && g_Blocks[i].handle != -1) {
-            DrawGraph((int)g_Blocks[i].pos.x, (int)g_Blocks[i].pos.y, g_Blocks[i].handle, TRUE);
+            DrawGraph(
+                (int)(g_Blocks[i].pos.x - camera.GetX()), // カメラオフセット
+                (int)(g_Blocks[i].pos.y - camera.GetY()), // カメラオフセット
+                g_Blocks[i].handle,
+                TRUE
+            );
         }
     }
 }

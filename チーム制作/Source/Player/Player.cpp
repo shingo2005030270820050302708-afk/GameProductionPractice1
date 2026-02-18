@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
+#include "../../Data/Camera/Camera.h"
 
 //Player‰ŠúƒXƒ|[ƒ“
 #define PLAYER_DEFAULT_POS_X (0.0f)
@@ -178,19 +179,17 @@ void UpdateDead(PlayerData& player)
 
 }
 
+extern Camera camera;
+void DrawPlayer() {
+    PlayerData* player = GetPlayer();
+    if (!player || !player->active) return;
 
-void DrawPlayer()
-{
-    if (!g_PlayerData.active)
-    {
-        return;
-    }
     DrawGraph(
-        (int)(g_PlayerData.posX),
-        (int)(g_PlayerData.posY),
-        g_PlayerData.handle,
+        (int)(player->posX - camera.GetX()),
+        (int)(player->posY - camera.GetY()),
+        player->handle,
         TRUE
-    );  
+    );
 }
 
 void FinPlayer()
