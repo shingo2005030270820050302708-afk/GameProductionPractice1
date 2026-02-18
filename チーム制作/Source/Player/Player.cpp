@@ -32,7 +32,9 @@ void InitPlayer()
     g_PlayerData.moveY = 0.0f;
     g_PlayerData.active = false;
     g_PlayerData.isAir = false;
-
+    g_PlayerData.state = NORMAL;
+    g_PlayerData.maxHp = 5;
+    g_PlayerData.hp = g_PlayerData.maxHp;
     memset(&g_PlayerData.boxCollision, 0, sizeof(g_PlayerData.boxCollision));//構造体初期化
 }
 
@@ -62,7 +64,6 @@ void StepPlayer()
     g_PrevPlayerData = g_PlayerData;
 
     g_PlayerData.moveX = 0.0f;
-    g_PlayerData.moveY += PLAYER_GRAVITY;
 
     if (IsInputKey(KEY_LEFT))
     {
@@ -74,6 +75,14 @@ void StepPlayer()
         g_PlayerData.moveX = PLAYER_MOVE_SPEED;
         g_PlayerData.isTurn = false;
     }
+    
+    if (!g_PlayerData.isAir && IsTriggerKey(KEY_UP))
+    {
+        g_PlayerData.moveY = -PLAYER_JUMP_POWER;
+        g_PlayerData.isAir = true;
+    }
+
+    g_PlayerData.moveY += PLAYER_GRAVITY;
 }
 
 void UpdatePlayer()
@@ -83,22 +92,87 @@ void UpdatePlayer()
         return;
     }
 
-    if (g_PlayerData.moveY < 0.0f || g_PlayerData.moveY > PLAYER_GRAVITY)
+    switch (g_PlayerData.state)
     {
-        g_PlayerData.isAir = true;
+    case NORMAL:
+        UpdateNormal(g_PlayerData);
+        break;
+    case PUSH:
+        UpdateGrab(g_PlayerData);
+        break;
+    case GRAB:
+        UpdateGrab(g_PlayerData);
+        break;
+    case THROW:
+        UpdateThrow(g_PlayerData);
+        break;
+    case DAMAGE:
+        UpdateDamage(g_PlayerData);
+        break;
+    case DEAD:
+        UpdateDead(g_PlayerData);
+        break;
     }
-    else
-    {
-        if (IsTriggerKey(KEY_UP))
-        {
-            g_PlayerData.moveY = -PLAYER_JUMP_POWER;
-        }
-    }
+}
 
-    g_PlayerData.posX += g_PlayerData.moveX;
-    g_PlayerData.posY += g_PlayerData.moveY;
+void UpdateNormal(PlayerData& player)
+{
+    // 位置更新
+    player.posX += player.moveX;
+    player.posY += player.moveY;
+}
+
+void UpdatePush(PlayerData& player)
+{
+    // 位置更新（Xの移動はできる）
+    player.posX += player.moveX/2;
+}
+
+void UpdateGrab(PlayerData& player)
+{
+    // 位置更新（移動はできる）
+    player.posX += player.moveX;
+    player.posY += player.moveY;
+}
+
+void UpdateThrow(PlayerData& player)
+{
+    // 位置更新（移動はできる）
+    player.posX += player.moveX;
+    player.posY += player.moveY;
+}
+
+void UpdateDamage(PlayerData& player)
+{
+    // 位置更新（移動はできる）
+    player.posX += player.moveX;
+    player.posY += player.moveY;
+
+    // 一定時間後に NORMAL に戻す
+    static int damageTimer = 0;
+
+    if (damageTimer == 0)
+        damageTimer = 30; // 30フレーム無敵
+
+    damageTimer--;
+
+    if (damageTimer <= 0)
+    {
+        damageTimer = 0;
+        player.state = NORMAL;
+    }
 
 }
+
+void UpdateDead(PlayerData& player)
+{
+    // 死亡時は動かない
+    player.moveX = 0;
+    player.moveY = 0;
+
+
+}
+
 
 void DrawPlayer()
 {
@@ -191,7 +265,7 @@ void PlayerHitNormalBlockY(MapChipData mapChipData)
         else if (player.moveY < 0.0f)
         {
             // 下に押し出す
-            g_PlayerData.posY += (block->pos.y + MAP_CHIP_WIDTH) - y;
+            g_PlayerData.posY += (block->pos.y + MAP_CHIP_HEIGHT) - y;
         }
     }
 }
