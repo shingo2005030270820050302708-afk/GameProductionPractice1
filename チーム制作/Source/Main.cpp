@@ -27,12 +27,14 @@ int WINAPI WinMain(
     bg.AddLayer("Data/BG/3.png");
     bg.AddLayer("Data/BG/4.png");
 
+    InitPlayer();
     // マップ
     LoadMapManager();
     LoadPlayer();
     
     StartMapManager();
     StartPlayer();
+
     // メインループ
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
     {
@@ -43,6 +45,7 @@ int WINAPI WinMain(
         UpdatePlayer();
         DrawMapManager(); 
         DrawPlayer();
+        StepPlayer();
 
         ScreenFlip();
     }
