@@ -34,3 +34,4 @@ void Camera::Update(const PlayerData& player) {
 }
 
 Camera camera;
+//‚±‚ê
