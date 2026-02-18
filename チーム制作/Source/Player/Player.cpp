@@ -111,7 +111,7 @@ void DrawPlayer()
         (int)(g_PlayerData.posY),
         g_PlayerData.handle,
         TRUE
-    );
+    );  
 }
 
 void FinPlayer()
