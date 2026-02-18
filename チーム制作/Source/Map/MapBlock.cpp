@@ -11,7 +11,7 @@ void InitBlock()
     for (int i = 0; i < BLOCK_MAX; i++) {
         g_Blocks[i].active = false;
         g_Blocks[i].handle = -1;
-        g_Blocks[i].type = MAP_CHIP_NONE;
+        g_Blocks[i].mapChipType = MAP_CHIP_NONE;
         g_Blocks[i].pos = VGet(0, 0, 0);
         g_Blocks[i].width = MAP_CHIP_WIDTH;
         g_Blocks[i].height = MAP_CHIP_HEIGHT;
@@ -34,7 +34,8 @@ BlockData* CreateBlock(MapChipType type, VECTOR pos)
     for (int i = 0; i < BLOCK_MAX; i++) {
         if (!g_Blocks[i].active) {
             g_Blocks[i].active = true;
-            g_Blocks[i].type = type;
+            // MapChipType ¨ BlockType ‚É•ÏŠ·
+            g_Blocks[i].blockType = BlockType();
             g_Blocks[i].pos = pos;
             g_Blocks[i].width = MAP_CHIP_WIDTH;
             g_Blocks[i].height = MAP_CHIP_HEIGHT;
