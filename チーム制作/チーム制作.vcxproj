@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="Data\Camera\Camera.cpp" />
     <ClCompile Include="Source\BackGround\BackGround.cpp" />
+    <ClCompile Include="Source\Block\Block.cpp" />
     <ClCompile Include="Source\Collision\Collision.cpp" />
     <ClCompile Include="Source\FPS\Fps.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Data\Camera\Camera.h" />
     <ClInclude Include="Source\BackGround\BackGround.h" />
+    <ClInclude Include="Source\Block\Block.h" />
     <ClInclude Include="Source\Collision\Collision.h" />
     <ClInclude Include="Source\FPS\Fps.h" />
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
