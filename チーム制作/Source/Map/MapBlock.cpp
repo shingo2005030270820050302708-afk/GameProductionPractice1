@@ -3,67 +3,69 @@
 #include "MapBlock.h"
 #include "../../Data/Camera/Camera.h"
 
-BlockData g_Blocks[BLOCK_MAX];
-int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
+BlockData g_MapBlocks[BLOCK_MAX];
+int g_MapBlocksHandle[BLOCK_TYPE_MAX] = { -1 };
 
 
-void InitBlock()
+void InitMapBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++) {
-        g_Blocks[i].active = false;
-        g_Blocks[i].handle = -1;
-        g_Blocks[i].type = MAP_CHIP_NONE;
-        g_Blocks[i].pos = VGet(0, 0, 0);
-        g_Blocks[i].width = MAP_CHIP_WIDTH;
-        g_Blocks[i].height = MAP_CHIP_HEIGHT;
+        g_MapBlocks[i].active = false;
+        g_MapBlocks[i].handle = -1;
+        g_MapBlocks[i].mapChipType = MAP_CHIP;
+        g_MapBlocks[i].pos = VGet(0, 0, 0);
+        g_MapBlocks[i].width = MAP_CHIP_WIDTH;
+        g_MapBlocks[i].height = MAP_CHIP_HEIGHT;
     }
 }
 
 // グラフィック読み込み
-void LoadBlock()
+void LoadMapBlock()
 {
-    g_BlockHandle[NORMAL_BLOCK] = LoadGraph("Data/Map/Tiles.png"); // ノーマルブロック画像
-    g_BlockHandle[LEFT_BOTTOM] = LoadGraph("Data/Map/IndustrialTile_16.png"); //左角のブロック画像
-    g_BlockHandle[RIGHT_BOTTOM] = LoadGraph("Data/Map/IndustrialTile_17.png"); //右角のブロック画像
-    g_BlockHandle[LEFT_BLOCK] = LoadGraph("Data/Map/Left_Block.png"); //左のブロック画像
-    g_BlockHandle[RIGHT_BLOCK] = LoadGraph("Data/Map/Right_Block.png"); //左のブロック画像
-    g_BlockHandle[MIDDLE_BLOCK] = LoadGraph("Data/Map/M_Block.png"); //中央のブロック画像
+    g_MapBlocksHandle[NORMAL_BLOCK] = LoadGraph("Data/Map/Tiles.png"); // ノーマルブロック画像
+    g_MapBlocksHandle[LEFT_BOTTOM] = LoadGraph("Data/Map/IndustrialTile_16.png"); //左角のブロック画像
+    g_MapBlocksHandle[RIGHT_BOTTOM] = LoadGraph("Data/Map/IndustrialTile_17.png"); //右角のブロック画像
+    g_MapBlocksHandle[LEFT_BLOCK] = LoadGraph("Data/Map/Left_Block.png"); //左のブロック画像
+    g_MapBlocksHandle[RIGHT_BLOCK] = LoadGraph("Data/Map/Right_Block.png"); //左のブロック画像
+    g_MapBlocksHandle[MIDDLE_BLOCK] = LoadGraph("Data/Map/M_Block.png"); //中央のブロック画像
 }
 // ブロック生成
-BlockData* CreateBlock(MapChipType type, VECTOR pos)
+BlockData* CreateMapBlock(MapChipType type, VECTOR pos)
 {
     for (int i = 0; i < BLOCK_MAX; i++) {
-        if (!g_Blocks[i].active) {
-            g_Blocks[i].active = true;
-            g_Blocks[i].type = type;
-            g_Blocks[i].pos = pos;
-            g_Blocks[i].width = MAP_CHIP_WIDTH;
-            g_Blocks[i].height = MAP_CHIP_HEIGHT;
+        if (!g_MapBlocks[i].active) {
+            g_MapBlocks[i].active = true;
+            // MapChipType → BlockType に変換
+            g_MapBlocks[i].mapChipType = MAP_CHIP;
+            g_MapBlocks[i].pos = pos;
+            g_MapBlocks[i].width = MAP_CHIP_WIDTH;
+            g_MapBlocks[i].height = MAP_CHIP_HEIGHT;
 
             // タイプごとに画像ハンドルを設定
             if (type >= 0 && type < BLOCK_TYPE_MAX)
-                g_Blocks[i].handle = g_BlockHandle[type];
+                g_MapBlocks[i].handle = g_MapBlocksHandle[type];
             else
-                g_Blocks[i].handle = -1;
+                g_MapBlocks[i].handle = -1;
 
-            return &g_Blocks[i];
+            return &g_MapBlocks[i];
         }
     }
     return nullptr;
 }
 // 描画
 
-extern Camera camera;
-extern BlockData g_Blocks[BLOCK_MAX]; 
 
-void DrawBlock()
+extern Camera camera;
+void DrawMapBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++) {
-        if (g_Blocks[i].active && g_Blocks[i].handle != -1) {
+    for (int i = 0; i < BLOCK_MAX; i++)
+    {
+        if (g_MapBlocks[i].active && g_MapBlocks[i].handle != -1)
+        {
             DrawGraph(
-                (int)(g_Blocks[i].pos.x - camera.GetX()), // カメラオフセット
-                (int)(g_Blocks[i].pos.y - camera.GetY()), // カメラオフセット
-                g_Blocks[i].handle,
+                (int)(g_MapBlocks[i].pos.x - camera.GetX()),
+                (int)(g_MapBlocks[i].pos.y - camera.GetY()),
+                g_MapBlocks[i].handle,
                 TRUE
             );
         }

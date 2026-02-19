@@ -31,6 +31,9 @@
     <Filter Include="Source\Collision">
       <UniqueIdentifier>{990f461b-bde1-49c5-9cf7-fc3c2eaf6125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\FPS">
+      <UniqueIdentifier>{50a3c83e-2339-412f-adff-dc17fb98ebf3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="Source\UI\HpUI.cpp">
       <Filter>Source\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FPS\Fps.cpp">
+      <Filter>Source\FPS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="Source\UI\HpUI.h">
       <Filter>Source\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FPS\Fps.h">
+      <Filter>Source\FPS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -20,6 +20,7 @@ struct PlayerData
 {
 	bool active;								// 生存フラグ
 	bool isTurn;								// 左を向いているか
+	bool isGround;
 	bool isAir;									// 空中にいるか
 	float posX;									// X座標
 	float posY;									// Y座標
@@ -48,8 +49,6 @@ void UpdateThrow(PlayerData& player);
 void UpdateDamage(PlayerData& player);
 void UpdateDead(PlayerData& player);
 PlayerData* GetPlayer();
+extern PlayerData g_PlayerData;
 
 
-void PlayerHitNormalBlockX(MapChipData mapChipData);
-void PlayerHitNormalBlockY(MapChipData mapChipData);
-void CalcBoxCollision(PlayerData player, float& x, float& y, float& w, float& h);

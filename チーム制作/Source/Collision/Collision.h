@@ -23,3 +23,13 @@ bool CheckCircleCircle(float circleA_PosX, float circleA_PosY, float circleA_Rad
 // 各当たり判定
 void CheckCollision();
 
+struct BlockData;
+struct PlayerData;
+
+// プレイヤーをブロックから押し戻す
+void ResolvePlayerBlockCollision(BlockData* block);
+
+// プレイヤーとマップの総合当たり判定
+void CheckPlayerMapCollision();
+
+
