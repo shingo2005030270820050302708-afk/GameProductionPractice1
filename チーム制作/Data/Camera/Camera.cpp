@@ -34,4 +34,3 @@ void Camera::Update(const PlayerData& player) {
 }
 
 Camera camera;
-//’Ç‰Á

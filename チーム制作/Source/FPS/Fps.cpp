@@ -47,4 +47,3 @@ void FPSWait(void)
 
     g_frameStart = GetNowCount();
 }
-//’Ç‰Á

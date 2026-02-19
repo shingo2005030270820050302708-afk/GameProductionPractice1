@@ -52,4 +52,3 @@ PlayerData* GetPlayer();
 extern PlayerData g_PlayerData;
 
 
-//’Ç‰Á

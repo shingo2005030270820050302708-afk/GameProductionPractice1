@@ -31,6 +31,3 @@ void ResolvePlayerBlockCollision(BlockData* block);
 
 // プレイヤーとマップの総合当たり判定
 void CheckPlayerMapCollision();
-
-
-//マップコリジョン追加
