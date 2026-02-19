@@ -5,7 +5,7 @@
 #include "../../Data/Camera/Camera.h"
 #include "../Map/MapChip.h"
 
-// Player初期スポーン
+//Player初期スポーン
 #define PLAYER_DEFAULT_POS_X (400.0f)
 #define PLAYER_DEFAULT_POS_Y (0.0f)
 

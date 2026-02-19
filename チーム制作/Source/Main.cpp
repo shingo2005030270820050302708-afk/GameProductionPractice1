@@ -14,12 +14,13 @@ int WINAPI WinMain(
     _In_ int nShowCmd
 )
 {
-
     ChangeWindowMode(true);
-    SetMainWindowText("ロボット工場からの脱出");//タブの名前
-    SetWindowPosition(0, 0);//ウィンドウの初期位置
-    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);//ウィンドウの幅
+    SetMainWindowText("ロボット工場からの脱出");
+    SetWindowPosition(0, 0);
+    SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);
+
     if (DxLib_Init() == -1) return -1;
+
     SetTransColor(TRANS_COLOR_R, TRANS_COLOR_G, TRANS_COLOR_B);
     SetDrawScreen(DX_SCREEN_BACK);
 
@@ -29,12 +30,13 @@ int WINAPI WinMain(
     bg.AddLayer("Data/BG/2.png");
     bg.AddLayer("Data/BG/3.png");
     bg.AddLayer("Data/BG/4.png");
+
     InitInput();
     InitPlayer();
+
     // マップ
     LoadMapManager();
     LoadPlayer();
-
     StartMapManager();
     StartPlayer();
 
@@ -42,14 +44,20 @@ int WINAPI WinMain(
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
     {
         ClearDrawScreen();
+
         UpdateFPS();
         UpdateInput();
+
         bg.Draw();            // 背景描画
+
         StepPlayer();
         UpdatePlayer();
-        UpdateMapManager();   // マップ更新
+
+        UpdateMapManager();
         UpdatePlayer();
-        camera.Update(g_PlayerData);
+
+        camera.Update(g_PlayerData);  // カメラ追従
+
         DrawMapManager();
         DrawPlayer();
 
@@ -61,7 +69,7 @@ int WINAPI WinMain(
     FinMapManager();
     FinPlayer();
     FinInput();
+
     DxLib_End();
     return 0;
 }
-//追加
