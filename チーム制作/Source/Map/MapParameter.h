@@ -1,6 +1,5 @@
 #pragma once
 #include "DxLib.h"
-#include "../Block/Block.h"
 
 
 #define BLOCK_MAX 40000
@@ -9,6 +8,9 @@ constexpr int MAP_CHIP_X_NUM = 64;
 constexpr int MAP_CHIP_Y_NUM = 32;
 constexpr float MAP_CHIP_WIDTH = 32.0f;
 constexpr float MAP_CHIP_HEIGHT = 32.0f;
+
+enum BlockType;
+enum BlockState;
 
 enum MapChipType
 {
@@ -20,7 +22,9 @@ enum MapChipType
     LEFT_BLOCK,
     RIGHT_BLOCK,
     MIDDLE_BLOCK,
+    B_NORMAL_BLOCK,
     BLOCK_TYPE_MAX
+
 };
 
 struct BlockData
@@ -28,10 +32,10 @@ struct BlockData
     bool active = false;
     int handle = -1;
 
-    MapChipType mapChipType = MAP_CHIP_NONE; // Å©ïœçX
     VECTOR pos = VGet(0, 0, 0);
     VECTOR vel = VGet(0, 0, 0);
 
+    MapChipType mapChipType = MAP_CHIP_NONE; // Å©ïœçX
     BlockType blockType; // Å©ïœçX
 
     float width = MAP_CHIP_WIDTH;

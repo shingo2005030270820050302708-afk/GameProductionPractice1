@@ -14,6 +14,11 @@
 #define PLAYER_JUMP_POWER (10.0f)
 #define PLAYER_GRAVITY (0.4f)
 
+// マップ衝突判定用のプレイヤーサイズ補正
+#define PLAYER_MAP_COLLISION_OFFSET (0.05f)
+// 矩形判定の位置補正
+#define PLAYER_BOX_COLLISION_OFFSET_X (24)
+#define PLAYER_BOX_COLLISION_OFFSET_Y (20)
 // 矩形判定のサイズ
 #define PLAYER_BOX_COLLISION_WIDTH (60)
 #define PLAYER_BOX_COLLISION_HEIGHT (60)
@@ -158,4 +163,3 @@ void DrawPlayer()
 
 void FinPlayer() { DeleteGraph(g_PlayerData.handle); }
 PlayerData* GetPlayer() { return &g_PlayerData; }
-

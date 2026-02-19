@@ -1,4 +1,7 @@
 #pragma once
+#include <vector>
+#include "../Player/Player.h"
+#include "../Map/MapBlock.h"
 
 // ƒuƒƒbƒN‚Ìó‘Ô
 enum BlockState
@@ -25,7 +28,7 @@ void InitBlock();
 void LoadBlock();
 void StartBlock();
 void StepBlock();
-void UpdateBlock();
+void UpdateBlock(PlayerData& player);
 void DrawBlock();
 void FinBlock();
 

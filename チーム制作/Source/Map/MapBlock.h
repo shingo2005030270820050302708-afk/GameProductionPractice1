@@ -2,6 +2,7 @@
 #include "MapParameter.h"
 
 
+
 extern struct BlockData g_MapBlocks[BLOCK_MAX];
 
 void InitMapBlock();
