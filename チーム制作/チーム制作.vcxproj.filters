@@ -75,6 +75,12 @@
     <ClCompile Include="Source\FPS\Fps.cpp">
       <Filter>Source\FPS</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Block\Block.cpp">
+      <Filter>Source\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Block\BlockManager.cpp">
+      <Filter>Source\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Character.h">
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="Source\FPS\Fps.h">
       <Filter>Source\FPS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Block\Block.h">
+      <Filter>Source\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Block\BlockManager.h">
+      <Filter>Source\Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -33,9 +33,9 @@ void LoadMapChipData()
             case 1: g_MapChip[y][x].mapChip = NORMAL_BLOCK; break;
             case 2: g_MapChip[y][x].mapChip = LEFT_BOTTOM;  break;
             case 3: g_MapChip[y][x].mapChip = RIGHT_BOTTOM; break;
-            case 4:  g_MapChip[y][x].mapChip = LEFT_BLOCK; break;
-            case 5:g_MapChip[y][x].mapChip = RIGHT_BLOCK; break;
-            case 6:g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
+            case 4: g_MapChip[y][x].mapChip = LEFT_BLOCK; break;
+            case 5: g_MapChip[y][x].mapChip = RIGHT_BLOCK; break;
+            case 6: g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
 

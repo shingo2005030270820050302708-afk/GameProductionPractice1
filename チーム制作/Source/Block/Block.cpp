@@ -1,5 +1,5 @@
 #include <DxLib.h>
-#include "../Block/Block.h"
+#include "Block.h"
 #include "../Player/Player.h"
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
@@ -113,62 +113,73 @@ void StepBlock()
     }
 }
 
-void UpdateBlock()
+void UpdateBlock(PlayerData& player)
 {
+    PlayerData* p = GetPlayer();
+    for (int bi = 0; bi < BLOCK_MAX; bi++)
+    {
+        BlockData& b = g_Block[bi];
+        if (!b.active)
+            continue;
+
+        switch (b.state)
+        {
+        case BLOCK_STAY:
+        {
+            // ’Í‚Ý”»’è‚ÍL‚ß‚É‚·‚é
+            float px = player.posX + 10;
+            float py = player.posY + 10;
+            float pw = 30;
+            float ph = 40;
+
+            // Block ‚Ì“–‚½‚è”»’è
+            int bw, bh;
+            GetGraphSize(b.handle, &bw, &bh);
+            float bx = b.pos.x;
+            float by = b.pos.y;
+
+            bool hit =
+                (px < bx + bw) &&
+                (px + pw > bx) &&
+                (py < by + bh) &&
+                (py + ph > by);
+
+            if (hit && CheckHitKey(KEY_INPUT_X))
+            {
+                b.state = BLOCK_LIFT;
+                b.gravity = false;
+                b.vel = VGet(0, 0, 0);
+                b.hold = true;   // © true ‚É‚·‚é
+            }
+        }
+        break;
+
+        case BLOCK_LIFT:
+            // ‰º{X ¨ ’u‚­
+            if (CheckHitKey(KEY_INPUT_DOWN) && CheckHitKey(KEY_INPUT_X))
+            {
+                b.gravity = false;
+                b.hold = false;  // © false ‚É‚·‚é
+                b.state = BLOCK_STAY;
+            }
+            // X ¨ “Š‚°‚é
+            else if (CheckHitKey(KEY_INPUT_X))
+            {
+                b.gravity = true;
+                b.hold = false;  // © false ‚É‚·‚é
+                b.state = BLOCK_THROW;
+            }
+        break;
+        case BLOCK_THROW:
+            b.gravity = true;
+            // “Š‚°‚é‘¬“x
+            b.vel.x = (p->isTurn ? -6.0f : 6.0f);
+            b.vel.y = -8.0f;
+        }
+    }
 }
 
-//void UpdateBlock()
-//{
-//    PlayerData* p = GetPlayer();
-//
-//    for (int bi = 0; bi < BLOCK_MAX; bi++)
-//    {
-//        BlockData& b = g_Block[bi];
-//        if (!b.active)
-//            continue;
-//
-//        switch (b.state)
-//        {
-//        case BLOCK_STAY:
-//        {
-//            if(PlayerHitNormalBlockX
-//                ,PlayerHitNormalBlockY)
-//            {  // ‹ß‚­‚Ä Z ¨ Ž‚Â
-//                if (CheckHitKey(KEY_INPUT_Z))
-//                {
-//                    b.state = BLOCK_LIFT;
-//                    b.gravity = false;
-//                    b.vel = VGet(0, 0, 0);
-//                    b.hold = true;   // © true ‚É‚·‚é
-//                } 
-//            }
-//          
-//        }
-//        break;
-//
-//        case BLOCK_LIFT:
-//            // ‰º{Z ¨ ’u‚­
-//            if (CheckHitKey(KEY_INPUT_DOWN) && CheckHitKey(KEY_INPUT_Z))
-//            {
-//                b.state = BLOCK_STAY;
-//                b.gravity = false;
-//                b.hold = false;  // © false ‚É‚·‚é
-//            }
-//            // Z ¨ “Š‚°‚é
-//            else if (CheckHitKey(KEY_INPUT_Z))
-//            {
-//                b.state = BLOCK_THROW;
-//                b.gravity = true;
-//                b.hold = false;  // © false ‚É‚·‚é
-//
-//                // “Š‚°‚é‘¬“x
-//                b.vel.x = (p->isTurn ? -6.0f : 6.0f);
-//                b.vel.y = -8.0f;
-//            }
-//            break;
-//        }
-//    }
-//}
+
 void DrawBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++)
@@ -180,12 +191,10 @@ void DrawBlock()
         }
     }
 }
-    void FinBlock()
+void FinBlock()
+{
+    for (int i = 0; i < BLOCK_TYPE_MAX; i++)
     {
-        for (int i = 0; i < BLOCK_TYPE_MAX; i++)
-        {
-            DeleteGraph(g_BlockHandle[i]);
-        }
+        DeleteGraph(g_BlockHandle[i]);
     }
-
-
+}
