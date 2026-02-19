@@ -15,7 +15,7 @@ enum BlockState
 // ƒuƒƒbƒN‚Ìí—Ş
 enum BlockType 
 {
-    B_NORMAL_BLOCK,
+    //B_NORMAL_BLOCK,
     B_IRON_BLOCK,
     B_ICE_BLOCK,
     B_WOOD_BLOCK,

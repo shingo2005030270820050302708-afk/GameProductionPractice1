@@ -5,6 +5,12 @@
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = {};
 
+
+MapChipData(*GetMapData())[MAP_CHIP_X_NUM]
+{
+    return g_MapChip;
+}
+
 // Map.bin Çì«Ç›çûÇﬁ
 void LoadMapChipData()
 {
@@ -36,6 +42,7 @@ void LoadMapChipData()
             case 4: g_MapChip[y][x].mapChip = LEFT_BLOCK; break;
             case 5: g_MapChip[y][x].mapChip = RIGHT_BLOCK; break;
             case 6: g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
+            case 7: g_MapChip[y][x].data = nullptr; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
 
