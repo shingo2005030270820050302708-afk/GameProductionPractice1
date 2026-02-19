@@ -1,5 +1,6 @@
 #include <DxLib.h>
 #include "Block.h"
+#include "BlockManager.h"
 #include "../Player/Player.h"
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
