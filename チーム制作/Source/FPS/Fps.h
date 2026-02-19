@@ -6,3 +6,4 @@ void DrawFPS(void);
 
 
 void FPSWait();
+//’Ç‰Á

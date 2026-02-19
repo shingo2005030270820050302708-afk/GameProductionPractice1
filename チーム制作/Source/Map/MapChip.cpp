@@ -77,3 +77,4 @@ MapChipData GetMapChipData(int x, int y)
     }
     return g_MapChip[y][x];
 }
+//‚¢‚¶‚ç‚È‚¢

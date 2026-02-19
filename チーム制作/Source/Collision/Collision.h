@@ -33,3 +33,4 @@ void ResolvePlayerBlockCollision(BlockData* block);
 void CheckPlayerMapCollision();
 
 
+//マップコリジョン追加

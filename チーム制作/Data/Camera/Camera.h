@@ -24,4 +24,4 @@ private:
 };
 
 extern Camera camera;
-//l32
+//’Ç‰Á

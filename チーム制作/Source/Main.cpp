@@ -64,3 +64,4 @@ int WINAPI WinMain(
     DxLib_End();
     return 0;
 }
+//’Ç‰Á

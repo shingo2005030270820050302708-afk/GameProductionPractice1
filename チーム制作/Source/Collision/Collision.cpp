@@ -127,7 +127,7 @@ void ResolvePlayerBlockCollision(BlockData* block)
     }
 }
 
-
+//’Ç‰Á
 void CheckPlayerMapCollision()
 {
     PlayerData* p = GetPlayer();
