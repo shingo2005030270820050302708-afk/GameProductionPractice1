@@ -4,10 +4,33 @@
 #include "../Player/Player.h"
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
+#include "../../Data/Camera/Camera.h"
 
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
+BlockData* CreateBlock(BlockType type, VECTOR pos)
+{
+    for (int i = 0; i < BLOCK_MAX; i++)
+    {
+        if (!g_Block[i].active)
+        {
+            g_Block[i].active = true;
+            g_Block[i].blockType = type;
+            g_Block[i].pos = pos;
+            g_Block[i].vel = VGet(0, 0, 0);
+            g_Block[i].state = BLOCK_STAY;
+            g_Block[i].gravity = false;
+            g_Block[i].handle = g_BlockHandle[type];
+            g_Block[i].breakable = (type == BREAKABLE_BLOCK);
+
+            return &g_Block[i];
+        }
+    }
+
+    // ‹ó‚«‚ª‚È‚©‚Á‚½
+    return nullptr;
+}
 void InitBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++)
@@ -37,30 +60,10 @@ void StartBlock()
         g_Block[i].gravity = false;
         g_Block[i].vel = VGet(0, 0, 0);
     }
+    VECTOR pos = VGet(200, 700, 0);
+    CreateBlock(B_NORMAL_BLOCK, pos);
 }
 
-BlockData* CreateBlock(BlockType type, VECTOR pos)
-{
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        if (!g_Block[i].active)
-        {
-            g_Block[i].active = true;
-            g_Block[i].blockType = type;
-            g_Block[i].pos = pos;
-            g_Block[i].vel = VGet(0, 0, 0);
-            g_Block[i].state = BLOCK_STAY;
-            g_Block[i].gravity = false;
-            g_Block[i].handle = g_BlockHandle[type];
-            g_Block[i].breakable = (type == BREAKABLE_BLOCK);
-            
-            return &g_Block[i];
-        }
-    }
-
-    // ‹ó‚«‚ª‚È‚©‚Á‚½
-    return nullptr;
-}
 
 void StepBlock()
 {

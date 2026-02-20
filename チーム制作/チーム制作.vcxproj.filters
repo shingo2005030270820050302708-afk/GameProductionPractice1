@@ -34,6 +34,9 @@
     <Filter Include="Source\FPS">
       <UniqueIdentifier>{50a3c83e-2339-412f-adff-dc17fb98ebf3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Enemy">
+      <UniqueIdentifier>{eb0b5f73-3211-400d-969b-47c9d6f96b61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -80,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="Source\Block\BlockManager.cpp">
       <Filter>Source\Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\EnemyManager.cpp">
+      <Filter>Source\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\NormalEnemy .cpp">
+      <Filter>Source\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="Source\Block\BlockManager.h">
       <Filter>Source\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\EnemyManager.h">
+      <Filter>Source\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\NormalEnemy.h">
+      <Filter>Source\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

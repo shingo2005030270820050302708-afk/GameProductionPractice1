@@ -34,7 +34,7 @@ struct BlockManager
 {
     std::vector<Block> blocks;
 
-    void Init();
+    //void Init();
     void SpawnBlock(int x, int y, BlockType type);
     void Update(PlayerData& player);
     void Step();

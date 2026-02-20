@@ -6,6 +6,8 @@
 #include "Input/Input.h"
 #include "FPS/Fps.h"
 #include "../Data/Camera/Camera.h"
+#include "Block/Block.h"
+#include "Block/BlockManager.h"
 
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
@@ -33,12 +35,15 @@ int WINAPI WinMain(
 
     InitInput();
     InitPlayer();
+    InitBlock();
 
     // マップ
     LoadMapManager();
     LoadPlayer();
+    LoadBlock();
     StartMapManager();
     StartPlayer();
+    StartBlock();
 
     // メインループ
     while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
@@ -51,15 +56,20 @@ int WINAPI WinMain(
         bg.Draw();            // 背景描画
 
         StepPlayer();
-        UpdatePlayer();
+        BlockManager Step;
 
-        UpdateMapManager();
         UpdatePlayer();
+        UpdateMapManager();
+        BlockManager Update;
+        UpdateBlock(g_PlayerData);
 
         camera.Update(g_PlayerData);  // カメラ追従
 
         DrawMapManager();
         DrawPlayer();
+        BlockManager Draw;
+        DrawBlock();
+
 
         FPSWait();
         ScreenFlip();
@@ -69,6 +79,7 @@ int WINAPI WinMain(
     FinMapManager();
     FinPlayer();
     FinInput();
+    FinBlock();
 
     DxLib_End();
     return 0;

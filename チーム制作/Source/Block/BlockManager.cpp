@@ -51,7 +51,8 @@ void Block::Update(PlayerData* p)
             (px + pw > bx) &&
             (py < by + height) &&
             (py + ph > by);
-
+        
+        printfDx("Block‚Ó‚ê‚ ‚¢\n");
         if (hit && CheckHitKey(KEY_INPUT_X))
         {
             state = BLOCK_LIFT;
