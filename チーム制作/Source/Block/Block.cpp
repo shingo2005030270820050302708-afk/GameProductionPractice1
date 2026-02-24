@@ -94,10 +94,7 @@ void StepBlock()
                 b.pos.y = groundY - b.height;
                 b.vel = VGet(0, 0, 0);
                 b.gravity = false;
-                
-
-                if (b.state == BLOCK_THROW)
-                    b.state = BLOCK_STAY;
+                b.state = BLOCK_STAY;
             }
         }
         break;
@@ -134,18 +131,22 @@ void UpdateBlock(PlayerData& player)
         {
         case BLOCK_STAY:
         {
-            if (hit && IsInputKey(KEY_X))
+            b.gravity = true;
+
+            if (hit && IsTriggerKey(KEY_X))
             {
                 b.state = BLOCK_LIFT;
                 b.hold = true;
+                b.gravity = false;
             }
         }
         break;
 
         case BLOCK_LIFT:
         {
-            if (IsTriggerKey(KEY_DOWN) && IsTriggerKey(KEY_X))
+            if (IsInputKey(KEY_DOWN) && IsTriggerKey(KEY_X))
             {
+
                 b.state = BLOCK_STAY;
                 b.hold = false;
             }
