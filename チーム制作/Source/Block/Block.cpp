@@ -89,6 +89,8 @@ void StepBlock()
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
 
+            CheckBlockMapCollision(b);
+
             if (b.pos.y + b.height >= groundY)
             {
                 b.pos.y = groundY - b.height;
@@ -101,9 +103,95 @@ void StepBlock()
         }
     }
 }
+void CheckBlockMapCollision(BlockData& b)
+{
+    if (!b.active) return;
+
+    float bx = b.pos.x;
+    float by = b.pos.y;
+    float bw = b.width;
+    float bh = b.height;
+
+    int leftTile = (int)(bx / MAP_CHIP_WIDTH);
+    int rightTile = (int)((bx + bw - 1) / MAP_CHIP_WIDTH);
+    int topTile = (int)(by / MAP_CHIP_HEIGHT);
+    int bottomTile = (int)((by + bh - 1) / MAP_CHIP_HEIGHT);
+
+    for (int y = topTile; y <= bottomTile; y++)
+    {
+        for (int x = leftTile; x <= rightTile; x++)
+        {
+            MapChipData chip = GetMapChipData(x, y);
+            if (chip.mapChip == MAP_CHIP_NONE) continue;
+            if (!chip.data || !chip.data->active) continue;
+
+            BlockData* mapBlock = chip.data;
+            if (CheckSquareSquare(bx, by, bw, bh, mapBlock->pos.x, mapBlock->pos.y, mapBlock->width, mapBlock->height))
+            {
+                float overlapTop = (by + bh) - mapBlock->pos.y;
+                float overlapBottom = (mapBlock->pos.y + mapBlock->height) - by;
+                float overlapLeft = (bx + bw) - mapBlock->pos.x;
+                float overlapRight = (mapBlock->pos.x + mapBlock->width) - bx;
+
+                float minOverlapX = (overlapLeft < overlapRight) ? overlapLeft : overlapRight;
+                float minOverlapY = (overlapTop < overlapBottom) ? overlapTop : overlapBottom;
+
+                if (minOverlapY < minOverlapX)
+                {
+                    if (overlapTop < overlapBottom)
+                    {
+                        b.pos.y = mapBlock->pos.y - bh;
+                        b.vel.y = 0;
+                        b.gravity = false;
+                        b.state = BLOCK_STAY;
+                    }
+                    else
+                    {
+                        b.pos.y = mapBlock->pos.y + mapBlock->height;
+                        b.vel.y = 0;
+                    }
+                }
+                else
+                {
+                    if (overlapLeft < overlapRight)
+                        b.pos.x = mapBlock->pos.x - bw;
+                    else
+                        b.pos.x = mapBlock->pos.x + mapBlock->width;
+
+                    b.vel.x = 0;
+                }
+            }
+        }
+    }
+}
 
 void UpdateBlock(PlayerData& player)
 {
+
+    for (int i = 0; i < BLOCK_MAX; i++)
+    {
+        BlockData& b = g_Block[i];
+        if (!b.active) continue;
+
+        // Ž‚¿ã‚°’†‚ÌƒuƒƒbƒN‚Í“–‚½‚è”»’è‚µ‚È‚¢
+        if (b.state == BLOCK_LIFT) continue;
+
+        float px = player.posX;
+        float py = player.posY;
+        float pw = player.boxCollision.width;
+        float ph = player.boxCollision.height;
+
+        float bx = b.pos.x;
+        float by = b.pos.y;
+        float bw = b.width;
+        float bh = b.height;
+
+        if (!CheckSquareSquare(px, py, pw, ph, bx, by, bw, bh))
+            continue;
+
+        // Õ“Ë‰ðŒˆ
+        ResolvePlayerBlockCollision(&b);
+    }
     PlayerData* p = GetPlayer();
     for (int bi = 0; bi < BLOCK_MAX; bi++)
     {
