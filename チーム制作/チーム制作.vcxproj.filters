@@ -37,6 +37,27 @@
     <Filter Include="Source\Enemy">
       <UniqueIdentifier>{eb0b5f73-3211-400d-969b-47c9d6f96b61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Scene">
+      <UniqueIdentifier>{96302a98-2fbc-49c8-b0ca-63dad44e278b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\Title">
+      <UniqueIdentifier>{9c3cef45-278f-486e-a6a6-3437244920f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\SceneSelect">
+      <UniqueIdentifier>{58bd3166-4226-424d-af03-ad9eafd5aac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\GameClear">
+      <UniqueIdentifier>{f25a1839-1b38-4a82-af6e-5a11fc876b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\Setting">
+      <UniqueIdentifier>{6f5defb7-df6a-4e01-86b4-7e0234c44597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\GameOver">
+      <UniqueIdentifier>{59f3906e-cd89-4d8d-824f-bb0e8027219f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Scene\Play">
+      <UniqueIdentifier>{521268a0-edaf-47de-91fb-477acea7c014}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -89,6 +110,27 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp">
       <Filter>Source\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\SceneManager.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\GameClear\GameClearScene.cpp">
+      <Filter>Source\Scene\GameClear</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\GameOver\GameOverScene.cpp">
+      <Filter>Source\Scene\GameOver</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Setting\SettingScene.cpp">
+      <Filter>Source\Scene\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\StageSelect\StageSelectScene.cpp">
+      <Filter>Source\Scene\SceneSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Title\TitleScene.cpp">
+      <Filter>Source\Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Play\PlayScene.cpp">
+      <Filter>Source\Scene\Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +187,30 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy\NormalEnemy.h">
       <Filter>Source\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\SceneBase.h">
+      <Filter>Source\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\SceneManager.h">
+      <Filter>Source\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\GameClear\GameClearScene.h">
+      <Filter>Source\Scene\GameClear</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\GameOver\GameOverScene.h">
+      <Filter>Source\Scene\GameOver</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Setting\SettingScene.h">
+      <Filter>Source\Scene\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\StageSelect\StageSelectScene.h">
+      <Filter>Source\Scene\SceneSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Title\TitleScene.h">
+      <Filter>Source\Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Play\PlayScene.h">
+      <Filter>Source\Scene\Play</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
