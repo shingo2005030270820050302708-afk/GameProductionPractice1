@@ -9,7 +9,7 @@
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
-float groundY = 825.0f;
+float groundY = 832.0f;
 
 BlockData* CreateBlock(BlockType type, VECTOR pos)
 {
@@ -168,6 +168,8 @@ void CheckBlockMapCollision(BlockData& b)
 void UpdateBlock(PlayerData& player)
 {
 
+    float liftPadding = 1.0f;
+
     for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_Block[i];
@@ -198,11 +200,10 @@ void UpdateBlock(PlayerData& player)
         BlockData& b = g_Block[bi];
         if (!b.active)
             continue;
-        float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
-        float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
-        float pw = player.boxCollision.width;
-        float ph = player.boxCollision.height;
-
+        float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X - liftPadding;
+        float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y - liftPadding;
+        float pw = player.boxCollision.width + liftPadding * 2;
+        float ph = player.boxCollision.height + liftPadding * 2;
         // Block ‚Ì“–‚½‚è”»’è
         int bw, bh;
         GetGraphSize(b.handle, &bw, &bh);

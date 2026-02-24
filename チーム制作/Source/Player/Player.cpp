@@ -11,7 +11,7 @@
 
 // Playerの諸々のステータス
 #define PLAYER_MOVE_SPEED (2.0f)
-#define PLAYER_JUMP_POWER (10.0f)
+#define PLAYER_JUMP_POWER (6.5f)
 #define PLAYER_GRAVITY (0.4f)
 
 // マップ衝突判定用のプレイヤーサイズ補正
