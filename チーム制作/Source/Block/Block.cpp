@@ -60,58 +60,39 @@ void StartBlock()
         g_Block[i].gravity = false;
         g_Block[i].vel = VGet(0, 0, 0);
     }
-    VECTOR pos = VGet(200, 700, 0);
+    VECTOR pos = VGet(200, 800, 0);
     CreateBlock(B_NORMAL_BLOCK, pos);
 }
-
 
 void StepBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_Block[i];
-        if (!b.active)
-            continue;
+        if (!b.active) continue;
 
         switch (b.state)
         {
         case BLOCK_LIFT:
-            // ÉvÉåÉCÉÑÅ[í«è]
             b.pos.x = GetPlayer()->posX;
             b.pos.y = GetPlayer()->posY - PLAYER_HEIGHT;
             break;
 
         case BLOCK_THROW:
-            // èdóÕ
             if (b.gravity)
                 b.vel.y += 0.5f;
 
-            // à⁄ìÆ
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
 
-            //// ìGÇ∆ÇÃìñÇΩÇËîªíË
-            //for (int ei = 0; ei < ENEMY_MAX; ei++)
-            //{
-            //    EnemyData& e = g_Enemy[ei];
-            //    if (!e.active)
-            //        continue;
-
-            //    if (CheckHitBlockEnemy(&b, &e))
-            //    {
-            //        e.hp -= 1;
-
-            //        if (b.breakable)
-            //            b.active = false;
-            //        else
-            //        {
-            //            b.state = BLOCK_STAY;
-            //            b.gravity = true;
-            //        }
-
-            //        break;
-            //    }
-            //}
+            const float groundY = 850.0f;
+            if (b.pos.y + b.height >= groundY)
+            {
+                b.pos.y = groundY - b.height;
+                b.vel = VGet(0, 0, 0);
+                b.gravity = false;
+                b.state = BLOCK_STAY;
+            }
             break;
         }
     }
@@ -130,11 +111,12 @@ void UpdateBlock(PlayerData& player)
         {
         case BLOCK_STAY:
         {
+            b.gravity = true;
             // íÕÇ›îªíËÇÕçLÇﬂÇ…Ç∑ÇÈ
-            float px = player.posX + 10;
-            float py = player.posY + 10;
-            float pw = 30;
-            float ph = 40;
+            float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
+            float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
+            float pw = player.boxCollision.width;
+            float ph = player.boxCollision.height;
 
             // Block ÇÃìñÇΩÇËîªíË
             int bw, bh;
@@ -148,8 +130,9 @@ void UpdateBlock(PlayerData& player)
                 (py < by + bh) &&
                 (py + ph > by);
 
-            if (hit && CheckHitKey(KEY_INPUT_X))
+            if (hit && IsInputKey(KEY_X))
             {
+                printfDx("âüÇπÇƒÇÈÇÊ\n");
                 b.state = BLOCK_LIFT;
                 b.gravity = false;
                 b.vel = VGet(0, 0, 0);
@@ -160,25 +143,26 @@ void UpdateBlock(PlayerData& player)
 
         case BLOCK_LIFT:
             // â∫Å{X Å® íuÇ≠
-            if (CheckHitKey(KEY_INPUT_DOWN) && CheckHitKey(KEY_INPUT_X))
+            if (IsTriggerKey(KEY_DOWN) && IsTriggerKey(KEY_X))
             {
                 b.gravity = false;
                 b.hold = false;  // Å© false Ç…Ç∑ÇÈ
                 b.state = BLOCK_STAY;
             }
             // X Å® ìäÇ∞ÇÈ
-            else if (CheckHitKey(KEY_INPUT_X))
+            else if (IsTriggerKey(KEY_X))
             {
                 b.gravity = true;
                 b.hold = false;  // Å© false Ç…Ç∑ÇÈ
                 b.state = BLOCK_THROW;
+
+                b.vel.x = (p->isTurn ? -6.0f : 6.0f);
+                b.vel.y = -8.0f;
             }
         break;
+
         case BLOCK_THROW:
-            b.gravity = true;
-            // ìäÇ∞ÇÈë¨ìx
-            b.vel.x = (p->isTurn ? -6.0f : 6.0f);
-            b.vel.y = -8.0f;
+        break;
         }
     }
 }
@@ -190,11 +174,17 @@ void DrawBlock()
     {
         if (g_Block[i].active && g_Block[i].handle != -1)
         {
-            DrawGraph((int)g_Block[i].pos.x,
-                (int)g_Block[i].pos.y, g_Block[i].handle, TRUE);
+            DrawGraph(
+                (int)(g_Block[i].pos.x - camera.GetX()),
+                (int)(g_Block[i].pos.y - camera.GetY()),
+                g_Block[i].handle,
+                TRUE
+            );
         }
     }
 }
+
+
 void FinBlock()
 {
     for (int i = 0; i < BLOCK_TYPE_MAX; i++)
@@ -202,3 +192,4 @@ void FinBlock()
         DeleteGraph(g_BlockHandle[i]);
     }
 }
+

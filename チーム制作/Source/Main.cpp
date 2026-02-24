@@ -53,23 +53,19 @@ int WINAPI WinMain(
         UpdateFPS();
         UpdateInput();
 
-        bg.Draw();            // îwåiï`âÊ
-
         StepPlayer();
-        BlockManager Step;
-
         UpdatePlayer();
+
         UpdateMapManager();
-        BlockManager Update;
         UpdateBlock(g_PlayerData);
+        StepBlock();
 
-        camera.Update(g_PlayerData);  // ÉJÉÅÉâí«è]
+        camera.Update(g_PlayerData);
 
+        bg.Draw();
         DrawMapManager();
         DrawPlayer();
-        BlockManager Draw;
         DrawBlock();
-
 
         FPSWait();
         ScreenFlip();
