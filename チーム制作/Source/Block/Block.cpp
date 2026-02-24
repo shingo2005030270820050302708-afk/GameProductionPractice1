@@ -9,6 +9,8 @@
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
+float groundY = 825.0f;
+
 BlockData* CreateBlock(BlockType type, VECTOR pos)
 {
     for (int i = 0; i < BLOCK_MAX; i++)
@@ -74,26 +76,31 @@ void StepBlock()
         switch (b.state)
         {
         case BLOCK_LIFT:
-            b.pos.x = GetPlayer()->posX;
-            b.pos.y = GetPlayer()->posY - PLAYER_HEIGHT;
+            b.pos.x = GetPlayer()->posX + 15;
+            b.pos.y = GetPlayer()->posY - 22;
             break;
 
         case BLOCK_THROW:
+        case BLOCK_STAY:
+        {
             if (b.gravity)
                 b.vel.y += 0.5f;
 
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
 
-            const float groundY = 850.0f;
             if (b.pos.y + b.height >= groundY)
             {
                 b.pos.y = groundY - b.height;
                 b.vel = VGet(0, 0, 0);
                 b.gravity = false;
-                b.state = BLOCK_STAY;
+                
+
+                if (b.state == BLOCK_THROW)
+                    b.state = BLOCK_STAY;
             }
-            break;
+        }
+        break;
         }
     }
 }
@@ -106,62 +113,52 @@ void UpdateBlock(PlayerData& player)
         BlockData& b = g_Block[bi];
         if (!b.active)
             continue;
+        float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
+        float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
+        float pw = player.boxCollision.width;
+        float ph = player.boxCollision.height;
+
+        // Block ÇÃìñÇΩÇËîªíË
+        int bw, bh;
+        GetGraphSize(b.handle, &bw, &bh);
+        float bx = b.pos.x;
+        float by = b.pos.y;
+
+        bool hit =
+            (px < bx + bw) &&
+            (px + pw > bx) &&
+            (py < by + bh) &&
+            (py + ph > by);
 
         switch (b.state)
         {
         case BLOCK_STAY:
         {
-            b.gravity = true;
-            // íÕÇ›îªíËÇÕçLÇﬂÇ…Ç∑ÇÈ
-            float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
-            float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
-            float pw = player.boxCollision.width;
-            float ph = player.boxCollision.height;
-
-            // Block ÇÃìñÇΩÇËîªíË
-            int bw, bh;
-            GetGraphSize(b.handle, &bw, &bh);
-            float bx = b.pos.x;
-            float by = b.pos.y;
-
-            bool hit =
-                (px < bx + bw) &&
-                (px + pw > bx) &&
-                (py < by + bh) &&
-                (py + ph > by);
-
             if (hit && IsInputKey(KEY_X))
             {
-                printfDx("âüÇπÇƒÇÈÇÊ\n");
                 b.state = BLOCK_LIFT;
-                b.gravity = false;
-                b.vel = VGet(0, 0, 0);
-                b.hold = true;   // Å© true Ç…Ç∑ÇÈ
+                b.hold = true;
             }
         }
         break;
 
         case BLOCK_LIFT:
-            // â∫Å{X Å® íuÇ≠
+        {
             if (IsTriggerKey(KEY_DOWN) && IsTriggerKey(KEY_X))
             {
-                b.gravity = false;
-                b.hold = false;  // Å© false Ç…Ç∑ÇÈ
                 b.state = BLOCK_STAY;
+                b.hold = false;
             }
-            // X Å® ìäÇ∞ÇÈ
             else if (IsTriggerKey(KEY_X))
             {
-                b.gravity = true;
-                b.hold = false;  // Å© false Ç…Ç∑ÇÈ
                 b.state = BLOCK_THROW;
+                b.hold = false;
+                b.gravity = true;
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;
             }
-        break;
-
-        case BLOCK_THROW:
+        }
         break;
         }
     }
