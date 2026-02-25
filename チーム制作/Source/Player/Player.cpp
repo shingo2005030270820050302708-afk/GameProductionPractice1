@@ -10,7 +10,7 @@
 #define PLAYER_DEFAULT_POS_Y (0.0f)
 
 // Playerの諸々のステータス
-#define PLAYER_MOVE_SPEED (2.0f)
+#define PLAYER_MOVE_SPEED (3.0f)
 #define PLAYER_JUMP_POWER (7.0f)
 #define PLAYER_GRAVITY (0.4f)
 
