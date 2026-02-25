@@ -18,6 +18,7 @@ public:
     SceneType NextScene() const override;
 
 private:
+    int TitlebgHandle = -1;
     bool isEnd = false;
     SceneType next = SceneType::Title;
 };

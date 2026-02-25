@@ -132,6 +132,9 @@
     <ClCompile Include="Source\Scene\Play\PlayScene.cpp">
       <Filter>Source\Scene\Play</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\GlobalData.cpp">
+      <Filter>Source\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Character.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Source\Scene\Play\PlayScene.h">
       <Filter>Source\Scene\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\GlobalData.h">
+      <Filter>Source\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

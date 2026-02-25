@@ -6,11 +6,13 @@
 #include "GameClear/GameClearScene.h"
 #include "GameOver/GameOverScene.h"
 
-SceneManager::SceneManager(SceneType start) {
+SceneManager::SceneManager(SceneType start)
+{
     ChangeScene(start);
 }
 
-void SceneManager::ChangeScene(SceneType next) {
+void SceneManager::ChangeScene(SceneType next) 
+{
     currentScene = next;
 
     switch (next) {
@@ -43,18 +45,20 @@ void SceneManager::ChangeScene(SceneType next) {
     scene->Start();
 }
 
-void SceneManager::Update() {
+void SceneManager::Update() 
+{
     scene->Step();
     scene->Update();
 
-    if (scene->IsEnd()) {
+    if (scene->IsEnd()) 
+    {
         SceneType next = scene->NextScene();
         scene->Fin();
         ChangeScene(next);
     }
 }
 
-void SceneManager::Draw() {
+void SceneManager::Draw() 
+{
     scene->Draw();
 }
-//
