@@ -30,3 +30,15 @@ struct NormalEnemyData
 
 	NormalEnemyState state;
 };
+
+void InitNormalEnemy();
+void LoadNormalEnemy();
+void StartNormalEnemy();
+void StepNormalEnemy();
+void UpdaterNormalEnemy();
+void DrawNormalEnemy();
+void FinNormalEnemy();
+void UpdateDamage(NormalEnemyData& player);
+void UpdateDead(NormalEnemyData& player);
+NormalEnemyData* GetNormalEnemyData();
+extern NormalEnemyData g_NormalEnemyData;
