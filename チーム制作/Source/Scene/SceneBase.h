@@ -25,3 +25,4 @@ public:
     virtual bool IsEnd() const = 0;
     virtual SceneType NextScene() const = 0;
 };
+//

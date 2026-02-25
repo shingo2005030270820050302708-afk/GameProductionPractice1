@@ -17,4 +17,4 @@ public:
 private:
     bool isEnd = false;
     SceneType next = SceneType::Title;
-};
+};//

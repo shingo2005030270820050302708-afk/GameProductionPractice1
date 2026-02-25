@@ -35,4 +35,3 @@ void FinMapManager()
         g_MapBlocks[i].active = false;
     }
 }
-//

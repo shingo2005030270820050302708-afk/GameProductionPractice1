@@ -39,4 +39,4 @@ void TitleScene::Fin()
 }
 
 bool TitleScene::IsEnd() const { return isEnd; }
-SceneType TitleScene::NextScene() const { return next; }
+SceneType TitleScene::NextScene() const { return next; }//

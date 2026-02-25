@@ -26,7 +26,7 @@ int WINAPI WinMain(
 
     SceneManager sceneManager(SceneType::Title); // タイトルシーンから開始
 
-    while (ProcessMessage() == 0 && !CheckHitKey(KEY_INPUT_ESCAPE))
+    while (ProcessMessage() == 0 && !CheckHitKey(KEY_INPUT_E))
     {
         ClearDrawScreen();
 
@@ -42,3 +42,4 @@ int WINAPI WinMain(
     DxLib_End();
     return 0;
 }
+//

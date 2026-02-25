@@ -6,4 +6,4 @@ void LoadMapManager(const char* mapPath);
 void StartMapManager();    // 開始処理
 void UpdateMapManager();   // 更新処理
 void DrawMapManager();     // 描画
-void FinMapManager();  // 終了処理
+void FinMapManager();  // 終了処理//

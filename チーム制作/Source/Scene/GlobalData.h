@@ -6,4 +6,4 @@ struct GameData {
     bool soundEnabled = true;
 };
 
-extern GameData gData;
+extern GameData gData;//

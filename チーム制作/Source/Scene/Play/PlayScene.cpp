@@ -46,4 +46,4 @@ void PlayScene::Fin()
 }
 
 bool PlayScene::IsEnd() const { return isEnd; }
-SceneType PlayScene::NextScene() const { return next; }
+SceneType PlayScene::NextScene() const { return next; }//
