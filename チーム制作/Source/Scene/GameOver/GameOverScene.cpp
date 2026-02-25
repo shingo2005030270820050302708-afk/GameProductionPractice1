@@ -9,4 +9,4 @@ void GameOverScene::Draw() {}
 void GameOverScene::Fin() {}
 
 bool GameOverScene::IsEnd() const { return isEnd; }
-SceneType GameOverScene::NextScene() const { return next; }//
+SceneType GameOverScene::NextScene() const { return next; }////

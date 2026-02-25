@@ -7,6 +7,7 @@
 enum BlockState
 {
     BLOCK_STAY,
+    BLOCK_PUSH,
     BLOCK_LIFT,
     BLOCK_THROW,
     BREAKABLE_BLOCK

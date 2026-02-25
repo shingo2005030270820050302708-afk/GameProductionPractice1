@@ -19,4 +19,3 @@ protected:
     int pos_y;
     bool active;
 };
-//43

@@ -49,6 +49,39 @@ void UpdateInput()
 	{
 		g_InputState |= KEY_Z;
 	}
+
+	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
+
+	if (pad & PAD_INPUT_UP)
+	{
+		g_InputState |= KEY_UP;
+	}
+	if (pad & PAD_INPUT_DOWN)
+	{
+		g_InputState |= KEY_DOWN;
+	}
+	if (pad & PAD_INPUT_LEFT)
+	{
+		g_InputState |= KEY_LEFT;
+	}
+	if (pad & PAD_INPUT_RIGHT)
+	{
+		g_InputState |= KEY_RIGHT;
+	}
+
+	if (pad & PAD_INPUT_A)
+	{
+		g_InputState |= KEY_Z; // A → Z と同じ扱い
+	}
+	if (pad & PAD_INPUT_B)
+	{
+		g_InputState |= KEY_C; // B → C
+	}
+	if (pad & PAD_INPUT_X)
+	{
+		g_InputState |= KEY_X; // X → X
+	}
+
 }
 
 void DrawInput()

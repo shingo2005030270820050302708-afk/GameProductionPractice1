@@ -12,28 +12,28 @@ MapChipData(*GetMapData())[MAP_CHIP_X_NUM]
 }
 
 // Map.bin を読み込む
-void LoadMapChipData()
+// 引数 path を受け取るように変更
+void LoadMapChipData(const char* path)
 {
     FILE* fp;
-    if (fopen_s(&fp, "Data/Map/Map.bin", "rb") != 0 || fp == nullptr)
+    if (fopen_s(&fp, path, "rb") != 0 || fp == nullptr)
     {
-        printfDx("マップデータ読み込み失敗\n");
+        printfDx("マップデータ読み込み失敗: %s\n", path);
         return;
     }
 
-    int* buffer = new int[MAP_CHIP_X_NUM * MAP_CHIP_Y_NUM] {0};
+    int* buffer = new int[MAP_CHIP_X_NUM * MAP_CHIP_Y_NUM] { 0 };
     size_t readCount = fread(buffer, sizeof(int), MAP_CHIP_X_NUM * MAP_CHIP_Y_NUM, fp);
     fclose(fp);
 
     if (readCount != MAP_CHIP_X_NUM * MAP_CHIP_Y_NUM)
-        printfDx("マップデータサイズが不正です\n");
+        printfDx("マップデータサイズが不正です: %s\n", path);
 
     for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
     {
         for (int x = 0; x < MAP_CHIP_X_NUM; x++)
         {
             int val = buffer[y * MAP_CHIP_X_NUM + x];
-
             switch (val)
             {
             case 1: g_MapChip[y][x].mapChip = NORMAL_BLOCK; break;
@@ -42,10 +42,8 @@ void LoadMapChipData()
             case 4: g_MapChip[y][x].mapChip = LEFT_BLOCK; break;
             case 5: g_MapChip[y][x].mapChip = RIGHT_BLOCK; break;
             case 6: g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
-            case 7: g_MapChip[y][x].data = nullptr; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
-
             g_MapChip[y][x].data = nullptr;
         }
     }
@@ -84,4 +82,3 @@ MapChipData GetMapChipData(int x, int y)
     }
     return g_MapChip[y][x];
 }
-//いじらない

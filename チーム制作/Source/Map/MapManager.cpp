@@ -4,11 +4,11 @@
 #include "../Player/Player.h"
 
 // マップ読み込み
-void LoadMapManager()
+void LoadMapManager(const char* mapPath)
 {
-    LoadMapBlock();        // タイル画像読み込み
-    LoadMapChipData();  // Map.bin 読み込み
-    CreateMap();        // ブロック生成
+    LoadMapBlock();              // タイル画像読み込み
+    LoadMapChipData(mapPath);    // Map.bin 読み込み
+    CreateMap();                 // ブロック生成
 }
 // 開始処理（今は空）
 void StartMapManager()

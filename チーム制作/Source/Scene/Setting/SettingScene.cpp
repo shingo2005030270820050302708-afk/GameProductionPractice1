@@ -9,4 +9,4 @@ void SettingScene::Draw() {}
 void SettingScene::Fin() {}
 
 bool SettingScene::IsEnd() const { return isEnd; }
-SceneType SettingScene::NextScene() const { return next; }//
+SceneType SettingScene::NextScene() const { return next; }/////

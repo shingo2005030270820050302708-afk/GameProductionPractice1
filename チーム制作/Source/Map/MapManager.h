@@ -2,7 +2,7 @@
 #include "MapChip.h"
 
 // マップ管理関数
-void LoadMapManager();     // マップ読み込み
+void LoadMapManager(const char* mapPath);
 void StartMapManager();    // 開始処理
 void UpdateMapManager();   // 更新処理
 void DrawMapManager();     // 描画

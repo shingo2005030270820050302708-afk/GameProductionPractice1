@@ -89,4 +89,4 @@ void StageSelectScene::Draw()
 }
 
 bool StageSelectScene::IsEnd() const { return isEnd; }
-SceneType StageSelectScene::NextScene() const { return next; }//
+SceneType StageSelectScene::NextScene() const { return next; }////

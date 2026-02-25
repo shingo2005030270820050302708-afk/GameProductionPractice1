@@ -22,4 +22,4 @@ private:
     static const int STAGE_MAX = 5;           // ステージ数
     int stageIconHandle[STAGE_MAX];           // ステージアイコン画像
     int cursorHandle;                          // カーソル画像
-};
+};//

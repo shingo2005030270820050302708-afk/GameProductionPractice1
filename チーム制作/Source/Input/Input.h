@@ -3,15 +3,16 @@
 // 入力ボタン定義
 enum InputKey
 {
-	KEY_UP = (1 << 0),	// 0x0000 0000 0001
-	KEY_DOWN = (1 << 1),	// 0x0000 0000 0010
-	KEY_LEFT = (1 << 2), // 0x0000 0000 0100
-	KEY_RIGHT = (1 << 3), // 0x0000 0000 1000
-	KEY_C = (1 << 4), // 0x0000 0001 0000
-	KEY_X = (1 << 5), // 0x0000 0010 0000
-	KEY_Z = (1 << 6), // 0x0000 0100 0000
+    KEY_UP = (1 << 0),
+    KEY_DOWN = (1 << 1),
+    KEY_LEFT = (1 << 2),
+    KEY_RIGHT = (1 << 3),
+    KEY_C = (1 << 4),
+    KEY_X = (1 << 5),
+    KEY_Z = (1 << 6),
+    KEY_ESCAPE = (1 << 7),
+    KEY_RETURN = (1 << 8),
 };
-
 // 関数のプロトタイプ宣言 
 void InitInput();
 void UpdateInput();

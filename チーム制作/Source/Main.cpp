@@ -8,6 +8,7 @@
 #include "../Data/Camera/Camera.h"
 #include "Block/Block.h"
 #include "Block/BlockManager.h"
+#include "Scene/SceneManager.h"
 
 int WINAPI WinMain(
     _In_ HINSTANCE hInstance,
@@ -18,64 +19,25 @@ int WINAPI WinMain(
 {
     ChangeWindowMode(true);
     SetMainWindowText("ロボット工場からの脱出");
-    SetWindowPosition(0, 0);
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);
-
     if (DxLib_Init() == -1) return -1;
 
-    SetTransColor(TRANS_COLOR_R, TRANS_COLOR_G, TRANS_COLOR_B);
     SetDrawScreen(DX_SCREEN_BACK);
 
-    // 背景レイヤー
-    BackGround bg;
-    bg.AddLayer("Data/BG/1.png");
-    bg.AddLayer("Data/BG/2.png");
-    bg.AddLayer("Data/BG/3.png");
-    bg.AddLayer("Data/BG/4.png");
+    SceneManager sceneManager(SceneType::Title); // タイトルシーンから開始
 
-    InitInput();
-    InitPlayer();
-    InitBlock();
-
-    // マップ
-    LoadMapManager();
-    LoadPlayer();
-    LoadBlock();
-    StartMapManager();
-    StartPlayer();
-    StartBlock();
-
-    // メインループ
-    while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
+    while (ProcessMessage() == 0 && !CheckHitKey(KEY_INPUT_ESCAPE))
     {
         ClearDrawScreen();
 
         UpdateFPS();
         UpdateInput();
 
-        StepPlayer();
-        UpdatePlayer();
+        sceneManager.Update();  // シーン更新と自動切替
+        sceneManager.Draw();    // シーン描画
 
-        UpdateMapManager();
-        UpdateBlock(g_PlayerData);
-        StepBlock();
-
-        camera.Update(g_PlayerData);
-
-        bg.Draw();
-        DrawMapManager();
-        DrawPlayer();
-        DrawBlock();
-
-        FPSWait();
         ScreenFlip();
     }
-
-    // 終了処理
-    FinMapManager();
-    FinPlayer();
-    FinInput();
-    FinBlock();
 
     DxLib_End();
     return 0;
