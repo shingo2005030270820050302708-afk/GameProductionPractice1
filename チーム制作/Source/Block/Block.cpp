@@ -75,11 +75,13 @@ void StepBlock()
 
         switch (b.state)
         {
+        case BLOCK_PUSH:
+            b.pos.x = GetPlayer()->posX + 65;
+            break;
         case BLOCK_LIFT:
             b.pos.x = GetPlayer()->posX + 15;
-            b.pos.y = GetPlayer()->posY - 22;
+            b.pos.y = GetPlayer()->posY - 25;
             break;
-
         case BLOCK_THROW:
         case BLOCK_STAY:
         {
@@ -222,11 +224,29 @@ void UpdateBlock(PlayerData& player)
         {
             b.gravity = true;
 
+            if (hit && IsTriggerKey(KEY_C))
+            {
+                b.state = BLOCK_PUSH;
+                b.hold = true;
+                b.gravity = false;
+            }
+
             if (hit && IsTriggerKey(KEY_X))
             {
                 b.state = BLOCK_LIFT;
                 b.hold = true;
                 b.gravity = false;
+            }
+        }
+        break;
+
+        case BLOCK_PUSH:
+        {
+            if (IsInputKey(KEY_DOWN) && IsTriggerKey(KEY_X))
+            {
+
+                b.state = BLOCK_STAY;
+                b.hold = false;
             }
         }
         break;

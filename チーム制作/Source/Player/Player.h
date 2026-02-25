@@ -14,9 +14,6 @@
 enum PlayerState
 {
 	NORMAL,
-	PUSH,
-	GRAB,
-	THROW,
 	DAMAGE,
 	DEAD
 };
