@@ -1,7 +1,8 @@
 #pragma once
 #include "../Map/MapParameter.h"
 #include "../Collision/Collision.h"
-
+#include "../Block/Block.h"
+#define ENEMY_MAX 1000
 
 enum NormalEnemyState
 {
@@ -31,6 +32,8 @@ struct NormalEnemyData
 	NormalEnemyState state;
 };
 
+extern NormalEnemyData g_NormalEnemyData[ENEMY_MAX];
+
 void InitNormalEnemy();
 void LoadNormalEnemy();
 void StartNormalEnemy();
@@ -38,7 +41,6 @@ void StepNormalEnemy();
 void UpdaterNormalEnemy();
 void DrawNormalEnemy();
 void FinNormalEnemy();
-void UpdateDamage(NormalEnemyData& player);
-void UpdateDead(NormalEnemyData& player);
+void UpdateDamage(NormalEnemyData& enemy);
+void UpdateDead(NormalEnemyData& enemy);
 NormalEnemyData* GetNormalEnemyData();
-extern NormalEnemyData g_NormalEnemyData;

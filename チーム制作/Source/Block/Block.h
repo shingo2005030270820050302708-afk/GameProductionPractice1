@@ -3,6 +3,8 @@
 #include "../Player/Player.h"
 #include "../Map/MapBlock.h"
 
+extern BlockData g_Block[BLOCK_MAX];
+
 // ƒuƒƒbƒN‚Ìó‘Ô
 enum BlockState
 {
