@@ -14,9 +14,6 @@
 enum PlayerState
 {
 	NORMAL,
-	PUSH,
-	GRAB,
-	THROW,
 	DAMAGE,
 	DEAD
 };
@@ -48,9 +45,6 @@ void UpdatePlayer();
 void DrawPlayer();
 void FinPlayer();
 void UpdateNormal(PlayerData& player);
-void UpdateGrab(PlayerData& player);
-void UpdatePush(PlayerData& player);
-void UpdateThrow(PlayerData& player);
 void UpdateDamage(PlayerData& player);
 void UpdateDead(PlayerData& player);
 PlayerData* GetPlayer();

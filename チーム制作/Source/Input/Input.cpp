@@ -82,6 +82,16 @@ void UpdateInput()
 		g_InputState |= KEY_X; // X → X
 	}
 
+	if (CheckHitKey(KEY_INPUT_ESCAPE))
+	{
+		g_InputState |= KEY_ESCAPE;
+	}
+
+	if (CheckHitKey(KEY_INPUT_RETURN))
+	{
+		g_InputState |= KEY_RETURN;
+	}
+
 }
 
 void DrawInput()

@@ -7,3 +7,5 @@ MapChipData GetMapChipData(int x, int y);
 
 
 MapChipData(*GetMapData())[MAP_CHIP_X_NUM]; // BlockManager ‚ªg‚¤ŠÖ”
+
+//

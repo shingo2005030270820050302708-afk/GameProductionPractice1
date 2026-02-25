@@ -85,15 +85,6 @@ void UpdatePlayer()
     case NORMAL:
         UpdateNormal(g_PlayerData);
         break;
-    case PUSH:
-        UpdateGrab(g_PlayerData);
-        break;
-    case GRAB:
-        UpdateGrab(g_PlayerData);
-        break;
-    case THROW:
-        UpdateThrow(g_PlayerData);
-        break;
     case DAMAGE:
         UpdateDamage(g_PlayerData);
         break;
@@ -108,24 +99,6 @@ void UpdateNormal(PlayerData& player)
     // à íuçXêV
     player.posX += player.moveX;
     player.posY += player.moveY;
-
-    if (IsInputKey(KEY_C))
-    {
-        g_PlayerData.state = PUSH;
-    }
-}
-
-void UpdatePush(PlayerData& player)
-{
-    player.posX += player.moveX / 2;
-}
-void UpdateGrab(PlayerData& player)
-{
-    player.posX += player.moveX; player.posY += player.moveY;
-}
-void UpdateThrow(PlayerData& player)
-{
-    player.posX += player.moveX; player.posY += player.moveY;
 }
 
 void UpdateDamage(PlayerData& player)

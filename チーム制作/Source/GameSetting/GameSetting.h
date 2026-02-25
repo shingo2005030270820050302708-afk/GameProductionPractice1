@@ -9,3 +9,5 @@
 #define TRANS_COLOR_R (1)	// 透過色のR値
 #define TRANS_COLOR_G (100)	// 透過色のG値
 #define TRANS_COLOR_B (2)	// 透過色のB値
+
+//

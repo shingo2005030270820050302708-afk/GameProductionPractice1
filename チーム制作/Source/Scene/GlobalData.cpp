@@ -1,2 +1,2 @@
 #include "GlobalData.h"
-GameData gData;//
+GameData gData;
