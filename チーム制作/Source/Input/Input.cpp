@@ -71,15 +71,15 @@ void UpdateInput()
 
 	if (pad & PAD_INPUT_A)
 	{
-		g_InputState |= KEY_Z; // A → Z と同じ扱い
+		g_InputState |= KEY_Z;
 	}
 	if (pad & PAD_INPUT_B)
 	{
-		g_InputState |= KEY_C; // B → C
+		g_InputState |= KEY_C;
 	}
 	if (pad & PAD_INPUT_X)
 	{
-		g_InputState |= KEY_X; // X → X
+		g_InputState |= KEY_X;
 	}
 
 }
