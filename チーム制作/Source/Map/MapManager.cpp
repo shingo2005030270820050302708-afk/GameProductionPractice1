@@ -1,7 +1,12 @@
 #include "MapManager.h"
 #include "DxLib.h"
 #include "MapBlock.h"
+#include "MapParameter.h" // ← 追加
 #include "../Player/Player.h"
+
+// groundY の実体はここだけに置く
+float groundY = 832.0f;
+
 
 // マップ読み込み
 void LoadMapManager(const char* mapPath)

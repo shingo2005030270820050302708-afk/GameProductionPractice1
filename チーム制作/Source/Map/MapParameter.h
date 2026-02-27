@@ -9,6 +9,9 @@ constexpr int MAP_CHIP_Y_NUM = 32;
 constexpr float MAP_CHIP_WIDTH = 32.0f;
 constexpr float MAP_CHIP_HEIGHT = 32.0f;
 
+// グローバル groundY の宣言（定義は .cpp に一箇所だけ置く）
+extern float groundY;
+
 enum BlockType;
 enum BlockState;
 

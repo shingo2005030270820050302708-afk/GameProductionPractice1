@@ -9,8 +9,6 @@
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
-float groundY = 832.0f;
-
 BlockData* CreateBlock(BlockType type, VECTOR pos)
 {
     for (int i = 0; i < BLOCK_MAX; i++)
