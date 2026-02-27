@@ -1,5 +1,6 @@
 #pragma once
 #include "../SceneBase.h"
+#include "../../BackGround/BackGround.h"
 
 class PlayScene : public SceneBase {
 public:
@@ -15,6 +16,7 @@ public:
     SceneType NextScene() const override;
 
 private:
+    BackGround bg;
     bool isEnd = false;
     SceneType next = SceneType::Title;
 };//

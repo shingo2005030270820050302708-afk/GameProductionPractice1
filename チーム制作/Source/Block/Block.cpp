@@ -6,6 +6,7 @@
 #include "../Collision/Collision.h"
 #include "../../Data/Camera/Camera.h"
 
+
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
 
@@ -45,6 +46,7 @@ void InitBlock()
         g_Block[i].breakable = false;
         g_Block[i].width = 32;
         g_Block[i].height = 32;
+        int X = 0;
     }
 }
 void LoadBlock()
@@ -76,11 +78,16 @@ void StepBlock()
         switch (b.state)
         {
         case BLOCK_PUSH:
-            b.pos.x = GetPlayer()->posX + 65;
-            break;
+        {
+            int X = GetPlayer()->isTurn ? -35 : 65;
+            b.pos.x = GetPlayer()->posX + X;
+        }
+        break;
         case BLOCK_LIFT:
+        {
             b.pos.x = GetPlayer()->posX + 15;
             b.pos.y = GetPlayer()->posY - 25;
+        }
             break;
         case BLOCK_THROW:
         case BLOCK_STAY:
@@ -261,12 +268,20 @@ void UpdateBlock(PlayerData& player)
             }
             else if (IsTriggerKey(KEY_X))
             {
+                // ƒuƒƒbƒN“Š‚°
                 b.state = BLOCK_THROW;
                 b.hold = false;
                 b.gravity = true;
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;
+
+
+                SetPlayerAnimation(PLAYER_ANIM_THROW);
+                g_PlayerData.isThrowing = true;
+
+
+                g_PlayerData.throwAnimTimer = 15;
             }
         }
         break;

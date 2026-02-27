@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Data\Camera\Camera.cpp" />
+    <ClCompile Include="Source\Animation\Animation.cpp" />
     <ClCompile Include="Source\BackGround\BackGround.cpp" />
     <ClCompile Include="Source\Block\Block.cpp" />
     <ClCompile Include="Source\Block\BlockManager.cpp" />
@@ -163,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data\Camera\Camera.h" />
+    <ClInclude Include="Source\Animation\Animation.h" />
     <ClInclude Include="Source\BackGround\BackGround.h" />
     <ClInclude Include="Source\Block\Block.h" />
     <ClInclude Include="Source\Block\BlockManager.h" />

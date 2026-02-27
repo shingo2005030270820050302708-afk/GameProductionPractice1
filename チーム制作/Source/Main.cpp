@@ -17,7 +17,7 @@ int WINAPI WinMain(
     _In_ int nShowCmd
 )
 {
-    ChangeWindowMode(true);
+    ChangeWindowMode(false);
     SetMainWindowText("ロボット工場からの脱出");
     SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOR_DEPTH);
     if (DxLib_Init() == -1) return -1;

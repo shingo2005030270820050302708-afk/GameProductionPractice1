@@ -1,17 +1,39 @@
 #include "PlayScene.h"
 #include "../../Map/MapManager.h"
 #include "../../Input/Input.h"
-#include "../../Block/Block.h"
 #include "../GlobalData.h"
+#include "../../Block/Block.h"
 
 void PlayScene::Init()  
 {
 	InitInput();
 	InitPlayer();
-	InitBlock();
+    InitBlock();
 }
 void PlayScene::Load()
 {
+
+    switch (gData.stageNumber)
+    {
+    case 0:
+        bg.AddLayer("Data/BG/1.png");
+        bg.AddLayer("Data/BG/2.png");
+        bg.AddLayer("Data/BG/3.png");
+        bg.AddLayer("Data/BG/4.png");
+        break;
+    case 1:
+        bg.AddLayer("Data/BG/1.png");
+        bg.AddLayer("Data/BG/2.png");
+        bg.AddLayer("Data/BG/3.png");
+        bg.AddLayer("Data/BG/4.png");
+        break;
+    case 2:
+        bg.AddLayer("Data/BG/1.png");
+        bg.AddLayer("Data/BG/2.png");
+        bg.AddLayer("Data/BG/3.png");
+        bg.AddLayer("Data/BG/4.png");
+        break;
+    }
     const char* mapPath = nullptr;
 
     switch (gData.stageNumber)
@@ -25,24 +47,37 @@ void PlayScene::Load()
     }
 
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
+
+    LoadPlayer();
+    LoadBlock();
+
 }
 void PlayScene::Start()
-{}
+{
+    StartPlayer();
+    StartBlock();
+}
 void PlayScene::Step() 
 {
-
+    StepPlayer();
+    StepBlock();
 }
 void PlayScene::Update() 
 {
-
+    UpdatePlayer();
+    UpdateBlock(g_PlayerData);
 }
 void PlayScene::Draw()
 {
+    bg.Draw();
 	DrawMapManager();
+    DrawPlayer();
+    DrawBlock();
 }
 void PlayScene::Fin()
 {
-
+    FinPlayer();
+    FinBlock();
 }
 
 bool PlayScene::IsEnd() const { return isEnd; }
