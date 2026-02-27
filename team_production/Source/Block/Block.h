@@ -20,10 +20,12 @@ enum BlockType
 {
     B_NORMAL_BLOCK,
     B_IRON_BLOCK,
+    B_FIRE_BLOCK,
     B_ICE_BLOCK,
     B_WOOD_BLOCK,
-    B_FIRE_BLOCK,
     B_ARROW_BLOCK,
+    B_BREAKABLE_BLOCK,
+    B_BLOCK_TYPE_MAX, 
 };
 
 // ä÷êî

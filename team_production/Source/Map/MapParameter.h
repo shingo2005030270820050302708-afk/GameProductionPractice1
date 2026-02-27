@@ -25,8 +25,7 @@ enum MapChipType
     LEFT_BLOCK,
     RIGHT_BLOCK,
     MIDDLE_BLOCK,
-    //B_NORMAL_BLOCK,
-    BLOCK_TYPE_MAX
+    BLOCK_TYPE_MAX,
 
 };
 

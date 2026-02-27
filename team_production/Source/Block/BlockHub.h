@@ -1,4 +1,5 @@
 #pragma once
+#include "../Player/Player.h"
 
 void InitBlockHub();
 void LoadBlockHub();

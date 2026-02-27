@@ -8,7 +8,7 @@
 #include "../../Data/Camera/Camera.h"
 
 BlockData g_WoodBlock[BLOCK_MAX];
-int g_WoodBlockHandle[BLOCK_TYPE_MAX] = { -1 };
+int g_WoodBlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
 BlockData* CreateWoodBlock(BlockType type, VECTOR pos)
 {
@@ -49,7 +49,7 @@ void InitWoodBlock()
 void LoadWoodBlock()
 {
     g_WoodBlockHandle[B_WOOD_BLOCK] = LoadGraph("Data/Block/WoodBlock.png");
-    g_WoodBlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
+    g_WoodBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 
 }
 

@@ -8,7 +8,7 @@
 
 
 BlockData g_Block[BLOCK_MAX];
-int g_BlockHandle[BLOCK_TYPE_MAX] = { -1 };
+int g_BlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
 BlockData* CreateBlock(BlockType type, VECTOR pos)
 {
@@ -50,7 +50,7 @@ void InitBlock()
 void LoadBlock()
 {
     g_BlockHandle[B_NORMAL_BLOCK] = LoadGraph("Data/Block/Normal.png");
-    g_BlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
+    g_BlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 

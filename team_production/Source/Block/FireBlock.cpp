@@ -9,7 +9,7 @@
 
 
 BlockData g_FireBlock[BLOCK_MAX];
-int g_FireBlockHandle[BLOCK_TYPE_MAX] = { -1 };
+int g_FireBlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
 BlockData* CreateFireBlock(BlockType type, VECTOR pos)
 {
@@ -50,7 +50,7 @@ void InitFireBlock()
 void LoadFireBlock()
 {
     g_FireBlockHandle[B_FIRE_BLOCK] = LoadGraph("Data/Block/FireBlock.png");
-    g_FireBlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
+    g_FireBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 
@@ -62,7 +62,7 @@ void StartFireBlock()
         g_FireBlock[i].gravity = false;
         g_FireBlock[i].vel = VGet(0, 0, 0);
     }
-    VECTOR pos = VGet(400, 700, 0);
+    VECTOR pos = VGet(300, 300, 0);
     CreateFireBlock(B_FIRE_BLOCK, pos);
 }
 

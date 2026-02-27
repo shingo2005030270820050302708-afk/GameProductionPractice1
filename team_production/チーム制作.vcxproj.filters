@@ -153,6 +153,9 @@
     <ClCompile Include="Source\Block\WoodBlock.cpp">
       <Filter>Source\Block</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Block\BlockHub.cpp">
+      <Filter>Source\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Character.h">
@@ -249,6 +252,9 @@
       <Filter>Source\Block</Filter>
     </ClInclude>
     <ClInclude Include="Source\Block\WoodBlock.h">
+      <Filter>Source\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Block\BlockHub.h">
       <Filter>Source\Block</Filter>
     </ClInclude>
   </ItemGroup>

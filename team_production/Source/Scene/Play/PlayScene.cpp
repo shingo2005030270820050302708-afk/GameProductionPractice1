@@ -4,12 +4,14 @@
 #include "../GlobalData.h"
 #include "../../Block/Block.h"
 #include "../../Block/WoodBlock.h"
+#include "../../Block/BlockHub.h"
 
 void PlayScene::Init()  
 {
 	InitInput();
 	InitPlayer();
-    InitBlock();
+    InitBlockHub();
+   
 }
 void PlayScene::Load()
 {
@@ -50,39 +52,38 @@ void PlayScene::Load()
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
 
     LoadPlayer();
-    LoadBlock();
-    LoadWoodBlock();
+    LoadBlockHub();
+    
 }
 void PlayScene::Start()
 {
     StartPlayer();
-    StartBlock();
-    StartWoodBlock();
+    StartBlockHub();
+   
 }
 void PlayScene::Step() 
 {
     StepPlayer();
-    StepBlock();
-    StepWoodBlock();
+    StepBlockHub();
 }
 void PlayScene::Update() 
 {
     UpdatePlayer();
-    UpdateBlock(g_PlayerData);
-    UpdateWoodBlock(g_PlayerData);
+    UpdateBlockHub(g_PlayerData);
+   
 }
 void PlayScene::Draw()
 {
     bg.Draw();
-	DrawMapManager();
+    DrawMapManager();
     DrawPlayer();
-    DrawBlock();
-    DrawWoodBlock();
+    DrawBlockHub();
 }
 void PlayScene::Fin()
 {
     FinPlayer();
-    FinBlock();
+    FinBlockHub();
+    
 }
 
 bool PlayScene::IsEnd() const { return isEnd; }

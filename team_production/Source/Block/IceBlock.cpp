@@ -8,7 +8,7 @@
 #include "../../Data/Camera/Camera.h"
 
 BlockData g_IceBlock[BLOCK_MAX];
-int g_IceBlockHandle[BLOCK_TYPE_MAX] = { -1 };
+int g_IceBlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
 BlockData* CreateIceBlock(BlockType type, VECTOR pos)
 {
@@ -49,7 +49,7 @@ void InitIceBlock()
 void LoadIceBlock()
 {
     g_IceBlockHandle[B_ICE_BLOCK] = LoadGraph("Data/Block/IceBlock.png");
-    g_IceBlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
+    g_IceBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 

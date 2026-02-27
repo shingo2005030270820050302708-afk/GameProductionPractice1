@@ -8,7 +8,7 @@
 #include "../../Data/Camera/Camera.h"
 
 BlockData g_IronBlock[BLOCK_MAX];
-int g_IronBlockHandle[BLOCK_TYPE_MAX] = { -1 };
+int g_IronBlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
 BlockData* CreateIronBlock(BlockType type, VECTOR pos)
 {
@@ -49,7 +49,7 @@ void InitIronBlock()
 void LoadIronBlock()
 {
     g_IronBlockHandle[B_IRON_BLOCK] = LoadGraph("Data/Block/IronBlock.png");
-    g_IronBlockHandle[BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
+    g_IronBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 

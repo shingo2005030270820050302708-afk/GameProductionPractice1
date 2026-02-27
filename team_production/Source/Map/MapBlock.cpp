@@ -2,6 +2,7 @@
 #include "MapParameter.h"
 #include "MapBlock.h"
 #include "../../Data/Camera/Camera.h"
+#include "../Block/Block.h"
 
 BlockData g_MapBlocks[BLOCK_MAX];
 int g_MapBlocksHandle[BLOCK_TYPE_MAX] = { -1 };
