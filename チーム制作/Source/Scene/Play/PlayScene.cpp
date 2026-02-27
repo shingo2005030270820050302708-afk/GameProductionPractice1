@@ -3,6 +3,7 @@
 #include "../../Input/Input.h"
 #include "../GlobalData.h"
 #include "../../Block/Block.h"
+#include "../../Block/WoodBlock.h"
 
 void PlayScene::Init()  
 {
@@ -50,22 +51,25 @@ void PlayScene::Load()
 
     LoadPlayer();
     LoadBlock();
-
+    LoadWoodBlock();
 }
 void PlayScene::Start()
 {
     StartPlayer();
     StartBlock();
+    StartWoodBlock();
 }
 void PlayScene::Step() 
 {
     StepPlayer();
     StepBlock();
+    StepWoodBlock();
 }
 void PlayScene::Update() 
 {
     UpdatePlayer();
     UpdateBlock(g_PlayerData);
+    UpdateWoodBlock(g_PlayerData);
 }
 void PlayScene::Draw()
 {
@@ -73,6 +77,7 @@ void PlayScene::Draw()
 	DrawMapManager();
     DrawPlayer();
     DrawBlock();
+    DrawWoodBlock();
 }
 void PlayScene::Fin()
 {

@@ -140,6 +140,10 @@
     <ClCompile Include="Source\BackGround\BackGround.cpp" />
     <ClCompile Include="Source\Block\Block.cpp" />
     <ClCompile Include="Source\Block\BlockManager.cpp" />
+    <ClCompile Include="Source\Block\FireBlock.cpp" />
+    <ClCompile Include="Source\Block\IceBlock.cpp" />
+    <ClCompile Include="Source\Block\IronBlock.cpp" />
+    <ClCompile Include="Source\Block\WoodBlock.cpp" />
     <ClCompile Include="Source\Collision\Collision.cpp" />
     <ClCompile Include="Source\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp" />
@@ -168,6 +172,10 @@
     <ClInclude Include="Source\BackGround\BackGround.h" />
     <ClInclude Include="Source\Block\Block.h" />
     <ClInclude Include="Source\Block\BlockManager.h" />
+    <ClInclude Include="Source\Block\FireBlock.h" />
+    <ClInclude Include="Source\Block\IceBlock.h" />
+    <ClInclude Include="Source\Block\IronBlock.h" />
+    <ClInclude Include="Source\Block\WoodBlock.h" />
     <ClInclude Include="Source\Collision\Collision.h" />
     <ClInclude Include="Source\Enemy\EnemyManager.h" />
     <ClInclude Include="Source\Enemy\NormalEnemy.h" />
