@@ -16,6 +16,7 @@ public:
 
 private:
     int StageSelectbgHandle = -1;
+    int lockIconHandle = -1;
     bool isEnd = false;
     SceneType next = SceneType::Title;
     int cursor = 0;                            // 現在選択中ステージ

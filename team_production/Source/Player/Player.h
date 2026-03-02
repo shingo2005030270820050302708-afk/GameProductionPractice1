@@ -49,6 +49,7 @@ struct PlayerData
 	int handle;
 	bool isThrowing;    
 	int throwAnimTimer;
+	bool isGoal;
 
 
 	AnimationData animation[PLAYER_ANIM_MAX];

@@ -187,6 +187,11 @@ void UpdateFireBlock(PlayerData& player)
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;
+                SetPlayerAnimation(PLAYER_ANIM_THROW);
+                g_PlayerData.isThrowing = true;
+
+
+                g_PlayerData.throwAnimTimer = 15;
             }
         }
         break;

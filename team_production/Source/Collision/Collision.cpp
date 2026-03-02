@@ -126,7 +126,6 @@ void ResolvePlayerBlockCollision(BlockData* block)
         }
     }
 }
-
 void CheckPlayerMapCollision()
 {
     PlayerData* p = GetPlayer();
@@ -155,6 +154,23 @@ void CheckPlayerMapCollision()
             BlockData* block = chip.data;
             if (!block || !block->active) continue;
 
+            // -------------------------------------------------------
+            // ★ ゴールブロック判定追加 ★
+            // -------------------------------------------------------
+            if (chip.mapChip == GOAL_BLOCK)
+            {
+                // プレイヤーがゴールに触れた！
+                if (CheckSquareSquare(px, py, pw, ph,
+                    block->pos.x, block->pos.y, block->width, block->height))
+                {
+                    // クリアフラグ ON
+                    p->isGoal = true;
+                    return; // これ以上判定しなくてもいい
+                }
+            }
+            // -------------------------------------------------------
+
+            // 通常の衝突判定
             if (CheckSquareSquare(
                 px, py, pw, ph,
                 block->pos.x, block->pos.y, block->width, block->height))
@@ -164,5 +180,4 @@ void CheckPlayerMapCollision()
         }
     }
 }
-
 

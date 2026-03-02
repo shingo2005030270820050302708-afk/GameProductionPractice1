@@ -29,6 +29,7 @@ void LoadMapBlock()
     g_MapBlocksHandle[LEFT_BLOCK] = LoadGraph("Data/Map/Left_Block.png"); //左のブロック画像
     g_MapBlocksHandle[RIGHT_BLOCK] = LoadGraph("Data/Map/Right_Block.png"); //左のブロック画像
     g_MapBlocksHandle[MIDDLE_BLOCK] = LoadGraph("Data/Map/M_Block.png"); //中央のブロック画像
+    g_MapBlocksHandle[GOAL_BLOCK] = LoadGraph("Data/Map/Goal.png"); //中央のブロック画像
 }
 // ブロック生成
 BlockData* CreateMapBlock(MapChipType type, VECTOR pos)

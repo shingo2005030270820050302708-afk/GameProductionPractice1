@@ -5,6 +5,7 @@
 #include "../../Block/Block.h"
 #include "../../Block/WoodBlock.h"
 #include "../../Block/BlockHub.h"
+#include "../../../Data/Camera/Camera.h"
 
 void PlayScene::Init()  
 {
@@ -66,11 +67,18 @@ void PlayScene::Step()
     StepPlayer();
     StepBlockHub();
 }
-void PlayScene::Update() 
+void PlayScene::Update()
 {
     UpdatePlayer();
     UpdateBlockHub(g_PlayerData);
-   
+    camera.Update(g_PlayerData);
+
+    // ▼ ここからゴール判定追加 ▼
+    if (g_PlayerData.isGoal)
+    {
+        isEnd = true;
+        next = SceneType::GameClear; // クリアシーンへ遷移
+    }
 }
 void PlayScene::Draw()
 {

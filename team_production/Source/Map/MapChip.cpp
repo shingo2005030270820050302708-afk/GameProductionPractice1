@@ -42,6 +42,7 @@ void LoadMapChipData(const char* path)
             case 4: g_MapChip[y][x].mapChip = LEFT_BLOCK; break;
             case 5: g_MapChip[y][x].mapChip = RIGHT_BLOCK; break;
             case 6: g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
+            case 7: g_MapChip[y][x].mapChip = GOAL_BLOCK; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
             g_MapChip[y][x].data = nullptr;

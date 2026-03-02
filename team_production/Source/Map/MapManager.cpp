@@ -11,11 +11,11 @@ float groundY = 832.0f;
 // マップ読み込み
 void LoadMapManager(const char* mapPath)
 {
-    LoadMapBlock();              // タイル画像読み込み
-    LoadMapChipData(mapPath);    // Map.bin 読み込み
-    CreateMap();                 // ブロック生成
-}
-// 開始処理（今は空）
+    InitMapBlock();            // ★ 追加：前マップのブロックを完全クリア
+    LoadMapBlock();            // タイル画像読み込み
+    LoadMapChipData(mapPath);  // Map.bin 読み込み
+    CreateMap();               // ブロック生成
+}// 開始処理（今は空）
 void StartMapManager()
 {
 }
