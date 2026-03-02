@@ -5,30 +5,7 @@
 
 extern BlockData g_Block[BLOCK_MAX];
 
-// ブロックの状態
-enum BlockState
-{
-    BLOCK_STAY,
-    BLOCK_PUSH,
-    BLOCK_LIFT,
-    BLOCK_THROW,
-    BREAKABLE_BLOCK
-};
-
-// ブロックの種類
-enum BlockType 
-{
-    B_NORMAL_BLOCK,
-    B_IRON_BLOCK,
-    B_FIRE_BLOCK,
-    B_ICE_BLOCK,
-    B_WOOD_BLOCK,
-    B_ARROW_BLOCK,
-    B_BREAKABLE_BLOCK,
-    B_BLOCK_TYPE_MAX, 
-};
-
-// 関数
+// 関数   
 void InitBlock();
 void LoadBlock();
 void StartBlock();
