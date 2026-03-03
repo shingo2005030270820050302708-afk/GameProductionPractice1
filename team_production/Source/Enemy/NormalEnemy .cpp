@@ -69,6 +69,7 @@ void StepNormalEnemy(const PlayerData& player)
         float ew = e.boxCollision.width;
         float eh = e.boxCollision.height;
 
+
         for (int j = 0; j < BLOCK_MAX; j++)
         {
             BlockData& b = g_Block[j];
@@ -85,71 +86,6 @@ void StepNormalEnemy(const PlayerData& player)
                 e.state = Dead;
                 e.active = false;
                 break;
-            }
-        }
-    }
-}
-
-void CheckEnemyMapCollision(NormalEnemyData& e)
-{
-    float bx = e.pos.x;
-    float by = e.pos.y;
-    float bw = e.boxCollision.width;
-    float bh = e.boxCollision.height;
-
-    int leftTile = (int)(bx / MAP_CHIP_WIDTH);
-    int rightTile = (int)((bx + bw - 1) / MAP_CHIP_WIDTH);
-    int topTile = (int)(by / MAP_CHIP_HEIGHT);
-    int bottomTile = (int)((by + bh - 1) / MAP_CHIP_HEIGHT);
-
-    bool onGround = false;
-
-    for (int y = topTile; y <= bottomTile; y++)
-    {
-        for (int x = leftTile; x <= rightTile; x++)
-        {
-            MapChipData chip = GetMapChipData(x, y);
-            if (chip.mapChip == MAP_CHIP_NONE) continue;
-            if (!chip.data || !chip.data->active) continue;
-
-            BlockData* mapBlock = chip.data;
-            if (CheckSquareSquare(bx, by, bw, bh, mapBlock->pos.x, mapBlock->pos.y, mapBlock->width, mapBlock->height))
-            {
-                float overlapTop = (by + bh) - mapBlock->pos.y;
-                float overlapBottom = (mapBlock->pos.y + mapBlock->height) - by;
-                float overlapLeft = (bx + bw) - mapBlock->pos.x;
-                float overlapRight = (mapBlock->pos.x + mapBlock->width) - bx;
-
-                float minOverlapX = (overlapLeft < overlapRight) ? overlapLeft : overlapRight;
-                float minOverlapY = (overlapTop < overlapBottom) ? overlapTop : overlapBottom;
-
-
-                if (minOverlapY < minOverlapX)
-                {
-                    if (overlapTop < overlapBottom)
-                    {
-                        e.pos.y = mapBlock->pos.y - bh;
-                        e.vel.y = 0;
-                        onGround = true;
-                    }
-                    else
-                    {
-                        e.pos.y = mapBlock->pos.y + mapBlock->height;
-                        e.vel.y = 0;
-                    }
-                }
-                else
-                {
-                    if (overlapLeft < overlapRight)
-                        e.pos.x = mapBlock->pos.x - bw;
-                    else
-                        e.pos.x = mapBlock->pos.x + mapBlock->width;
-
-                    e.vel.x = 0;
-                }
-
-                e.gravity = !onGround;
-
             }
         }
     }
@@ -190,10 +126,10 @@ void UpdateMove(NormalEnemyData& e, const PlayerData& player)
 {
     float vx = player.posX - e.pos.x;
 
-    e.vel.x = (vx > 0) ? 1.5f : -1.5f;
+    e.vel.x = (vx > 0) ? 0.5f : -0.5f;
 
     //ãﬂÇ√Ç¢ÇΩÇÁçUåÇÇ∑ÇÈ
-    if (fabsf(vx) < 600.0f)
+    if (fabsf(vx) < 150.0f)
     {
         e.state = Attack;
     }
@@ -204,17 +140,22 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
 {
     float vx = player.posX - e.pos.x;
 
-    e.vel.x = (vx > 0) ? 2.5f : -2.5f;
+    e.vel.x = (vx > 0) ? 0.75f : -0.75f;
 
     // è≠Çµó£ÇÍÇΩÇÁí«ê’Ç…ñﬂÇÈ
-    if (fabsf(vx) > 700.0f)
+    if (fabsf(vx) > 200.0f)
         e.state = Move;
 
 }
 
 void UpdateDead(NormalEnemyData& e, const PlayerData& player)
 {
+    e.deathTimer++;
 
+    if (e.deathTimer > 30)
+    {
+        e.active = false;
+    }
 }
 
 void DrawNormalEnemy()

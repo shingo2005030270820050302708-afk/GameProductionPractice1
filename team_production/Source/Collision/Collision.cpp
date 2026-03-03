@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "Collision.h"
 #include "../Player/Player.h"
+#include "../Enemy/NormalEnemy.h"
 #include "../Map/MapBlock.h"
 #include "../Map/MapManager.h"
 #include <math.h>
@@ -127,6 +128,55 @@ void ResolvePlayerBlockCollision(BlockData* block)
         }
     }
 }
+
+void ResolveEnemyBlockCollision(NormalEnemyData& e, BlockData* block)
+{
+    float ex = e.pos.x;
+    float ey = e.pos.y;
+    float ew = e.boxCollision.width;
+    float eh = e.boxCollision.height;
+
+    float bx = block->pos.x;
+    float by = block->pos.y;
+    float bw = block->width;
+    float bh = block->height;
+
+    float overlapLeft = (ex + ew) - bx;
+    float overlapRight = (bx + bw) - ex;
+    float overlapTop = (ey + eh) - by;
+    float overlapBottom = (by + bh) - ey;
+
+    float minOverlapX = (overlapLeft < overlapRight ? overlapLeft : overlapRight);
+    float minOverlapY = (overlapTop < overlapBottom ? overlapTop : overlapBottom);
+
+    // â°ï˚å¸ÇÃâüÇµñﬂÇµ
+    if (minOverlapX < minOverlapY)
+    {
+        if (overlapLeft < overlapRight)
+            e.pos.x = bx - ew;      // ç∂Ç©ÇÁÇ‘Ç¬Ç©Ç¡ÇΩ
+        else
+            e.pos.x = bx + bw;      // âEÇ©ÇÁÇ‘Ç¬Ç©Ç¡ÇΩ
+
+        e.vel.x = 0;
+    }
+    // ècï˚å¸ÇÃâüÇµñﬂÇµ
+    else
+    {
+        if (overlapTop < overlapBottom)
+        {
+            e.pos.y = by - eh;      // è„Ç©ÇÁóéÇøÇƒÇ´ÇΩ
+            e.vel.y = 0;
+            e.isGround = true;
+            e.isAir = false;
+        }
+        else
+        {
+            e.pos.y = by + bh;      // â∫Ç©ÇÁìÀÇ´è„Ç∞ÇΩ
+            e.vel.y = 0;
+        }
+    }
+}
+
 void CheckPlayerMapCollision()
 {
     PlayerData* p = GetPlayer();
@@ -178,6 +228,43 @@ void CheckPlayerMapCollision()
         }
     }
 }
+
+void CheckEnemyMapCollision(NormalEnemyData& e)
+{
+    float ex = e.pos.x;
+    float ey = e.pos.y;
+    float ew = e.boxCollision.width;
+    float eh = e.boxCollision.height;
+
+    int leftTile = (int)(ex / MAP_CHIP_WIDTH);
+    int rightTile = (int)((ex + ew) / MAP_CHIP_WIDTH);
+    int topTile = (int)(ey / MAP_CHIP_HEIGHT);
+    int bottomTile = (int)((ey + eh) / MAP_CHIP_HEIGHT);
+
+    e.isGround = false;
+
+    for (int y = topTile; y <= bottomTile; y++)
+    {
+        for (int x = leftTile; x <= rightTile; x++)
+        {
+            MapChipData chip = GetMapChipData(x, y);
+            if (chip.mapChip == MAP_CHIP_NONE) continue;
+
+            BlockData* block = chip.data;
+            if (!block || !block->active) continue;
+
+            // Å• ìGÇ∆ÉuÉçÉbÉNÇÃìñÇΩÇËîªíË
+            if (CheckSquareSquare(
+                ex, ey, ew, eh,
+                block->pos.x, block->pos.y, block->width, block->height))
+            {
+                ResolveEnemyBlockCollision(e, block);
+            }
+        }
+    }
+}
+
+
 // ìÆÇ≠ÉuÉçÉbÉNìØémÇÃè’ìÀ
 void ResolveBlockCollision(BlockData& a, BlockData& b)
 {
@@ -252,5 +339,54 @@ void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock)
         movingBlock.pos.y -= overlapY;
         movingBlock.vel.y = 0;
         movingBlock.vel.x *= friction; // â°ë¨ìxÇ…ñÄéCÇÇ©ÇØÇÈ
+    }
+}
+
+void ResolveEnemyCollision(NormalEnemyData& a, NormalEnemyData& b)
+{
+    if (!a.active || !b.active) return;
+
+    float aLeft = a.pos.x;
+    float aRight = a.pos.x + a.boxCollision.width;
+    float aTop = a.pos.y;
+    float aBottom = a.pos.y + a.boxCollision.height;
+
+    float bLeft = b.pos.x;
+    float bRight = b.pos.x + b.boxCollision.width;
+    float bTop = b.pos.y;
+    float bBottom = b.pos.y + b.boxCollision.height;
+
+    // èdÇ»ÇËó 
+    float overlapX = (aRight - bLeft < bRight - aLeft)
+        ? (aRight - bLeft)
+        : -(bRight - aLeft);
+
+    float overlapY = (aBottom - bTop < bBottom - aTop)
+        ? (aBottom - bTop)
+        : -(bBottom - aTop);
+
+    const float friction = 0.5f;
+
+    // â°ï˚å¸ÇÃâüÇµñﬂÇµ
+    if (fabs(overlapX) < fabs(overlapY))
+    {
+        a.pos.x -= overlapX / 2.0f;
+        b.pos.x += overlapX / 2.0f;
+
+        a.vel.x = 0;
+        b.vel.x = 0;
+    }
+    // ècï˚å¸ÇÃâüÇµñﬂÇµ
+    else
+    {
+        a.pos.y -= overlapY / 2.0f;
+        b.pos.y += overlapY / 2.0f;
+
+        a.vel.y = 0;
+        b.vel.y = 0;
+
+        // ñÄéC
+        a.vel.x *= friction;
+        b.vel.x *= friction;
     }
 }
