@@ -5,12 +5,14 @@
 #include "../../Block/Block.h"
 #include "../../Block/WoodBlock.h"
 #include "../../Block/BlockHub.h"
+#include "../../Enemy/NormalEnemy.h"
 #include "../../../Data/Camera/Camera.h"
 
 void PlayScene::Init()  
 {
 	InitInput();
 	InitPlayer();
+    InitNormalEnemy();
     InitBlockHub();
    
 }
@@ -53,18 +55,21 @@ void PlayScene::Load()
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
 
     LoadPlayer();
+    LoadNormalEnemy();
     LoadBlockHub();
     
 }
 void PlayScene::Start()
 {
     StartPlayer();
+    StartNormalEnemy();
     StartBlockHub();
-   
+       
 }
 void PlayScene::Step() 
 {
     StepPlayer();
+    StepNormalEnemy(g_PlayerData);
     StepBlockHub();
 }
 void PlayScene::Update()
@@ -85,6 +90,7 @@ void PlayScene::Draw()
     bg.Draw();
     DrawMapManager();
     DrawPlayer();
+    DrawNormalEnemy();
     DrawBlockHub();
 }
 void PlayScene::Fin()

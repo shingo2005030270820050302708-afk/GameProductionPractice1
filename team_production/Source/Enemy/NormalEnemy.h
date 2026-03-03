@@ -1,4 +1,5 @@
 #pragma once
+#include "../Player/Player.h"
 #include "../Map/MapParameter.h"
 #include "../Collision/Collision.h"
 #include "../Block/Block.h"
@@ -6,27 +7,26 @@
 
 enum NormalEnemyState
 {
-    Idle,
-    Move,
-    Attack,
-    Damage,
-    Dead
+	Idle,
+	Move,
+	Attack,
+	Dead
 };
 
 struct NormalEnemyData
 {
-	bool active;								// 生存フラグ
-	bool isTurn;								// 左を向いているか
+	bool active;								
+	bool isTurn;								
 	bool isGround;
-	bool isAir;									// 空中にいるか
-	float posX;									// X座標
-	float posY;									// Y座標
-	float moveX;								// X移動量
-	float moveY;								// Y移動量
+	bool isAir;									
+	bool gravity = false;
+	VECTOR pos = VGet(0, 0, 0);
+	VECTOR vel = VGet(0, 0, 0);
+	float moveX;								
+	float moveY;								
 	int hp;
 	int maxHp;
-	int handle;
-
+	int handle = -1;
 	BoxCollision boxCollision;
 
 	NormalEnemyState state;
@@ -37,10 +37,13 @@ extern NormalEnemyData g_NormalEnemyData[ENEMY_MAX];
 void InitNormalEnemy();
 void LoadNormalEnemy();
 void StartNormalEnemy();
-void StepNormalEnemy();
-void UpdaterNormalEnemy();
+void StepNormalEnemy(const PlayerData& player);
+void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player);
 void DrawNormalEnemy();
 void FinNormalEnemy();
-void UpdateDamage(NormalEnemyData& enemy);
-void UpdateDead(NormalEnemyData& enemy);
+void UpdateIdle(NormalEnemyData& e, const PlayerData& player);
+void UpdateMove(NormalEnemyData& e, const PlayerData& player);
+void UpdateAttack(NormalEnemyData& e, const PlayerData& player);
+void UpdateDead(NormalEnemyData& e, const PlayerData& player);
+void CheckEnemyMapCollision(NormalEnemyData& e);
 NormalEnemyData* GetNormalEnemyData();
