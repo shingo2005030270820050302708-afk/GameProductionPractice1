@@ -8,7 +8,7 @@
 #define PLAYER_HEIGHT	(64.0f)
 #define PLAYER_RADIUS	(32.0f)
 #define PLAYER_BOX_COLLISION_OFFSET_X (0)
-#define PLAYER_BOX_COLLISION_OFFSET_Y (0)
+#define PLAYER_BOX_COLLISION_OFFSET_Y (10)
 #define PLAYER_BOX_COLLISION_WIDTH (60)
 #define PLAYER_BOX_COLLISION_HEIGHT (64)
 
@@ -50,6 +50,8 @@ struct PlayerData
 	bool isThrowing;    
 	int throwAnimTimer;
 	bool isGoal;
+	BlockData* heldBlock = nullptr;
+
 
 
 	AnimationData animation[PLAYER_ANIM_MAX];

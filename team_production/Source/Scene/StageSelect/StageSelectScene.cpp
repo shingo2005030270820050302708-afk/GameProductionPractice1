@@ -60,7 +60,7 @@ void StageSelectScene::Update()
     // 決定（Enter）
     if (IsTriggerKey(KEY_RETURN)) {
 
-        // ★ 未アンロックステージは選べない
+        // 未アンロックステージは選べない
         if (cursor > gData.maxClearStage) {
             return; // 遷移しない
         }
@@ -94,9 +94,9 @@ void StageSelectScene::Draw()
 
         DrawGraph(x, y, stageIconHandle[i], TRUE);
 
-        // ★ ロック表示（未クリアなら鍵）
+        //  ロック表示（未クリアなら鍵）
         if (i > gData.maxClearStage) {
-            DrawGraph(x + 50, y + 50, lockIconHandle, TRUE);
+            DrawGraph(x , y , lockIconHandle, TRUE);
         }
 
         // 選択中ならカーソル描画（アンロック済みのみ）

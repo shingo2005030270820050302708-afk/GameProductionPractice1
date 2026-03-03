@@ -4,6 +4,7 @@
 #include "../Map/MapBlock.h"
 #include "../Map/MapManager.h"
 #include <math.h>
+#include "../Block/BlockManager.h"
 
 // 矩形と点の当たり判定
 bool CheckSquarePoint(float squarePosX, float squarePosY, float squareWidth, float squareHeight, float pointX, float pointY)
@@ -154,9 +155,7 @@ void CheckPlayerMapCollision()
             BlockData* block = chip.data;
             if (!block || !block->active) continue;
 
-            // -------------------------------------------------------
-            // ★ ゴールブロック判定追加 ★
-            // -------------------------------------------------------
+            
             if (chip.mapChip == GOAL_BLOCK)
             {
                 // プレイヤーがゴールに触れた！
@@ -168,8 +167,7 @@ void CheckPlayerMapCollision()
                     return; // これ以上判定しなくてもいい
                 }
             }
-            // -------------------------------------------------------
-
+        
             // 通常の衝突判定
             if (CheckSquareSquare(
                 px, py, pw, ph,
@@ -180,4 +178,79 @@ void CheckPlayerMapCollision()
         }
     }
 }
+// 動くブロック同士の衝突
+void ResolveBlockCollision(BlockData& a, BlockData& b)
+{
+    if (!a.active || !b.active) return;
 
+    float aLeft = a.pos.x;
+    float aRight = a.pos.x + a.width;
+    float aTop = a.pos.y;
+    float aBottom = a.pos.y + a.height;
+
+    float bLeft = b.pos.x;
+    float bRight = b.pos.x + b.width;
+    float bTop = b.pos.y;
+    float bBottom = b.pos.y + b.height;
+
+    float overlapX = (aRight - bLeft < bRight - aLeft) ? (aRight - bLeft) : -(bRight - aLeft);
+    float overlapY = (aBottom - bTop < bBottom - aTop) ? (aBottom - bTop) : -(bBottom - aTop);
+
+    const float friction = 0.5f; // 摩擦係数
+
+    if (fabs(overlapX) < fabs(overlapY))
+    {
+        // 横方向の押し戻し
+        a.pos.x -= overlapX / 2.0f;
+        b.pos.x += overlapX / 2.0f;
+        a.vel.x = 0;
+        b.vel.x = 0;
+    }
+    else
+    {
+        // 縦方向の押し戻し
+        a.pos.y -= overlapY / 1.0f;
+        b.pos.y += overlapY / 1.0f;
+        a.vel.y = 0;
+        b.vel.y = 0;
+
+        // 縦押し戻しのときに横速度に摩擦をかける
+        a.vel.x *= friction;
+        b.vel.x *= friction;
+    }
+}
+
+// 動くブロック同士の衝突判定
+void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock)
+{
+    if (!movingBlock.active || !mapBlock.active) return;
+
+    float aLeft = movingBlock.pos.x;
+    float aRight = movingBlock.pos.x + movingBlock.width;
+    float aTop = movingBlock.pos.y;
+    float aBottom = movingBlock.pos.y + movingBlock.height;
+
+    float bLeft = mapBlock.pos.x;
+    float bRight = mapBlock.pos.x + mapBlock.width;
+    float bTop = mapBlock.pos.y;
+    float bBottom = mapBlock.pos.y + mapBlock.height;
+
+    float overlapX = (aRight - bLeft < bRight - aLeft) ? (aRight - bLeft) : -(bRight - aLeft);
+    float overlapY = (aBottom - bTop < bBottom - aTop) ? (aBottom - bTop) : -(bBottom - aTop);
+
+    const float friction = 0.5f; // 摩擦係数
+
+    if (fabs(overlapX) < fabs(overlapY))
+    {
+        // 横方向の押し戻し
+        movingBlock.pos.x -= overlapX;
+        movingBlock.vel.x = 0;
+    }
+    else
+    {
+        // 縦方向の押し戻し
+        movingBlock.pos.y -= overlapY;
+        movingBlock.vel.y = 0;
+        movingBlock.vel.x *= friction; // 横速度に摩擦をかける
+    }
+}

@@ -49,7 +49,6 @@ void InitIceBlock()
 void LoadIceBlock()
 {
     g_IceBlockHandle[B_ICE_BLOCK] = LoadGraph("Data/Block/IceBlock.png");
-    g_IceBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 
@@ -107,7 +106,7 @@ void StepIceBlock()
 void UpdateIceBlock(PlayerData& player)
 {
 
-    float liftPadding = 1.0f;
+    float liftPadding = 10.0f;
 
     for (int i = 0; i < BLOCK_MAX; i++)
     {

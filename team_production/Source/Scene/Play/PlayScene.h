@@ -19,4 +19,5 @@ private:
     BackGround bg;
     bool isEnd = false;
     SceneType next = SceneType::Title;
-};//
+    
+};

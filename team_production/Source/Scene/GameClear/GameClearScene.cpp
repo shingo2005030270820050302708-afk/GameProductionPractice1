@@ -35,8 +35,8 @@ void GameClearScene::Draw()
         DrawGraph(0, 0, clearBG, TRUE);
     }
 
-    DrawString(600, 200, "STAGE CLEAR!", GetColor(255, 255, 0));
-    DrawString(520, 350, "Back to Stage Select...", GetColor(255, 255, 255));
+    DrawString(700, 300, "STAGE CLEAR!", GetColor(255, 255, 0));
+    DrawString(650, 650, "Back to Stage Select...", GetColor(255, 255, 255));
 }
 
 void GameClearScene::Fin() {}

@@ -31,3 +31,8 @@ void ResolvePlayerBlockCollision(BlockData* block);
 
 // プレイヤーとマップの総合当たり判定
 void CheckPlayerMapCollision();
+
+void ResolveBlockCollision(BlockData& a, BlockData& b);
+
+
+void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock);

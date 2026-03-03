@@ -49,7 +49,6 @@ void InitIronBlock()
 void LoadIronBlock()
 {
     g_IronBlockHandle[B_IRON_BLOCK] = LoadGraph("Data/Block/IronBlock.png");
-    g_IronBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 

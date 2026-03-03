@@ -10,6 +10,32 @@
 BlockData g_Block[BLOCK_MAX];
 int g_BlockHandle[B_BLOCK_TYPE_MAX] = { -1 };
 
+
+bool IsBlockOnAnotherBlock(const BlockData& block, BlockData* blockArray, int blockMax) {
+    for (int i = 0; i < blockMax; i++) {
+        const BlockData& other = blockArray[i];
+        if (!other.active) continue;
+        if (&other == &block) continue;
+
+        // 下方向に1ピクセルだけずらして当たり判定
+        float bx = block.pos.x;
+        float by = block.pos.y + block.height; // 下端
+        float bw = block.width;
+        float bh = 1.0f; // 1ピクセルだけ
+
+        float ox = other.pos.x;
+        float oy = other.pos.y;
+        float ow = other.width;
+        float oh = other.height;
+
+        if (bx < ox + ow && bx + bw > ox && by < oy + oh && by + bh > oy) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 BlockData* CreateBlock(BlockType type, VECTOR pos)
 {
     for (int i = 0; i < BLOCK_MAX; i++)
@@ -50,7 +76,6 @@ void InitBlock()
 void LoadBlock()
 {
     g_BlockHandle[B_NORMAL_BLOCK] = LoadGraph("Data/Block/Normal.png");
-    g_BlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 
@@ -229,29 +254,11 @@ void UpdateBlock(PlayerData& player)
         {
             b.gravity = true;
 
-            if (hit && IsTriggerKey(KEY_C))
-            {
-                b.state = BLOCK_PUSH;
-                b.hold = true;
-                b.gravity = false;
-            }
-
             if (hit && IsTriggerKey(KEY_X))
             {
                 b.state = BLOCK_LIFT;
                 b.hold = true;
                 b.gravity = false;
-            }
-        }
-        break;
-
-        case BLOCK_PUSH:
-        {
-            if (IsInputKey(KEY_DOWN) && IsTriggerKey(KEY_X))
-            {
-
-                b.state = BLOCK_STAY;
-                b.hold = false;
             }
         }
         break;
@@ -266,15 +273,12 @@ void UpdateBlock(PlayerData& player)
             }
             else if (IsTriggerKey(KEY_X))
             {
-                // ブロック投げ
                 b.state = BLOCK_THROW;
                 b.hold = false;
                 b.gravity = true;
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;
-
-
                 SetPlayerAnimation(PLAYER_ANIM_THROW);
                 g_PlayerData.isThrowing = true;
 
@@ -287,22 +291,24 @@ void UpdateBlock(PlayerData& player)
     }
 }
 
+ void DrawBlock()
+ {
 
-void DrawBlock()
-{
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        if (g_Block[i].active && g_Block[i].handle != -1)
-        {
-            DrawGraph(
-                (int)(g_Block[i].pos.x - camera.GetX()),
-                (int)(g_Block[i].pos.y - camera.GetY()),
-                g_Block[i].handle,
-                TRUE
-            );
-        }
-    }
-}
+
+     for (int i = 0; i < BLOCK_MAX; i++)
+     {
+         if (g_Block[i].active && g_Block[i].handle != -1)
+         {
+             DrawGraph(
+                 (int)(g_Block[i].pos.x - camera.GetX()),
+                 (int)(g_Block[i].pos.y - camera.GetY()),
+                 g_Block[i].handle,
+                 TRUE
+             );
+         }
+     }
+ }
+
 
 
 void FinBlock()

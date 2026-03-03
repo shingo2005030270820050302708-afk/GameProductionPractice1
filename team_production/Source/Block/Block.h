@@ -17,3 +17,4 @@ void FinBlock();
 // ブロックとマップチップの当たり判定
 void CheckBlockMapCollision(BlockData& b);
 
+

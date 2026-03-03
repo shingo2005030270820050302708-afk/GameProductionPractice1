@@ -49,8 +49,6 @@ void InitWoodBlock()
 void LoadWoodBlock()
 {
     g_WoodBlockHandle[B_WOOD_BLOCK] = LoadGraph("Data/Block/WoodBlock.png");
-    g_WoodBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
-
 }
 
 

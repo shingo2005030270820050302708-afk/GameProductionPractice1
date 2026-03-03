@@ -50,7 +50,6 @@ void InitFireBlock()
 void LoadFireBlock()
 {
     g_FireBlockHandle[B_FIRE_BLOCK] = LoadGraph("Data/Block/FireBlock.png");
-    g_FireBlockHandle[B_BREAKABLE_BLOCK] = LoadGraph("Data/Block/Breakable.png");
 }
 
 

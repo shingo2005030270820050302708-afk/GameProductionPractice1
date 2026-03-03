@@ -12,6 +12,7 @@ enum InputKey
     KEY_Z = (1 << 6),
     KEY_ESCAPE = (1 << 7),
     KEY_RETURN = (1 << 8),
+    KEY_R = (1 << 9),
 };
 // 関数のプロトタイプ宣言 
 void InitInput();

@@ -5,6 +5,7 @@
 #include "../../Data/Camera/Camera.h"
 #include "../Map/MapChip.h"
 #include "../Block/Block.h"
+#include "../Block/BlockManager.h"
 
 NormalEnemyData g_NormalEnemyData[ENEMY_MAX];
 

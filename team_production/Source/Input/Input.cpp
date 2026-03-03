@@ -49,6 +49,10 @@ void UpdateInput()
 	{
 		g_InputState |= KEY_Z;
 	}
+	if (CheckHitKey(KEY_INPUT_R))
+	{
+		g_InputState |= KEY_R;
+	}
 
 	int pad = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
