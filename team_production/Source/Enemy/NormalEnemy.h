@@ -3,8 +3,7 @@
 #include "../Map/MapParameter.h"
 #include "../Collision/Collision.h"
 #include "../Block/Block.h"
-#define ENEMY_MAX 1000
-
+#define ENEMY_MAX 10
 enum NormalEnemyState
 {
 	Idle,
@@ -26,6 +25,8 @@ struct NormalEnemyData
 	float moveY;								
 	int hp;
 	int maxHp;
+	int deathTimer = 0;
+
 	int handle = -1;
 	BoxCollision boxCollision;
 
