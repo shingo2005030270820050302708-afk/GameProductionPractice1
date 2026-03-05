@@ -129,7 +129,7 @@ void UpdateMove(NormalEnemyData& e, const PlayerData& player)
     e.vel.x = (vx > 0) ? 0.5f : -0.5f;
 
     //ãﬂÇ√Ç¢ÇΩÇÁçUåÇÇ∑ÇÈ
-    if (fabsf(vx) < 150.0f)
+    if (fabsf(vx) < 200.0f)
     {
         e.state = Attack;
     }
@@ -143,7 +143,7 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
     e.vel.x = (vx > 0) ? 0.75f : -0.75f;
 
     // è≠Çµó£ÇÍÇΩÇÁí«ê’Ç…ñﬂÇÈ
-    if (fabsf(vx) > 200.0f)
+    if (fabsf(vx) > 250.0f)
         e.state = Move;
 
 }

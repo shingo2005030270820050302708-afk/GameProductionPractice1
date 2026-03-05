@@ -178,6 +178,7 @@ void UpdateWoodBlock(PlayerData& player)
 
                 b.state = BLOCK_STAY;
                 b.hold = false;
+                player.holdingBlock = nullptr;
             }
             else if (IsTriggerKey(KEY_X))
             {
