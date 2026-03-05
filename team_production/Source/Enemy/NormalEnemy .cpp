@@ -5,6 +5,11 @@
 #include "../../Data/Camera/Camera.h"
 #include "../Map/MapChip.h"
 #include "../Block/Block.h"
+#include "../Block/IceBlock.h"
+#include "../Block/IronBlock.h"
+#include "../Block/WoodBlock.h"
+#include "../Block/BlockHub.h"
+#include "../Block/FireBlock.h"
 #include "../Block/BlockManager.h"
 
 NormalEnemyData g_NormalEnemyData[ENEMY_MAX];
@@ -70,9 +75,85 @@ void StepNormalEnemy(const PlayerData& player)
         float eh = e.boxCollision.height;
 
 
-        for (int j = 0; j < BLOCK_MAX; j++)
+        for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_Block[j];
+            if (!b.active) continue;
+            if (b.state != BLOCK_THROW) continue;
+
+            float bx = b.pos.x;
+            float by = b.pos.y;
+            float bw = b.width;
+            float bh = b.height;
+
+            if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
+            {
+                e.state = Dead;
+                e.active = false;
+                break;
+            }
+        }
+
+        for (int j = 0; j < B_BLOCK_MAX; j++)
+        {
+            BlockData& b = g_FireBlock[j];
+            if (!b.active) continue;
+            if (b.state != BLOCK_THROW) continue;
+
+            float bx = b.pos.x;
+            float by = b.pos.y;
+            float bw = b.width;
+            float bh = b.height;
+
+            if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
+            {
+                e.state = Dead;
+                e.active = false;
+                break;
+            }
+        }
+
+        for (int j = 0; j < B_BLOCK_MAX; j++)
+        {
+            BlockData& b = g_IceBlock[j];
+            if (!b.active) continue;
+            if (b.state != BLOCK_THROW) continue;
+
+            float bx = b.pos.x;
+            float by = b.pos.y;
+            float bw = b.width;
+            float bh = b.height;
+
+            if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
+            {
+                e.state = Dead;
+                e.active = false;
+                break;
+            }
+        }
+
+        for (int j = 0; j < B_BLOCK_MAX; j++)
+        {
+            BlockData& b = g_IronBlock[j];
+            if (!b.active) continue;
+            if (b.state != BLOCK_THROW) continue;
+
+            float bx = b.pos.x;
+            float by = b.pos.y;
+            float bw = b.width;
+            float bh = b.height;
+
+            if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
+            {
+                e.state = Dead;
+                e.active = false;
+                break;
+            }
+        }
+
+        for (int j = 0; j < B_BLOCK_MAX; j++)
+        {
+            BlockData& b = g_WoodBlock[j];
             if (!b.active) continue;
             if (b.state != BLOCK_THROW) continue;
 

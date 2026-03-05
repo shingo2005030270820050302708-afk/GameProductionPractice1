@@ -1,5 +1,8 @@
 #pragma once
 #include "../Player/Player.h"
+#include "BlockManager.h"
+
+extern BlockData* allBlocks[B_BLOCK_MAX];
 
 void InitBlockHub();
 void LoadBlockHub();

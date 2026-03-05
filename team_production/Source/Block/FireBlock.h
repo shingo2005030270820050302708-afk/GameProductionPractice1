@@ -3,7 +3,7 @@
 #include "../Player/Player.h"
 #include "../Map/MapBlock.h"
 
-
+extern BlockData g_FireBlock[BLOCK_MAX];
 
 // ä÷êî
 void InitFireBlock();

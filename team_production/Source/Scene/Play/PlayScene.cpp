@@ -12,7 +12,7 @@ void PlayScene::Init()
 {
 	InitInput();
 	InitPlayer();
-    //InitNormalEnemy();
+    InitNormalEnemy();
     InitBlockHub();
    
 }
@@ -55,21 +55,21 @@ void PlayScene::Load()
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
 
     LoadPlayer();
-    //LoadNormalEnemy();
+    LoadNormalEnemy();
     LoadBlockHub();
     
 }
 void PlayScene::Start()
 {
     StartPlayer();
-//StartNormalEnemy();
+    StartNormalEnemy();
     StartBlockHub();
        
 }
 void PlayScene::Step() 
 {
     StepPlayer();
-    //StepNormalEnemy(g_PlayerData);
+    StepNormalEnemy(g_PlayerData);
     StepBlockHub();
 }
 void PlayScene::Update()
@@ -90,7 +90,7 @@ void PlayScene::Draw()
     bg.Draw();
     DrawMapManager();
     DrawPlayer();
-    //DrawNormalEnemy();
+    DrawNormalEnemy();
     DrawBlockHub();
 }
 void PlayScene::Fin()
