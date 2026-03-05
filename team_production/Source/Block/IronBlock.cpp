@@ -106,7 +106,7 @@ void StepIronBlock()
 void UpdateIronBlock(PlayerData& player)
 {
 
-    float liftPadding = 1.0f;
+    float liftPadding = 30.0f;
 
     for (int i = 0; i < BLOCK_MAX; i++)
     {
@@ -160,11 +160,14 @@ void UpdateIronBlock(PlayerData& player)
         {
             b.gravity = true;
 
-            if (hit && IsTriggerKey(KEY_X))
+            if (player.holdingBlock == nullptr && hit && IsTriggerKey(KEY_X))
             {
                 b.state = BLOCK_LIFT;
                 b.hold = true;
                 b.gravity = false;
+
+                player.holdingBlock = &b;
+                return;
             }
         }
         break;
@@ -182,6 +185,8 @@ void UpdateIronBlock(PlayerData& player)
                 b.state = BLOCK_THROW;
                 b.hold = false;
                 b.gravity = true;
+
+                player.holdingBlock = nullptr;
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;

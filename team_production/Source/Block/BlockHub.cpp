@@ -42,31 +42,38 @@ void StepBlockHub()
     StepIronBlock();
     StepWoodBlock();
 
-    // ヒープに確保
-    BlockData** allBlocks = new BlockData * [BLOCK_MAX * 5];
+
+    BlockData* allBlocks[B_BLOCK_MAX];
     int allCount = 0;
 
     // 通常ブロック
     for (int i = 0; i < BLOCK_MAX; i++)
         if (g_Block[i].active) allBlocks[allCount++] = &g_Block[i];
 
-    // Fire
+    // Fireブロック
     for (int i = 0; i < BLOCK_MAX; i++)
         if (g_FireBlock[i].active) allBlocks[allCount++] = &g_FireBlock[i];
 
-    // Ice
+    // Iceブロック
     for (int i = 0; i < BLOCK_MAX; i++)
         if (g_IceBlock[i].active) allBlocks[allCount++] = &g_IceBlock[i];
 
-    // Iron
+    // Ironブロック
     for (int i = 0; i < BLOCK_MAX; i++)
         if (g_IronBlock[i].active) allBlocks[allCount++] = &g_IronBlock[i];
 
-    // Wood
+    // Woodブロック
     for (int i = 0; i < BLOCK_MAX; i++)
         if (g_WoodBlock[i].active) allBlocks[allCount++] = &g_WoodBlock[i];
 
-    // 衝突判定
+    // 安全チェック（B_BLOCK_MAXを超えないか）
+    if (allCount > B_BLOCK_MAX)
+    {
+        allCount = B_BLOCK_MAX; // 超えた分は無視
+        // ここでログや警告出すのも可
+    }
+
+    // 衝突判定：ブロック同士
     for (int i = 0; i < allCount; i++)
     {
         BlockData* a = allBlocks[i];
@@ -86,6 +93,7 @@ void StepBlockHub()
         }
     }
 
+    // 衝突判定：マップブロック
     for (int i = 0; i < allCount; i++)
     {
         BlockData* moving = allBlocks[i];
@@ -104,9 +112,6 @@ void StepBlockHub()
             }
         }
     }
-
-    // ヒープ解放
-    delete[] allBlocks;
 }
 void UpdateBlockHub(PlayerData& player)
 {

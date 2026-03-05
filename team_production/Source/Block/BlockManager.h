@@ -4,6 +4,7 @@
 #include "../Map/MapParameter.h"
 #include "../Map/MapManager.h"
 
+#define B_BLOCK_MAX (100)
 // ƒuƒƒbƒN‚Ìó‘Ô
 enum BlockState
 {
