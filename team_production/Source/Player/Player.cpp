@@ -56,7 +56,7 @@ void InitPlayer()
     g_PlayerData.isGround = false;
     g_PlayerData.playAnim = PLAYER_ANIM_NONE;
     g_PlayerData.state = NORMAL;
-    g_PlayerData.maxHp = 5;
+    g_PlayerData.maxHp = 1;
     g_PlayerData.isGoal = false;
     g_PlayerData.hp = g_PlayerData.maxHp;
     g_PlayerData.invincibleTimer = 0;
@@ -190,20 +190,21 @@ void UpdateDamage(PlayerData& player)
     player.posX += player.moveX;
     player.posY += player.moveY;
 
+    player.hp--;
+
+    // HP ‚ª 0 ‚È‚çŽ€–S
+    if (player.hp <= 0)
+    {
+        player.state = DEAD;
+    }
+
     player.invincibleTimer--;
 
     if (player.invincibleTimer <= 0)
     {
         player.invincibleTimer = 0;
 
-        player.hp--;
         player.state = NORMAL;
-    }
-
-    // HP ‚ª 0 ‚È‚çŽ€–S
-    if (player.hp <= 0)
-    {
-        player.state = DEAD;
     }
 
 }
