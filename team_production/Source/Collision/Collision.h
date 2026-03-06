@@ -1,5 +1,6 @@
 #pragma once
 
+
 struct BoxCollision
 {
 	float posX;
@@ -8,6 +9,8 @@ struct BoxCollision
 	float height;
 };
 
+struct NormalEnemyData;
+struct PlayerData;
 // ‹éŒ`‚Æ“_‚Ì“–‚½‚è”»’è
 bool CheckSquarePoint(float squarePosX, float squarePosY, float squareWidth, float squareHeight, float pointX, float pointY);
 
@@ -34,5 +37,6 @@ void CheckPlayerMapCollision();
 
 void ResolveBlockCollision(BlockData& a, BlockData& b);
 
-
 void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock);
+
+void CheckPlayerEnemyCollision(NormalEnemyData& e, PlayerData& p);

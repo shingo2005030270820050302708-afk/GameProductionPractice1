@@ -4,6 +4,8 @@
 #include "../Collision/Collision.h"
 #include "../../Data/Camera/Camera.h"
 #include "../Map/MapChip.h"
+#include "../Enemy/NormalEnemy.h"
+
 
 //Player初期スポーン
 #define PLAYER_DEFAULT_POS_X (400.0f)
@@ -40,7 +42,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
     {6, 4, 64, 64},//THROW
     {6, 6, 64, 64},//DUST1(RUN,PUSH)
     {6, 5, 64, 64},//DUST2(JUMP)
-  
+
 };
 
 void InitPlayer()
@@ -57,6 +59,8 @@ void InitPlayer()
     g_PlayerData.maxHp = 5;
     g_PlayerData.isGoal = false;
     g_PlayerData.hp = g_PlayerData.maxHp;
+    g_PlayerData.invincibleTimer = 0;
+    g_PlayerData.deadTimer = 0;
     for (int i = 0; i < PLAYER_ANIM_MAX; i++)
         InitAnimation(&g_PlayerData.animation[i]);
     memset(&g_PlayerData.boxCollision, 0, sizeof(g_PlayerData.boxCollision));
@@ -134,6 +138,10 @@ void UpdatePlayer()
     {
     case NORMAL:
         UpdateNormal(g_PlayerData);
+        for (int i = 0; i < ENEMY_MAX; i++)
+        {
+            CheckPlayerEnemyCollision(g_NormalEnemyData[i], g_PlayerData);
+        }
         break;
     case DAMAGE:
         UpdateDamage(g_PlayerData);
@@ -173,6 +181,8 @@ void UpdateNormal(PlayerData& player)
     // 位置更新
     player.posX += player.moveX;
     player.posY += player.moveY;
+
+
 }
 
 void UpdateDamage(PlayerData& player)
@@ -180,13 +190,49 @@ void UpdateDamage(PlayerData& player)
     player.posX += player.moveX;
     player.posY += player.moveY;
 
-    static int damageTimer = 0;
-    if (damageTimer == 0) damageTimer = 30;
-    damageTimer--;
-    if (damageTimer <= 0) { damageTimer = 0; player.state = NORMAL; }
+    player.invincibleTimer--;
+
+    if (player.invincibleTimer <= 0)
+    {
+        player.invincibleTimer = 0;
+
+        player.hp--;
+        player.state = NORMAL;
+    }
+
+    // HP が 0 なら死亡
+    if (player.hp <= 0)
+    {
+        player.state = DEAD;
+    }
+
 }
 
-void UpdateDead(PlayerData& player) { player.moveX = 0; player.moveY = 0; }
+void UpdateDead(PlayerData& player)
+{
+    if (player.deadTimer == 0)
+    {
+        player.deadTimer = 30;   // 30フレーム待つ
+    }
+
+    player.deadTimer--;
+
+    // タイマーが終わったらリスポーン
+    if (player.deadTimer <= 0)
+    {
+        player.deadTimer = 0;
+
+        player.moveX = 0;
+        player.moveY = 0;
+
+        player.hp = player.maxHp;
+        player.posX = PLAYER_DEFAULT_POS_X;
+        player.posY = PLAYER_DEFAULT_POS_Y;
+
+        player.state = NORMAL;
+    }
+
+}
 
 extern Camera camera;
 void DrawPlayer()
@@ -209,7 +255,7 @@ void DrawPlayer()
     }
     for (auto anim : p->extraAnims)
     {
-        // 念のため範囲チェック
+        // 念のため範囲チェックw
         if (anim >= 0 && anim < PLAYER_ANIM_MAX)
         {
             DrawAnimation(
@@ -281,3 +327,42 @@ void UpdatePlayerAnimation() {
 }
 void FinPlayer() { DeleteGraph(g_PlayerData.handle); }
 PlayerData* GetPlayer() { return &g_PlayerData; }
+
+void CheckPlayerEnemyCollision(NormalEnemyData& e, PlayerData& p)
+{
+    // 敵が非アクティブなら何もしない
+    if (!e.active) return;
+
+    // プレイヤーの当たり判定
+    float px = p.posX;
+    float py = p.posY;
+    float pw = p.boxCollision.width;
+    float ph = p.boxCollision.height;
+
+    // 敵の当たり判定
+    float ex = e.pos.x;
+    float ey = e.pos.y;
+    float ew = e.boxCollision.width;
+    float eh = e.boxCollision.height;
+
+    // AABB衝突判定
+    bool hit =
+        px < ex + ew &&
+        px + pw > ex &&
+        py < ey + eh &&
+        py + ph > ey;
+
+    if (hit)
+    {
+        // ダメージは NORMAL のときだけ
+        if (p.state == NORMAL)
+        {
+            p.state = DAMAGE;
+
+            p.invincibleTimer = 90;
+            // ノックバック方向（敵の位置から計算）
+            p.moveX = (p.posX < ex ? -3.0f : 3.0f);
+            p.moveY = -5.0f;
+        }
+    }
+}

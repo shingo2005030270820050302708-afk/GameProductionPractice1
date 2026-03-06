@@ -46,8 +46,11 @@ struct PlayerData
 	float moveY;								// Y移動量
 	int hp;
 	int maxHp;
+	int invincibleTimer;
+	int deadTimer;
+
 	int handle;
-	bool isThrowing;    
+	bool isThrowing;
 	int throwAnimTimer;
 	bool isGoal;
 	int holdingBlockId = -1;        // インデックス

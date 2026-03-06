@@ -14,15 +14,15 @@ enum NormalEnemyState
 
 struct NormalEnemyData
 {
-	bool active;								
-	bool isTurn;								
+	bool active;
+	bool isTurn;
 	bool isGround;
-	bool isAir;									
+	bool isAir;
 	bool gravity = false;
 	VECTOR pos = VGet(0, 0, 0);
 	VECTOR vel = VGet(0, 0, 0);
-	float moveX;								
-	float moveY;								
+	float moveX;
+	float moveY;
 	int hp;
 	int maxHp;
 	int deathTimer = 0;

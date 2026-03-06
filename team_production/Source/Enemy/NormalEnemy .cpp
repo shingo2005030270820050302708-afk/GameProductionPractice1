@@ -48,8 +48,8 @@ void StartNormalEnemy()
         e.pos = VGet(200 + i * 100, 800, 0);
         e.vel = VGet(0.0f, 0.0f, 0.0f);
 
-        e.boxCollision.width = 60.0f;
-        e.boxCollision.height = 60.0f;
+        e.boxCollision.width = 45.0f;
+        e.boxCollision.height = 45.0f;
     }
 }
 
@@ -224,9 +224,10 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
     e.vel.x = (vx > 0) ? 0.75f : -0.75f;
 
     // ­‚µ—£‚ê‚½‚ç’ÇÕ‚É–ß‚é
-    if (fabsf(vx) > 250.0f)
+    if (fabsf(vx) > 300.0f)
+    {
         e.state = Move;
-
+    }
 }
 
 void UpdateDead(NormalEnemyData& e, const PlayerData& player)
