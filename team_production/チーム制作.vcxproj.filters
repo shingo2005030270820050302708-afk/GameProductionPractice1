@@ -156,6 +156,15 @@
     <ClCompile Include="Source\Block\BlockHub.cpp">
       <Filter>Source\Block</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy\FireEnemy .cpp">
+      <Filter>Source\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\IceEnemy.cpp">
+      <Filter>Source\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Enemy\WoodEnemy.cpp">
+      <Filter>Source\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Character.h">
@@ -256,6 +265,15 @@
     </ClInclude>
     <ClInclude Include="Source\Block\BlockHub.h">
       <Filter>Source\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\FireEnemy.h">
+      <Filter>Source\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\IceEnemy.h">
+      <Filter>Source\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy\WoodEnemy.h">
+      <Filter>Source\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

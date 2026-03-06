@@ -147,7 +147,10 @@
     <ClCompile Include="Source\Block\WoodBlock.cpp" />
     <ClCompile Include="Source\Collision\Collision.cpp" />
     <ClCompile Include="Source\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Source\Enemy\FireEnemy .cpp" />
+    <ClCompile Include="Source\Enemy\IceEnemy.cpp" />
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp" />
+    <ClCompile Include="Source\Enemy\WoodEnemy.cpp" />
     <ClCompile Include="Source\FPS\Fps.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
@@ -180,7 +183,10 @@
     <ClInclude Include="Source\Block\WoodBlock.h" />
     <ClInclude Include="Source\Collision\Collision.h" />
     <ClInclude Include="Source\Enemy\EnemyManager.h" />
+    <ClInclude Include="Source\Enemy\FireEnemy.h" />
+    <ClInclude Include="Source\Enemy\IceEnemy.h" />
     <ClInclude Include="Source\Enemy\NormalEnemy.h" />
+    <ClInclude Include="Source\Enemy\WoodEnemy.h" />
     <ClInclude Include="Source\FPS\Fps.h" />
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
     <ClInclude Include="Source\Input\Input.h" />
