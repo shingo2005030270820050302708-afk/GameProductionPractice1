@@ -18,6 +18,7 @@ public:
 private:
     BackGround bg;
     bool isEnd = false;
+    int clearTime = 0;
     SceneType next = SceneType::Title;
     
 };

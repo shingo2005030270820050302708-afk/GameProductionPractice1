@@ -4,11 +4,18 @@
 class GameClearScene : public SceneBase
 {
 private:
-    bool isEnd = false;         // ★追加：シーン終了フラグ
-    SceneType next = SceneType::Title;  // ★追加：次のシーン遷移先
+    bool isEnd = false;
+    SceneType next = SceneType::Title;
+    int ClearbgHandle = -1;
+    int clearBG = -1;
+    int timer = 0;
+    int starHandle = -1;
+    int starEmptyHandle = -1;
 
-    int clearBG = -1;           // クリア画面の画像
-    int timer = 0;              // 表示時間計測用
+    int resultStar = 0;  
+    int showStar = 0;
+    int starTimer = 0;
+
 public:
     void Init() override;
     void Load() override;

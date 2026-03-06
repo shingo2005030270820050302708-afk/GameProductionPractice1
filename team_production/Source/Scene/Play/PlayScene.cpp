@@ -10,6 +10,8 @@
 
 void PlayScene::Init()  
 {
+    gData.coin = 0;
+    clearTime = 0;
 	InitInput();
 	InitPlayer();
     InitNormalEnemy();
@@ -74,13 +76,17 @@ void PlayScene::Step()
 }
 void PlayScene::Update()
 {
+  
+    clearTime++;
     UpdatePlayer();
     UpdateBlockHub(g_PlayerData);
     camera.Update(g_PlayerData);
+    UpdateMapBlock();
 
     // ▼ ここからゴール判定追加 ▼
     if (g_PlayerData.isGoal)
     {
+        gData.clearTime = clearTime;
         isEnd = true;
         next = SceneType::GameClear; // クリアシーンへ遷移
     }
@@ -95,9 +101,15 @@ void PlayScene::Draw()
 }
 void PlayScene::Fin()
 {
+    // ▼ ブロックを持っていたら強制的に離す ▼
+    if (g_PlayerData.holdingBlock)
+    {
+        g_PlayerData.holdingBlock = nullptr;
+    }
+
+    // ▼ 既存処理 ▼
     FinPlayer();
     FinBlockHub();
-    
 }
 
 bool PlayScene::IsEnd() const { return isEnd; }

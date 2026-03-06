@@ -105,7 +105,7 @@ void StepWoodBlock()
 void UpdateWoodBlock(PlayerData& player)
 {
 
-    float liftPadding = 30.0f;
+    float liftPadding = 32.0f;
 
     for (int i = 0; i < BLOCK_MAX; i++)
     {
@@ -175,10 +175,42 @@ void UpdateWoodBlock(PlayerData& player)
         {
             if (IsInputKey(KEY_DOWN) && IsTriggerKey(KEY_X))
             {
-
                 b.state = BLOCK_STAY;
                 b.hold = false;
                 player.holdingBlock = nullptr;
+
+                //プレイヤーと重ならないように位置補正
+                float px = player.posX;
+                float py = player.posY;
+                float pw = player.boxCollision.width;
+                float ph = player.boxCollision.height;
+
+                float bx = b.pos.x;
+                float by = b.pos.y;
+                float bw = b.width;
+                float bh = b.height;
+
+                // 下に置く
+                b.pos.x = px + pw / 2 - bw / 2;
+                b.pos.y = py + ph + 2; // 少し下に
+
+                // プレイヤーと重なっていたら補正
+                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
+                {
+                    // プレイヤーの右に置く
+                    b.pos.x = px + pw + 4;
+                    b.pos.y = py;
+                }
+
+                // それでも重なれば左
+                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
+                {
+                    b.pos.x = px - bw - 4;
+                    b.pos.y = py;
+                }
+
+                // 最後に重力ON
+                b.gravity = true;
             }
             else if (IsTriggerKey(KEY_X))
             {

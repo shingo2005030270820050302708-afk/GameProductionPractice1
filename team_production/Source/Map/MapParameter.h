@@ -1,5 +1,6 @@
 #pragma once
 #include "DxLib.h"
+#include "../Animation/Animation.h"
 
 
 #define BLOCK_MAX 40000
@@ -26,6 +27,7 @@ enum MapChipType
     RIGHT_BLOCK,
     MIDDLE_BLOCK,
     GOAL_BLOCK,
+	COIN_BLOCK,
     BLOCK_TYPE_MAX,
 
 };
@@ -40,6 +42,7 @@ struct BlockData
 
     MapChipType mapChipType = MAP_CHIP_NONE; // Å©ïœçX
     BlockType blockType; // Å©ïœçX
+    AnimationData anim;
 
     float width = MAP_CHIP_WIDTH;
     float height = MAP_CHIP_HEIGHT;
@@ -47,6 +50,8 @@ struct BlockData
     bool gravity;
     bool hold;
     bool breakable;
+
+   
 
     BlockState state; // Å©bool Ç∂Ç·Ç»Ç≠Çƒ enum Ç…Ç∑ÇÈ
 };
