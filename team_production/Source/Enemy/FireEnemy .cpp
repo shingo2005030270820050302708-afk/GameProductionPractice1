@@ -53,7 +53,7 @@ void StartFireEnemy()
     }
 }
 
-void StepNormalEnemy(const PlayerData& player)
+void StepFireEnemy(const PlayerData& player)
 {
     for (int i = 0; i < ENEMY_MAX; i++)
     {
@@ -162,6 +162,10 @@ void UpdateDead(FireEnemyData& e, const PlayerData& player)
     {
         e.active = false;
     }
+}
+
+void CheckEnemyMapCollision(FireEnemyData& e)
+{
 }
 
 void DrawFireEnemy()

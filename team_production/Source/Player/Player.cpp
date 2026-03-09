@@ -8,12 +8,12 @@
 
 
 //Player初期スポーン
-#define PLAYER_DEFAULT_POS_X (400.0f)
-#define PLAYER_DEFAULT_POS_Y (0.0f)
+#define PLAYER_DEFAULT_POS_X (100.0f)
+#define PLAYER_DEFAULT_POS_Y (640.0f)
 
 // Playerの諸々のステータス
 #define PLAYER_MOVE_SPEED (3.0f)
-#define PLAYER_JUMP_POWER (7.5f)
+#define PLAYER_JUMP_POWER (11.5f)
 #define PLAYER_GRAVITY (0.4f)
 
 // マップ衝突判定用のプレイヤーサイズ補正

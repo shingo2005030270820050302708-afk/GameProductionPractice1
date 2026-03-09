@@ -83,6 +83,13 @@ void PlayScene::Update()
     camera.Update(g_PlayerData);
     UpdateMapBlock();
 
+    if (CheckHitKey(KEY_INPUT_R))
+    {
+        isEnd = true;
+        next = SceneType::StageSelect;
+        return;
+    }
+	
     // ¥ ‚±‚±‚©‚çƒS[ƒ‹”»’è’Ç‰Á ¥
     if (g_PlayerData.isGoal)
     {

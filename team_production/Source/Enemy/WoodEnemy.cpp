@@ -163,6 +163,10 @@ void UpdateDead(WoodEnemyData& e, const PlayerData& player)
     }
 }
 
+void CheckEnemyMapCollision(WoodEnemyData& e)
+{
+}
+
 void DrawWoodEnemy()
 {
     for (int i = 0; i < ENEMY_MAX; i++)

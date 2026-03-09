@@ -163,6 +163,10 @@ void UpdateDead(IceEnemyData& e, const PlayerData& player)
     }
 }
 
+void CheckEnemyMapCollision(IceEnemyData& e)
+{
+}
+
 void DrawIceEnemy()
 {
     for (int i = 0; i < ENEMY_MAX; i++)
