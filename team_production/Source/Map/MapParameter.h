@@ -6,7 +6,7 @@
 #define BLOCK_MAX 40000
 
 constexpr int MAP_CHIP_X_NUM = 64;  
-constexpr int MAP_CHIP_Y_NUM = 32;
+constexpr int MAP_CHIP_Y_NUM = 64;
 constexpr float MAP_CHIP_WIDTH = 32.0f;
 constexpr float MAP_CHIP_HEIGHT = 32.0f;
 

@@ -33,4 +33,16 @@ void Camera::Update(const PlayerData& player) {
     if (y > mapHeight - screenHeight) y = mapHeight - screenHeight;
 }
 
+void Camera::SetPosition(float px, float py)
+{
+    x = px - screenWidth / 2;
+    y = py - screenHeight / 2;
+
+    // ƒ}ƒbƒv”ÍˆÍ“à‚É§ŒÀ
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+    if (x > mapWidth - screenWidth) x = mapWidth - screenWidth;
+    if (y > mapHeight - screenHeight) y = mapHeight - screenHeight;
+}
+
 Camera camera;

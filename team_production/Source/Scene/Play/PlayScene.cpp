@@ -12,6 +12,7 @@ void PlayScene::Init()
 {
     gData.coin = 0;
     clearTime = 0;
+    gData.deathCount = 0;
 	InitInput();
 	InitPlayer();
     InitNormalEnemy();
@@ -105,6 +106,9 @@ void PlayScene::Draw()
     DrawPlayer();
     DrawNormalEnemy();
     DrawBlockHub();
+    char buf[32];
+    sprintf_s(buf, "DeathCount: %d", gData.deathCount);
+    DrawString(60, 20, buf, GetColor(255, 0, 0));
 }
 void PlayScene::Fin()
 {

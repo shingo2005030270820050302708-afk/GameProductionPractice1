@@ -8,6 +8,8 @@ public:
 
     void Init(int screenWidth, int screenHeight, int mapWidth, int mapHeight);
     void Update(const PlayerData& player); // PlayerData‚ð“n‚·
+    void SetPosition(float px, float py);
+    
 
     int GetX() const { return (int)x; }
     int GetY() const { return (int)y; }

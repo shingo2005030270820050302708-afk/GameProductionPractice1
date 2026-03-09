@@ -5,6 +5,7 @@
 #include "../../Data/Camera/Camera.h"
 #include "../Map/MapChip.h"
 #include "../Enemy/NormalEnemy.h"
+#include "../Scene/GlobalData.h"
 
 
 //Player初期スポーン
@@ -121,6 +122,14 @@ void UpdatePlayer()
 {
     if (!g_PlayerData.active) return;
 
+    if (g_PlayerData.posY > 900.0f && g_PlayerData.state != DEAD)
+    {
+        g_PlayerData.state = DEAD;
+        g_PlayerData.deadTimer = 0;  
+      
+        return; 
+    }
+
     if (g_PlayerData.isThrowing)
     {
         g_PlayerData.playAnim = PLAYER_ANIM_THROW;
@@ -211,6 +220,14 @@ void UpdateDamage(PlayerData& player)
 
 void UpdateDead(PlayerData& player)
 {
+    static bool counted = false;
+
+    if (!counted)
+    {
+        gData.deathCount++;
+        counted = true;
+    }
+
     if (player.deadTimer == 0)
     {
         player.deadTimer = 30;   // 30フレーム待つ
@@ -231,10 +248,15 @@ void UpdateDead(PlayerData& player)
         player.posY = PLAYER_DEFAULT_POS_Y;
 
         player.state = NORMAL;
+
+
+
+        counted = false; // リスポーン時に再度カウントできるようにする
+
+        camera.SetPosition(PLAYER_DEFAULT_POS_X, PLAYER_DEFAULT_POS_Y);
+    
     }
-
 }
-
 extern Camera camera;
 void DrawPlayer()
 {

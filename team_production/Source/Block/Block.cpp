@@ -200,7 +200,7 @@ void CheckBlockMapCollision(BlockData& b)
 void UpdateBlock(PlayerData& player)
 {
 
-    float liftPadding = 32.0f;
+    float liftPadding = 35.0f;
 
     for (int i = 0; i < BLOCK_MAX; i++)
     {
