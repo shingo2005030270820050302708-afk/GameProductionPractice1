@@ -131,7 +131,7 @@ void UpdateFireBlock(PlayerData& player)
             continue;
 
         // Õ“Ë‰ğŒˆ
-        ResolvePlayerBlockCollision(&b);
+       
     }
     PlayerData* p = GetPlayer();
     for (int bi = 0; bi < BLOCK_MAX; bi++)

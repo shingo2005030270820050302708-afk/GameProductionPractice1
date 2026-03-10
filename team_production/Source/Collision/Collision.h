@@ -30,7 +30,7 @@ struct BlockData;
 struct PlayerData;
 
 // プレイヤーをブロックから押し戻す
-void ResolvePlayerBlockCollision(BlockData* block);
+void ResolvePlayerVsDynamicBlock(PlayerData* p, BlockData* b);
 
 // プレイヤーとマップの総合当たり判定
 void CheckPlayerMapCollision();

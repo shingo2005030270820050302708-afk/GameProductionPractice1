@@ -87,8 +87,11 @@ void StartBlock()
         g_Block[i].gravity = false;
         g_Block[i].vel = VGet(0, 0, 0);
     }
-    VECTOR pos = VGet(200, 800, 0);
-    CreateBlock(B_NORMAL_BLOCK, pos);
+
+    CreateBlock(B_NORMAL_BLOCK, VGet(200, 800, 0));
+    CreateBlock(B_NORMAL_BLOCK, VGet(300, 800, 0));
+    CreateBlock(B_NORMAL_BLOCK, VGet(400, 800, 0));
+    CreateBlock(B_NORMAL_BLOCK, VGet(500, 800, 0));
 }
 
 void StepBlock()
@@ -98,29 +101,22 @@ void StepBlock()
         BlockData& b = g_Block[i];
         if (!b.active) continue;
 
+        b.prevPos = b.pos;  // ← ここだけでOK
+
         switch (b.state)
         {
         case BLOCK_PUSH:
-        {
-            int X = GetPlayer()->isTurn ? -35 : 65;
-            b.pos.x = GetPlayer()->posX + X;
-        }
-        break;
+            b.pos.x = GetPlayer()->isTurn ? GetPlayer()->posX - 35 : GetPlayer()->posX + 65;
+            break;
         case BLOCK_LIFT:
-        {
-            b.pos.x = GetPlayer()->posX + 15;
+            b.pos.x = GetPlayer()->posX + 5;
             b.pos.y = GetPlayer()->posY - 25;
-        }
             break;
         case BLOCK_THROW:
         case BLOCK_STAY:
-        {
-            if (b.gravity)
-                b.vel.y += 0.5f;
-
+            if (b.gravity) b.vel.y += 0.5f;
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
-
             CheckBlockMapCollision(b);
 
             if (b.pos.y + b.height >= groundY)
@@ -130,12 +126,10 @@ void StepBlock()
                 b.gravity = false;
                 b.state = BLOCK_STAY;
             }
-        }
-        break;
+            break;
         }
     }
-}
-void CheckBlockMapCollision(BlockData& b)
+}void CheckBlockMapCollision(BlockData& b)
 {
     if (!b.active) return;
 
@@ -200,20 +194,21 @@ void CheckBlockMapCollision(BlockData& b)
 void UpdateBlock(PlayerData& player)
 {
 
-    float liftPadding = 35.0f;
+    float liftPadding = 50.0f;
 
     for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_Block[i];
         if (!b.active) continue;
 
-        // 持ち上げ中のブロックは当たり判定しない
-        if (b.state == BLOCK_LIFT) continue;
+        // プレイヤーが持っているブロック自身は衝突判定をスキップ
+        if (&b == player.holdingBlock) continue;
 
+        // 当たり判定用の矩形
         float px = player.posX;
-        float py = player.posY;
+        float py = player.posY + 5;
         float pw = player.boxCollision.width;
-        float ph = player.boxCollision.height;
+        float ph = player.boxCollision.height + 5;
 
         float bx = b.pos.x;
         float by = b.pos.y;
@@ -224,7 +219,7 @@ void UpdateBlock(PlayerData& player)
             continue;
 
         // 衝突解決
-        ResolvePlayerBlockCollision(&b);
+        ResolvePlayerVsDynamicBlock(GetPlayer(), &b);
     }
     PlayerData* p = GetPlayer();
     for (int bi = 0; bi < BLOCK_MAX; bi++)
@@ -328,23 +323,47 @@ void UpdateBlock(PlayerData& player)
     }
 }
 
- void DrawBlock()
- {
+void DrawBlock()
+{
+    for (int i = 0; i < BLOCK_MAX; i++)
+    {
+        BlockData& b = g_Block[i];
+        if (!b.active) continue;
 
+        float drawX = b.pos.x - camera.GetX();
+        float drawY = b.pos.y - camera.GetY();
 
-     for (int i = 0; i < BLOCK_MAX; i++)
-     {
-         if (g_Block[i].active && g_Block[i].handle != -1)
-         {
-             DrawGraph(
-                 (int)(g_Block[i].pos.x - camera.GetX()),
-                 (int)(g_Block[i].pos.y - camera.GetY()),
-                 g_Block[i].handle,
-                 TRUE
-             );
-         }
-     }
- }
+        // 色を決める（ブロック状態に応じて）
+        int color = GetColor(255, 255, 255); // デフォルト白
+        if (b.state == BLOCK_LIFT) color = GetColor(0, 0, 255); // 持たれている
+        else if (b.state == BLOCK_THROW) color = GetColor(255, 0, 0); // 投げられた
+        else if (b.state == BLOCK_STAY)
+        {
+            // 持てないブロックはグレー
+            PlayerData* p = GetPlayer();
+            float liftPadding = 50.0f;
+            float px = p->posX - liftPadding;
+            float py = p->posY - liftPadding;
+            float pw = p->boxCollision.width + liftPadding * 2;
+            float ph = p->boxCollision.height + liftPadding * 2;
+            if (!(CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, b.width, b.height)))
+            {
+                color = GetColor(128, 128, 128); // 持てない
+            }
+        }
+
+        // グラフィック描画
+        if (b.handle != -1)
+        {
+            DrawGraph((int)drawX, (int)drawY, b.handle, TRUE);
+        }
+
+        // デバッグ用ボックスで色表示
+#if 1
+        DrawBox(drawX, drawY, drawX + b.width, drawY + b.height, color, FALSE);
+#endif
+    }
+}
 
 
 

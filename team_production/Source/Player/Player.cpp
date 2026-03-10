@@ -33,15 +33,15 @@ struct PlayerAnimationParam
 
 const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 {
-    {10, 4, 64, 64},//IDLE
-    {6, 6, 64, 64},//RUN
-    {10, 8, 64, 64},//JUMP
+    {10, 4, 40, 64},//IDLE
+    {6, 6, 40, 64},//RUN
+    {10, 8, 40, 64},//JUMP
     {4, 6, 64, 64},//PUSH
     {4, 4, 64, 64},//CLIM
     {4, 8, 64, 64},//DEATH
     {4, 4, 64, 64},//HURT
-    {6, 4, 64, 64},//THROW
-    {6, 6, 64, 64},//DUST1(RUN,PUSH)
+    {6, 4, 40, 64},//THROW
+    {6, 6, 40, 64},//DUST1(RUN,PUSH)
     {6, 5, 64, 64},//DUST2(JUMP)
 
 };
@@ -290,6 +290,24 @@ void DrawPlayer()
             );
         }
     }
+
+#if 1 // デバッグ用
+
+    float px = p->posX + PLAYER_BOX_COLLISION_OFFSET_X - camera.GetX();
+    float py = p->posY + PLAYER_BOX_COLLISION_OFFSET_Y - camera.GetY();
+    float pw = p->boxCollision.width;
+    float ph = p->boxCollision.height;
+
+    DrawBox(
+        (int)px,
+        (int)py,
+        (int)(px + pw),
+        (int)(py + ph),
+        GetColor(255, 0, 0),
+        FALSE
+    );
+
+#endif
 }
 void StartPlayerAnimation(PlayerAnimationType anim)
 {

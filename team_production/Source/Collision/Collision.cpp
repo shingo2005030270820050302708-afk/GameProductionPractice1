@@ -77,22 +77,20 @@ void CheckCollision()
     //CheckMapPlayerCollision();
 }
 
-void ResolvePlayerBlockCollision(BlockData* block)
+void ResolvePlayerVsDynamicBlock(PlayerData* p, BlockData* b)
 {
-    PlayerData* p = GetPlayer();
-    if (!p) return;
-
-    float px = p->posX;
-    float py = p->posY;
+    // 前提：AABB重なりがある状態で呼ばれる
+    float px = p->posX + PLAYER_BOX_COLLISION_OFFSET_X;
+    float py = p->posY + PLAYER_BOX_COLLISION_OFFSET_Y;
     float pw = p->boxCollision.width;
     float ph = p->boxCollision.height;
 
-    float bx = block->pos.x;
-    float by = block->pos.y;
-    float bw = block->width;
-    float bh = block->height;
+    float bx = b->pos.x;
+    float by = b->pos.y;
+    float bw = b->width;
+    float bh = b->height;
 
-    // どちらの方向にめり込んでいるか判定
+    // オーバーラップ量
     float overlapLeft = (px + pw) - bx;
     float overlapRight = (bx + bw) - px;
     float overlapTop = (py + ph) - by;
@@ -101,34 +99,57 @@ void ResolvePlayerBlockCollision(BlockData* block)
     float minOverlapX = (overlapLeft < overlapRight ? overlapLeft : overlapRight);
     float minOverlapY = (overlapTop < overlapBottom ? overlapTop : overlapBottom);
 
-    // 横方向の押し戻しが小さい
-    if (minOverlapX < minOverlapY)
-    {
-        if (overlapLeft < overlapRight)
-            p->posX = bx - pw;       // 左からぶつかった
-        else
-            p->posX = bx + bw;       // 右からぶつかった
+    const float EPS = 0.0001f;
+    bool blockMovingDown = (b->vel.y > 0.0f) || (b->pos.y - b->prevPos.y > 0.0f);
 
-        p->moveX = 0;
-    }
-    // 縦方向の衝突
-    else
+    // 通常の軸選択
+    bool resolveXFirst = (minOverlapX + EPS < minOverlapY);
+
+    if (!resolveXFirst)
     {
-        if (overlapTop < overlapBottom)
+        // 縦方向が本来小さい ＝ 通常なら Y で解決
+        if (overlapTop + EPS < overlapBottom)
         {
-            p->posY = by - ph;       // 上から落ちてきた
+            // 上から着地（プレイヤーがブロック上に立つ）
+            p->posY = by - ph;
             p->moveY = 0;
             p->isGround = true;
             p->isAir = false;
         }
         else
         {
-            p->posY = by + bh;       // 下から突き上げた
-            p->moveY = 0;
+            // ここは「下から突き上げ」側
+            // もしブロックが落下中なら、Yで押さずにXで解決へ切替
+            if (blockMovingDown)
+            {
+                // Xで解決
+                if (overlapLeft < overlapRight)
+                    p->posX = bx - pw;
+                else
+                    p->posX = bx + bw;
+
+                p->moveX = 0;
+                // Yは触らない：下方向へ弾かない
+            }
+            else
+            {
+                // 通常の下方向解決
+                p->posY = by + bh;
+                p->moveY = 0;
+            }
         }
     }
-}
+    else
+    {
+        // Xで解決
+        if (overlapLeft < overlapRight)
+            p->posX = bx - pw;
+        else
+            p->posX = bx + bw;
 
+        p->moveX = 0;
+    }
+}
 void ResolveEnemyBlockCollision(NormalEnemyData& e, BlockData* block)
 {
     float ex = e.pos.x;
@@ -182,8 +203,8 @@ void CheckPlayerMapCollision()
     PlayerData* p = GetPlayer();
     if (!p) return;
 
-    float px = p->posX;
-    float py = p->posY;
+    float px = p->posX + PLAYER_BOX_COLLISION_OFFSET_X;
+    float py = p->posY + PLAYER_BOX_COLLISION_OFFSET_Y;
     float pw = p->boxCollision.width;
     float ph = p->boxCollision.height;
 
@@ -224,7 +245,7 @@ void CheckPlayerMapCollision()
                 px, py, pw, ph,
                 block->pos.x, block->pos.y, block->width, block->height))
             {
-                ResolvePlayerBlockCollision(block);
+                ResolvePlayerVsDynamicBlock(p, block);
             }
         }
     }
@@ -254,7 +275,7 @@ void CheckEnemyMapCollision(NormalEnemyData& e)
             BlockData* block = chip.data;
             if (!block || !block->active) continue;
 
-            // ▼ 敵とブロックの当たり判定
+            // 敵とブロックの当たり判定
             if (CheckSquareSquare(
                 ex, ey, ew, eh,
                 block->pos.x, block->pos.y, block->width, block->height))
@@ -308,7 +329,7 @@ void ResolveBlockCollision(BlockData& a, BlockData& b)
     }
 }
 
-// 動くブロック同士の衝突判定
+
 void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock)
 {
     if (!movingBlock.active || !mapBlock.active) return;
