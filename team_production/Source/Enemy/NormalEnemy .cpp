@@ -183,7 +183,7 @@ void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
         UpdateMove(e, player);
         break;
     case Attack:
-        UpdateAttack(e, player);E
+        UpdateAttack(e, player);
     case Dead:
         UpdateDead(e, player);
         break;

@@ -205,20 +205,21 @@ void CheckPlayerMapCollision()
             BlockData* block = chip.data;
             if (!block || !block->active) continue;
 
-            
+            // COIN_BLOCK は衝突しない
+            if (chip.mapChip == COIN_BLOCK) continue;
+
+            // ゴール判定
             if (chip.mapChip == GOAL_BLOCK)
             {
-                // プレイヤーがゴールに触れた！
                 if (CheckSquareSquare(px, py, pw, ph,
                     block->pos.x, block->pos.y, block->width, block->height))
                 {
-                    // クリアフラグ ON
                     p->isGoal = true;
-                    return; // これ以上判定しなくてもいい
+                    return;
                 }
             }
-        
-            // 通常の衝突判定
+
+            // 通常ブロックの衝突判定
             if (CheckSquareSquare(
                 px, py, pw, ph,
                 block->pos.x, block->pos.y, block->width, block->height))
