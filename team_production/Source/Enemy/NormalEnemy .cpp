@@ -51,7 +51,6 @@ void StartNormalEnemy()
 
         e.boxCollision.width = 45.0f;
         e.boxCollision.height = 45.0f;
-
     }
 }
 
