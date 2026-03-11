@@ -164,41 +164,39 @@ void ResolveEnemyBlockCollision(NormalEnemyData& e, BlockData* block)
     float bw = block->width;
     float bh = block->height;
 
-    // 中心座標
+    // 中心座標を計算（左上基準でもこれが一番安定）
     float ecx = ex + ew * 0.5f;
     float ecy = ey + eh * 0.5f;
     float bcx = bx + bw * 0.5f;
     float bcy = by + bh * 0.5f;
 
-    // 中心間距離
     float dx = ecx - bcx;
     float dy = ecy - bcy;
 
-    // 重なり量
     float overlapX = (ew * 0.5f + bw * 0.5f) - fabsf(dx);
     float overlapY = (eh * 0.5f + bh * 0.5f) - fabsf(dy);
 
-    // 横方向の押し戻し
     if (overlapX < overlapY)
     {
+        // 横方向の押し戻し
         if (dx > 0)
-            e.pos.x += overlapX;   // 右側に押し戻す
+            e.pos.x += overlapX;
         else
-            e.pos.x -= overlapX;   // 左側に押し戻す
+            e.pos.x -= overlapX;
 
         e.vel.x = 0;
     }
-    // 縦方向の押し戻し
     else
     {
+        // 縦方向の押し戻し
         if (dy > 0)
         {
-            e.pos.y += overlapY;   // 下から押し上げる
+            e.pos.y += overlapY;  // 下から押し上げる
             e.vel.y = 0;
         }
         else
         {
-            e.pos.y -= overlapY;   // 上から落ちてきた
+            e.pos.y -= overlapY;  // 上から落ちてきた
             e.vel.y = 0;
             e.isGround = true;
             e.isAir = false;
