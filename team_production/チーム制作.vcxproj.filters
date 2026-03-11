@@ -61,6 +61,9 @@
     <Filter Include="Source\Animation">
       <UniqueIdentifier>{5c4a40e3-070c-4104-b43d-676a2805a75d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Gimmik">
+      <UniqueIdentifier>{3ce64309-7824-4f75-86de-71ff480c2bf2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -161,6 +164,12 @@
     </ClCompile>
     <ClCompile Include="Source\Enemy\WoodEnemy.cpp">
       <Filter>Source\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gimmick\FireFloor.cpp">
+      <Filter>Source\Gimmik</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gimmick\GimmickManager.cpp">
+      <Filter>Source\Gimmik</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +277,12 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy\WoodEnemy.h">
       <Filter>Source\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gimmick\FireFloor.h">
+      <Filter>Source\Gimmik</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gimmick\GimmickManager.h">
+      <Filter>Source\Gimmik</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

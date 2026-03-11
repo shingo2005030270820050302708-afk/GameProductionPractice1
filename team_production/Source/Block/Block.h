@@ -16,5 +16,6 @@ void FinBlock();
 
 // ブロックとマップチップの当たり判定
 void CheckBlockMapCollision(BlockData& b);
+bool IsBlockOnAnotherBlock(const BlockData& block, BlockData* blockArray, int blockMax);
 
 

@@ -9,38 +9,38 @@
 void InitBlockHub()
 {
 	InitBlock();
-	/*InitFireBlock();
+	//InitFireBlock();
 	InitIceBlock();
-	InitIronBlock();
-	InitWoodBlock();*/
+	//InitIronBlock();
+	//InitWoodBlock();
 }
 
 void LoadBlockHub()
 {
 	LoadBlock();
-	/*LoadFireBlock();
+  //LoadFireBlock();
 	LoadIceBlock();
-	LoadIronBlock();
-	LoadWoodBlock();*/
+	//LoadIronBlock();
+	//LoadWoodBlock();
 }
 
 void StartBlockHub()
 {
 	StartBlock();
-	/*StartFireBlock();
+	//StartFireBlock();
 	StartIceBlock();
-	StartIronBlock();
-	StartWoodBlock();*/
+	//StartIronBlock();
+	//StartWoodBlock();
 }
 
 
 void StepBlockHub()
 {
     StepBlock();
-   /* StepFireBlock();
+    //StepFireBlock();
     StepIceBlock();
-    StepIronBlock();
-    StepWoodBlock();*/
+   // StepIronBlock();
+    //StepWoodBlock();
 
 
     BlockData* allBlocks[B_BLOCK_MAX];
@@ -116,26 +116,26 @@ void StepBlockHub()
 void UpdateBlockHub(PlayerData& player)
 {
 	UpdateBlock(player);
-	/*UpdateFireBlock(player);
+	//UpdateFireBlock(player);
 	UpdateIceBlock(player);
-	UpdateIronBlock(player);
-	UpdateWoodBlock(player);*/
+	//UpdateIronBlock(player);
+	//UpdateWoodBlock(player);
 }
 
 void DrawBlockHub()
 {
 	DrawBlock();
-	/*DrawFireBlock();
+	//DrawFireBlock();
 	DrawIceBlock();
-	DrawIronBlock();
-	DrawWoodBlock();*/
+	//DrawIronBlock();
+	//DrawWoodBlock();
 }
 
 void FinBlockHub()
 {
 	FinBlock();
-	/*FinFireBlock();
+	//FinFireBlock();
 	FinIceBlock();
-	FinIronBlock();
-	FinWoodBlock();*/
+	//FinIronBlock();
+	//FinWoodBlock();
 }

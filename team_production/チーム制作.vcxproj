@@ -151,6 +151,8 @@
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp" />
     <ClCompile Include="Source\Enemy\WoodEnemy.cpp" />
     <ClCompile Include="Source\FPS\Fps.cpp" />
+    <ClCompile Include="Source\Gimmick\FireFloor.cpp" />
+    <ClCompile Include="Source\Gimmick\GimmickManager.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Map\MapBlock.cpp" />
@@ -187,6 +189,8 @@
     <ClInclude Include="Source\Enemy\WoodEnemy.h" />
     <ClInclude Include="Source\FPS\Fps.h" />
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
+    <ClInclude Include="Source\Gimmick\FireFloor.h" />
+    <ClInclude Include="Source\Gimmick\GimmickManager.h" />
     <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\Map\MapBlock.h" />
     <ClInclude Include="Source\Map\MapChip.h" />

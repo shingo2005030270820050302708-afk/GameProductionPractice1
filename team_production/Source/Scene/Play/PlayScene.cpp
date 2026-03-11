@@ -7,6 +7,7 @@
 #include "../../Block/BlockHub.h"
 #include "../../Enemy/NormalEnemy.h"
 #include "../../../Data/Camera/Camera.h"
+#include "../../Gimmick/FireFloor.h"
 
 void PlayScene::Init()  
 {
@@ -17,6 +18,7 @@ void PlayScene::Init()
 	InitPlayer();
     InitNormalEnemy();
     InitBlockHub();
+	InitFireFloor();
    
 }
 void PlayScene::Load()
@@ -60,6 +62,7 @@ void PlayScene::Load()
     LoadPlayer();
     LoadNormalEnemy();
     LoadBlockHub();
+	LoadFireFloor();
     
 }
 void PlayScene::Start()
@@ -67,6 +70,7 @@ void PlayScene::Start()
     StartPlayer();
     StartNormalEnemy();
     StartBlockHub();
+	StartFireFloor();
        
 }
 void PlayScene::Step() 
@@ -74,6 +78,7 @@ void PlayScene::Step()
     StepPlayer();
     StepNormalEnemy(g_PlayerData);
     StepBlockHub();
+	StepFireFloor();
 }
 void PlayScene::Update()
 {
@@ -83,6 +88,7 @@ void PlayScene::Update()
     UpdateBlockHub(g_PlayerData);
     camera.Update(g_PlayerData);
     UpdateMapBlock();
+    UpdateFireFloor(g_PlayerData);
 
     if (CheckHitKey(KEY_INPUT_R))
     {
@@ -106,6 +112,7 @@ void PlayScene::Draw()
     DrawPlayer();
     DrawNormalEnemy();
     DrawBlockHub();
+	DrawFireFloor();
     char buf[32];
     sprintf_s(buf, "DeathCount: %d", gData.deathCount);
     DrawString(60, 20, buf, GetColor(255, 0, 0));
