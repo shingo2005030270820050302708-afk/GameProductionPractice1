@@ -94,7 +94,7 @@ void StepNormalEnemy(const PlayerData& player)
             }
         }
 
-        for (int j = 0; j < B_BLOCK_MAX; j++)
+        /*for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_FireBlock[j];
             if (!b.active) continue;
@@ -111,9 +111,9 @@ void StepNormalEnemy(const PlayerData& player)
                 e.active = false;
                 break;
             }
-        }
+        }*/
 
-        for (int j = 0; j < B_BLOCK_MAX; j++)
+        /*for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_IceBlock[j];
             if (!b.active) continue;
@@ -130,9 +130,9 @@ void StepNormalEnemy(const PlayerData& player)
                 e.active = false;
                 break;
             }
-        }
+        }*/
 
-        for (int j = 0; j < B_BLOCK_MAX; j++)
+        /*for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_IronBlock[j];
             if (!b.active) continue;
@@ -149,9 +149,9 @@ void StepNormalEnemy(const PlayerData& player)
                 e.active = false;
                 break;
             }
-        }
+        }*/
 
-        for (int j = 0; j < B_BLOCK_MAX; j++)
+        /*for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_WoodBlock[j];
             if (!b.active) continue;
@@ -168,7 +168,7 @@ void StepNormalEnemy(const PlayerData& player)
                 e.active = false;
                 break;
             }
-        }
+        }*/
     }
 }
 
@@ -185,7 +185,7 @@ void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
     case Attack:
         UpdateAttack(e, player);
     case Dead:
-        UpdateDead(e, player);
+        UpdateDead(e);
         break;
     }
 
@@ -229,7 +229,7 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
     }
 }
 
-void UpdateDead(NormalEnemyData& e, const PlayerData& player)
+void UpdateDead(NormalEnemyData& e)
 {
     e.deathTimer++;
 
