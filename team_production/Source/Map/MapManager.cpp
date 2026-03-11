@@ -5,7 +5,6 @@
 #include "../Player/Player.h"
 
 // groundY の実体はここだけに置く
-float groundY = 832.0f;
 
 
 // マップ読み込み

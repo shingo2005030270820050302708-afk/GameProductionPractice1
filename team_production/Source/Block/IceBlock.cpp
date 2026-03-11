@@ -66,7 +66,7 @@ void StartIceBlock()
 
 void StepIceBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
+   /* for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_IceBlock[i];
         if (!b.active) continue;
@@ -99,7 +99,7 @@ void StepIceBlock()
         }
         break;
         }
-    }
+    }*/
 }
 
 

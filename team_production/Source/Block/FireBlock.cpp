@@ -67,7 +67,7 @@ void StartFireBlock()
 
 void StepFireBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
+   /* for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_FireBlock[i];
         if (!b.active) continue;
@@ -100,7 +100,7 @@ void StepFireBlock()
         }
         break;
         }
-    }
+    }*/
 }
 
 

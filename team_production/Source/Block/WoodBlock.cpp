@@ -66,7 +66,7 @@ void StartWoodBlock()
 
 void StepWoodBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
+  /*  for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_WoodBlock[i];
         if (!b.active) continue;
@@ -99,7 +99,7 @@ void StepWoodBlock()
         }
         break;
         }
-    }
+    }*/
 }
 
 void UpdateWoodBlock(PlayerData& player)

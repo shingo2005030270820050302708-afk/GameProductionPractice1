@@ -115,21 +115,38 @@ void StepBlock()
         case BLOCK_THROW:
         case BLOCK_STAY:
             if (b.gravity) b.vel.y += 0.5f;
+
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
-            CheckBlockMapCollision(b);
 
-            if (b.pos.y + b.height >= groundY)
+            CheckBlockMapCollision(b);
+            if (b.vel.y >= 0)
             {
-                b.pos.y = groundY - b.height;
-                b.vel = VGet(0, 0, 0);
-                b.gravity = false;
-                b.state = BLOCK_STAY;
+                if (IsBlockOnAnotherBlock(b, g_Block, BLOCK_MAX))
+                {
+                    b.vel.y = 0;
+                    b.gravity = false;
+                    b.state = BLOCK_STAY;
+                }
+
+                // MapChipの上判定
+                MapChipData chip = GetMapChipData(
+                    (int)((b.pos.x + b.width / 2) / MAP_CHIP_WIDTH),
+                    (int)((b.pos.y + b.height + 1) / MAP_CHIP_HEIGHT)
+                );
+
+                if (chip.mapChip != MAP_CHIP_NONE)
+                {
+                    b.vel.y = 0;
+                    b.gravity = false;
+                    b.state = BLOCK_STAY;
+                }
             }
             break;
         }
     }
-}void CheckBlockMapCollision(BlockData& b)
+}
+    void CheckBlockMapCollision(BlockData& b)
 {
     if (!b.active) return;
 
@@ -331,6 +348,8 @@ void DrawBlock()
         if (!b.active) continue;
 
         float drawX = b.pos.x - camera.GetX();
+
+
         float drawY = b.pos.y - camera.GetY();
 
         // 色を決める（ブロック状態に応じて）

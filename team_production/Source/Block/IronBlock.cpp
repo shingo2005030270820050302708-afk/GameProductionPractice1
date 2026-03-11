@@ -66,40 +66,40 @@ void StartIronBlock()
 
 void StepIronBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        BlockData& b = g_IronBlock[i];
-        if (!b.active) continue;
+    //for (int i = 0; i < BLOCK_MAX; i++)
+    //{
+    //    BlockData& b = g_IronBlock[i];
+    //    if (!b.active) continue;
 
-        switch (b.state)
-        {
-        case BLOCK_LIFT:
-            b.pos.x = GetPlayer()->posX + 15;
-            b.pos.y = GetPlayer()->posY - 22;
-            break;
+    //    switch (b.state)
+    //    {
+    //    case BLOCK_LIFT:
+    //        b.pos.x = GetPlayer()->posX + 15;
+    //        b.pos.y = GetPlayer()->posY - 22;
+    //        break;
 
-        case BLOCK_THROW:
-        case BLOCK_STAY:
-        {
-            if (b.gravity)
-                b.vel.y += 0.5f;
+    //    case BLOCK_THROW:
+    //    case BLOCK_STAY:
+    //    {
+    //        if (b.gravity)
+    //            b.vel.y += 0.5f;
 
-            b.pos.x += b.vel.x;
-            b.pos.y += b.vel.y;
+    //        b.pos.x += b.vel.x;
+    //        b.pos.y += b.vel.y;
 
-            CheckBlockMapCollision(b);
+    //        CheckBlockMapCollision(b);
 
-            if (b.pos.y + b.height >= groundY)
-            {
-                b.pos.y = groundY - b.height;
-                b.vel = VGet(0, 0, 0);
-                b.gravity = false;
-                b.state = BLOCK_STAY;
-            }
-        }
-        break;
-        }
-    }
+    //        if (b.pos.y + b.height >= groundY)
+    //        {
+    //            b.pos.y = groundY - b.height;
+    //            b.vel = VGet(0, 0, 0);
+    //            b.gravity = false;
+    //            b.state = BLOCK_STAY;
+    //        }
+    //    }
+    //    break;
+    //    }
+    //}
 }
 
 
