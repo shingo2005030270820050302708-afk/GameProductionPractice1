@@ -108,9 +108,6 @@
     <ClCompile Include="Source\Block\BlockManager.cpp">
       <Filter>Source\Block</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Enemy\EnemyManager.cpp">
-      <Filter>Source\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp">
       <Filter>Source\Enemy</Filter>
     </ClCompile>
@@ -214,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="Source\Block\BlockManager.h">
       <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy\EnemyManager.h">
-      <Filter>Source\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy\NormalEnemy.h">
       <Filter>Source\Enemy</Filter>

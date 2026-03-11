@@ -45,6 +45,6 @@ void FinNormalEnemy();
 void UpdateIdle(NormalEnemyData& e, const PlayerData& player);
 void UpdateMove(NormalEnemyData& e, const PlayerData& player);
 void UpdateAttack(NormalEnemyData& e, const PlayerData& player);
-void UpdateDead(NormalEnemyData& e, const PlayerData& player);
+void UpdateDead(NormalEnemyData& e);
 void CheckEnemyMapCollision(NormalEnemyData& e);
 NormalEnemyData* GetNormalEnemyData();

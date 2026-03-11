@@ -70,7 +70,7 @@ void StepNormalEnemy(const PlayerData& player)
         CheckEnemyMapCollision(e);
 
         float ex = e.pos.x;
-        float ey = e.pos.y;
+        float ey = e.pos.y;             
         float ew = e.boxCollision.width;
         float eh = e.boxCollision.height;
 
@@ -89,9 +89,8 @@ void StepNormalEnemy(const PlayerData& player)
             if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
             {
                 e.state = Dead;
-                e.active = false;
                 break;
-            }
+            }   
         }
 
         /*for (int j = 0; j < B_BLOCK_MAX; j++)
@@ -184,6 +183,7 @@ void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
         break;
     case Attack:
         UpdateAttack(e, player);
+        break;
     case Dead:
         UpdateDead(e);
         break;
@@ -228,7 +228,7 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
         e.state = Move;
     }
 }
-
+                                
 void UpdateDead(NormalEnemyData& e)
 {
     e.deathTimer++;

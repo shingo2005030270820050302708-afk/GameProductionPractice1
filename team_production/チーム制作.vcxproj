@@ -146,7 +146,6 @@
     <ClCompile Include="Source\Block\IronBlock.cpp" />
     <ClCompile Include="Source\Block\WoodBlock.cpp" />
     <ClCompile Include="Source\Collision\Collision.cpp" />
-    <ClCompile Include="Source\Enemy\EnemyManager.cpp" />
     <ClCompile Include="Source\Enemy\FireEnemy .cpp" />
     <ClCompile Include="Source\Enemy\IceEnemy.cpp" />
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp" />
@@ -182,7 +181,6 @@
     <ClInclude Include="Source\Block\IronBlock.h" />
     <ClInclude Include="Source\Block\WoodBlock.h" />
     <ClInclude Include="Source\Collision\Collision.h" />
-    <ClInclude Include="Source\Enemy\EnemyManager.h" />
     <ClInclude Include="Source\Enemy\FireEnemy.h" />
     <ClInclude Include="Source\Enemy\IceEnemy.h" />
     <ClInclude Include="Source\Enemy\NormalEnemy.h" />
