@@ -88,9 +88,19 @@ void StepNormalEnemy(const PlayerData& player)
 
             if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
             {
-                e.state = Dead;
+                if (b.state == BLOCK_THROW)
+                {
+                    // 投げられているブロック → 敵は死ぬ
+                    e.state = Dead;
+                }
+                else
+                {
+                    // 投げられていないブロック → 地形扱いで押し戻す
+                    ResolveEnemyBlockCollision(e, &b);
+                }
+
                 break;
-            }   
+            }
         }
 
         /*for (int j = 0; j < B_BLOCK_MAX; j++)
@@ -171,6 +181,30 @@ void StepNormalEnemy(const PlayerData& player)
     }
 }
 
+bool IsBlockInFront(const NormalEnemyData& e, float dirX)
+{
+    float ex = e.pos.x;
+    float ey = e.pos.y;
+    float ew = e.boxCollision.width;
+    float eh = e.boxCollision.height;
+
+    // 敵の前方に小さな判定を置く
+    float checkX = ex + (dirX > 0 ? ew + 2 : -2);
+    float checkY = ey + eh * 0.5f;
+
+    // タイル座標に変換
+    int tileX = (int)(checkX / MAP_CHIP_WIDTH);
+    int tileY = (int)(checkY / MAP_CHIP_HEIGHT);
+
+    MapChipData chip = GetMapChipData(tileX, tileY);
+    if (chip.mapChip == MAP_CHIP_NONE) return false;
+
+    BlockData* block = chip.data;
+    if (!block || !block->active) return false;
+
+    return true;
+}
+
 void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
 {
     switch (e.state)
@@ -205,35 +239,50 @@ void UpdateIdle(NormalEnemyData& e, const PlayerData& player)
 void UpdateMove(NormalEnemyData& e, const PlayerData& player)
 {
     float vx = player.posX - e.pos.x;
+    float dir = (vx > 0) ? 1.0f : -1.0f;
 
-    e.vel.x = (vx > 0) ? 0.5f : -0.5f;
+    // 目の前にブロックがあるなら止まる
+    if (IsBlockInFront(e, dir))
+    {
+        e.vel.x = 0;
+        return;
+    }
 
-    //近づいたら攻撃する
-    if (fabsf(vx) < 200.0f)
+    // 何もなければ歩く
+    e.vel.x = dir * 0.5f;
+
+    if (fabsf(vx) < 500.0f)
     {
         e.state = Attack;
     }
-
 }
 
 void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
 {
     float vx = player.posX - e.pos.x;
+    float dir = (vx > 0) ? 1.0f : -1.0f;
 
-    e.vel.x = (vx > 0) ? 0.75f : -0.75f;
+    // 目の前にブロックがあるなら止まる
+    if (IsBlockInFront(e, dir))
+    {
+        e.vel.x = 0;
+        return;
+    }
 
-    // 少し離れたら追跡に戻る
-    if (fabsf(vx) > 300.0f)
+    e.vel.x = dir * 0.75f;
+
+    if (fabsf(vx) > 500.0f)
     {
         e.state = Move;
     }
 }
-                                
+
+
 void UpdateDead(NormalEnemyData& e)
 {
     e.deathTimer++;
 
-    if (e.deathTimer > 30)
+    if (e.deathTimer > 15)
     {
         e.active = false;
     }

@@ -1,288 +1,290 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source">
-      <UniqueIdentifier>{ac49abf9-ec88-43c2-a446-151c98fc9d93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Player">
-      <UniqueIdentifier>{635a0d66-af2a-4f1a-8b1b-47f4c7935fea}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Map">
-      <UniqueIdentifier>{7f7bed4e-5035-48b1-89ec-8d338d02e783}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Block">
-      <UniqueIdentifier>{cb1fde5d-a043-479a-b91f-6ea71bcf9200}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\GameSetting">
-      <UniqueIdentifier>{970035ae-f58f-42c4-abe6-72b2ad5549b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\BackGround">
-      <UniqueIdentifier>{1ad44c8b-7890-4718-8751-b677ed50e19b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Camera">
-      <UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\UI">
-      <UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Input">
-      <UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Collision">
-      <UniqueIdentifier>{990f461b-bde1-49c5-9cf7-fc3c2eaf6125}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\FPS">
-      <UniqueIdentifier>{50a3c83e-2339-412f-adff-dc17fb98ebf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Enemy">
-      <UniqueIdentifier>{eb0b5f73-3211-400d-969b-47c9d6f96b61}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene">
-      <UniqueIdentifier>{96302a98-2fbc-49c8-b0ca-63dad44e278b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\Title">
-      <UniqueIdentifier>{9c3cef45-278f-486e-a6a6-3437244920f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\SceneSelect">
-      <UniqueIdentifier>{58bd3166-4226-424d-af03-ad9eafd5aac6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\GameClear">
-      <UniqueIdentifier>{f25a1839-1b38-4a82-af6e-5a11fc876b6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\Setting">
-      <UniqueIdentifier>{6f5defb7-df6a-4e01-86b4-7e0234c44597}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\GameOver">
-      <UniqueIdentifier>{59f3906e-cd89-4d8d-824f-bb0e8027219f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Scene\Play">
-      <UniqueIdentifier>{521268a0-edaf-47de-91fb-477acea7c014}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Animation">
-      <UniqueIdentifier>{5c4a40e3-070c-4104-b43d-676a2805a75d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Gimmik">
-      <UniqueIdentifier>{3ce64309-7824-4f75-86de-71ff480c2bf2}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player\Character.cpp">
-      <Filter>Source\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Player\Player.cpp">
-      <Filter>Source\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapBlock.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapChip.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Map\MapManager.cpp">
-      <Filter>Source\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\BackGround\BackGround.cpp">
-      <Filter>Source\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="Data\Camera\Camera.cpp">
-      <Filter>Source\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input\Input.cpp">
-      <Filter>Source\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Collision\Collision.cpp">
-      <Filter>Source\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\UIBase.cpp">
-      <Filter>Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\UI\HpUI.cpp">
-      <Filter>Source\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\FPS\Fps.cpp">
-      <Filter>Source\FPS</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\Block.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\BlockManager.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy\NormalEnemy .cpp">
-      <Filter>Source\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\SceneManager.cpp">
-      <Filter>Source\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\GameClear\GameClearScene.cpp">
-      <Filter>Source\Scene\GameClear</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\GameOver\GameOverScene.cpp">
-      <Filter>Source\Scene\GameOver</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\Setting\SettingScene.cpp">
-      <Filter>Source\Scene\Setting</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\StageSelect\StageSelectScene.cpp">
-      <Filter>Source\Scene\SceneSelect</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\Title\TitleScene.cpp">
-      <Filter>Source\Scene\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\Play\PlayScene.cpp">
-      <Filter>Source\Scene\Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\GlobalData.cpp">
-      <Filter>Source\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Animation\Animation.cpp">
-      <Filter>Source\Animation</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\FireBlock.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\IceBlock.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\IronBlock.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\WoodBlock.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Block\BlockHub.cpp">
-      <Filter>Source\Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy\FireEnemy .cpp">
-      <Filter>Source\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy\IceEnemy.cpp">
-      <Filter>Source\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Enemy\WoodEnemy.cpp">
-      <Filter>Source\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Gimmick\FireFloor.cpp">
-      <Filter>Source\Gimmik</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Gimmick\GimmickManager.cpp">
-      <Filter>Source\Gimmik</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Player\Character.h">
-      <Filter>Source\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Player\Player.h">
-      <Filter>Source\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapParameter.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapBlock.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapChip.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Map\MapManager.h">
-      <Filter>Source\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GameSetting\GameSetting.h">
-      <Filter>Source\GameSetting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BackGround\BackGround.h">
-      <Filter>Source\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="Data\Camera\Camera.h">
-      <Filter>Source\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input\Input.h">
-      <Filter>Source\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Collision\Collision.h">
-      <Filter>Source\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\UIBase.h">
-      <Filter>Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\UI\HpUI.h">
-      <Filter>Source\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\FPS\Fps.h">
-      <Filter>Source\FPS</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\Block.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\BlockManager.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy\NormalEnemy.h">
-      <Filter>Source\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\SceneBase.h">
-      <Filter>Source\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\SceneManager.h">
-      <Filter>Source\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\GameClear\GameClearScene.h">
-      <Filter>Source\Scene\GameClear</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\GameOver\GameOverScene.h">
-      <Filter>Source\Scene\GameOver</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\Setting\SettingScene.h">
-      <Filter>Source\Scene\Setting</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\StageSelect\StageSelectScene.h">
-      <Filter>Source\Scene\SceneSelect</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\Title\TitleScene.h">
-      <Filter>Source\Scene\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\Play\PlayScene.h">
-      <Filter>Source\Scene\Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\GlobalData.h">
-      <Filter>Source\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Animation\Animation.h">
-      <Filter>Source\Animation</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\FireBlock.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\IceBlock.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\IronBlock.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\WoodBlock.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Block\BlockHub.h">
-      <Filter>Source\Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy\FireEnemy.h">
-      <Filter>Source\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy\IceEnemy.h">
-      <Filter>Source\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Enemy\WoodEnemy.h">
-      <Filter>Source\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Gimmick\FireFloor.h">
-      <Filter>Source\Gimmik</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Gimmick\GimmickManager.h">
-      <Filter>Source\Gimmik</Filter>
-    </ClInclude>
-  </ItemGroup>
+	<ItemGroup>
+		<Filter Include="Source">
+			<UniqueIdentifier>{ac49abf9-ec88-43c2-a446-151c98fc9d93}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Player">
+			<UniqueIdentifier>{635a0d66-af2a-4f1a-8b1b-47f4c7935fea}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Map">
+			<UniqueIdentifier>{7f7bed4e-5035-48b1-89ec-8d338d02e783}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Block">
+			<UniqueIdentifier>{cb1fde5d-a043-479a-b91f-6ea71bcf9200}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\GameSetting">
+			<UniqueIdentifier>{970035ae-f58f-42c4-abe6-72b2ad5549b1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\BackGround">
+			<UniqueIdentifier>{1ad44c8b-7890-4718-8751-b677ed50e19b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Camera">
+			<UniqueIdentifier>{89b533a7-5ec3-4c4a-bda2-3e01275ab5da}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\UI">
+			<UniqueIdentifier>{f7fdca8b-2c37-4674-b8a9-6539965d7838}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Input">
+			<UniqueIdentifier>{771e1e6f-710d-4213-a7e6-9f1bd59d44bb}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Collision">
+			<UniqueIdentifier>{990f461b-bde1-49c5-9cf7-fc3c2eaf6125}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\FPS">
+			<UniqueIdentifier>{50a3c83e-2339-412f-adff-dc17fb98ebf3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Enemy">
+			<UniqueIdentifier>{eb0b5f73-3211-400d-969b-47c9d6f96b61}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene">
+			<UniqueIdentifier>{96302a98-2fbc-49c8-b0ca-63dad44e278b}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\Title">
+			<UniqueIdentifier>{9c3cef45-278f-486e-a6a6-3437244920f5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\SceneSelect">
+			<UniqueIdentifier>{58bd3166-4226-424d-af03-ad9eafd5aac6}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\GameClear">
+			<UniqueIdentifier>{f25a1839-1b38-4a82-af6e-5a11fc876b6c}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\Setting">
+			<UniqueIdentifier>{6f5defb7-df6a-4e01-86b4-7e0234c44597}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\GameOver">
+			<UniqueIdentifier>{59f3906e-cd89-4d8d-824f-bb0e8027219f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Scene\Play">
+			<UniqueIdentifier>{521268a0-edaf-47de-91fb-477acea7c014}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Animation">
+			<UniqueIdentifier>{5c4a40e3-070c-4104-b43d-676a2805a75d}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source\Gimmick">
+			<UniqueIdentifier>{1dac8fa9-9648-4754-afd3-f1cc30360ffb}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ClCompile Include="Source\Main.cpp">
+			<Filter>Source</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Player\Character.cpp">
+			<Filter>Source\Player</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Player\Player.cpp">
+			<Filter>Source\Player</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapBlock.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapChip.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Map\MapManager.cpp">
+			<Filter>Source\Map</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\BackGround\BackGround.cpp">
+			<Filter>Source\BackGround</Filter>
+		</ClCompile>
+		<ClCompile Include="Data\Camera\Camera.cpp">
+			<Filter>Source\Camera</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Input\Input.cpp">
+			<Filter>Source\Input</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Collision\Collision.cpp">
+			<Filter>Source\Collision</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\UI\UIBase.cpp">
+			<Filter>Source\UI</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\UI\HpUI.cpp">
+			<Filter>Source\UI</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\FPS\Fps.cpp">
+			<Filter>Source\FPS</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\Block.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\BlockManager.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Enemy\NormalEnemy.cpp">
+			<Filter>Source\Enemy</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Enemy\FireEnemy.cpp">
+			<Filter>Source\Enemy</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Enemy\IceEnemy.cpp">
+			<Filter>Source\Enemy</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Enemy\WoodEnemy.cpp">
+			<Filter>Source\Enemy</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\SceneManager.cpp">
+			<Filter>Source\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\GameClear\GameClearScene.cpp">
+			<Filter>Source\Scene\GameClear</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\GameOver\GameOverScene.cpp">
+			<Filter>Source\Scene\GameOver</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\Setting\SettingScene.cpp">
+			<Filter>Source\Scene\Setting</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\StageSelect\StageSelectScene.cpp">
+			<Filter>Source\Scene\SceneSelect</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\Title\TitleScene.cpp">
+			<Filter>Source\Scene\Title</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\Play\PlayScene.cpp">
+			<Filter>Source\Scene\Play</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Scene\GlobalData.cpp">
+			<Filter>Source\Scene</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Animation\Animation.cpp">
+			<Filter>Source\Animation</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\FireBlock.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\IceBlock.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\IronBlock.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\WoodBlock.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Block\BlockHub.cpp">
+			<Filter>Source\Block</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Gimmick\FireFloor.cpp">
+			<Filter>Source\Gimmick</Filter>
+		</ClCompile>
+		<ClCompile Include="Source\Gimmick\GimmickManager.cpp">
+			<Filter>Source\Gimmick</Filter>
+		</ClCompile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ClInclude Include="Source\Player\Character.h">
+			<Filter>Source\Player</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Player\Player.h">
+			<Filter>Source\Player</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapParameter.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapBlock.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapChip.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Map\MapManager.h">
+			<Filter>Source\Map</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\GameSetting\GameSetting.h">
+			<Filter>Source\GameSetting</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\BackGround\BackGround.h">
+			<Filter>Source\BackGround</Filter>
+		</ClInclude>
+		<ClInclude Include="Data\Camera\Camera.h">
+			<Filter>Source\Camera</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Input\Input.h">
+			<Filter>Source\Input</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Collision\Collision.h">
+			<Filter>Source\Collision</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\UI\UIBase.h">
+			<Filter>Source\UI</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\UI\HpUI.h">
+			<Filter>Source\UI</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\FPS\Fps.h">
+			<Filter>Source\FPS</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\Block.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\BlockManager.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Enemy\NormalEnemy.h">
+			<Filter>Source\Enemy</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Enemy\FireEnemy.h">
+			<Filter>Source\Enemy</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Enemy\IceEnemy.h">
+			<Filter>Source\Enemy</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Enemy\WoodEnemy.h">
+			<Filter>Source\Enemy</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\SceneBase.h">
+			<Filter>Source\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\SceneManager.h">
+			<Filter>Source\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\GameClear\GameClearScene.h">
+			<Filter>Source\Scene\GameClear</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\GameOver\GameOverScene.h">
+			<Filter>Source\Scene\GameOver</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\Setting\SettingScene.h">
+			<Filter>Source\Scene\Setting</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\StageSelect\StageSelectScene.h">
+			<Filter>Source\Scene\SceneSelect</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\Title\TitleScene.h">
+			<Filter>Source\Scene\Title</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\Play\PlayScene.h">
+			<Filter>Source\Scene\Play</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Scene\GlobalData.h">
+			<Filter>Source\Scene</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Animation\Animation.h">
+			<Filter>Source\Animation</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\FireBlock.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\IceBlock.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\IronBlock.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\WoodBlock.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Block\BlockHub.h">
+			<Filter>Source\Block</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Gimmick\FireFloor.h">
+			<Filter>Source\Gimmick</Filter>
+		</ClInclude>
+		<ClInclude Include="Source\Gimmick\GimmickManager.h">
+			<Filter>Source\Gimmick</Filter>
+		</ClInclude>
+	</ItemGroup>
 </Project>

@@ -35,6 +35,8 @@ void ResolvePlayerVsDynamicBlock(PlayerData* p, BlockData* b);
 // プレイヤーとマップの総合当たり判定
 void CheckPlayerMapCollision();
 
+void ResolveEnemyBlockCollision(NormalEnemyData& e, BlockData* block);
+
 void ResolveBlockCollision(BlockData& a, BlockData& b);
 
 void ResolveBlockMapCollision(BlockData& movingBlock, BlockData& mapBlock);
