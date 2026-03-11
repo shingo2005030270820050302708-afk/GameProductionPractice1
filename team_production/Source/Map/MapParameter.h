@@ -28,6 +28,7 @@ enum MapChipType
     MIDDLE_BLOCK,
     GOAL_BLOCK,
 	COIN_BLOCK,
+    NORMAL_ENEMY,
     BLOCK_TYPE_MAX,
 
 };

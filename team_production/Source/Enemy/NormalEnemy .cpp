@@ -42,14 +42,16 @@ void StartNormalEnemy()
     for (int i = 0; i < ENEMY_MAX; i++)
     {
         NormalEnemyData& e = g_NormalEnemyData[i];
-        e.active = true;
+
+        e.active = false;        // ← ここ重要！最初は全員 inactive
         e.state = Idle;
         e.gravity = true;
-        e.pos = VGet(200 + i * 100, 800, 0);
         e.vel = VGet(0.0f, 0.0f, 0.0f);
+        e.deathTimer = 0;
 
         e.boxCollision.width = 45.0f;
         e.boxCollision.height = 45.0f;
+
     }
 }
 

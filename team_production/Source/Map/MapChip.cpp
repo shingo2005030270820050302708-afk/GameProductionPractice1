@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include <cstdio>
 #include "MapBlock.h"
+#include "../Enemy/NormalEnemy.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = {};
 
@@ -44,6 +45,7 @@ void LoadMapChipData(const char* path)
             case 6: g_MapChip[y][x].mapChip = MIDDLE_BLOCK; break;
             case 7: g_MapChip[y][x].mapChip = GOAL_BLOCK; break;
 			case 8: g_MapChip[y][x].mapChip = COIN_BLOCK; break;
+            case 9: g_MapChip[y][x].mapChip = NORMAL_ENEMY; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
             g_MapChip[y][x].data = nullptr;
@@ -56,18 +58,44 @@ void LoadMapChipData(const char* path)
 // 配列からブロック生成
 void CreateMap()
 {
+    int enemyIndex = 0;
+
     for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
     {
         for (int x = 0; x < MAP_CHIP_X_NUM; x++)
         {
             MapChipType type = static_cast<MapChipType>(g_MapChip[y][x].mapChip);
-            if (type == MAP_CHIP_NONE) continue;
-
             VECTOR pos = VGet(x * MAP_CHIP_WIDTH, y * MAP_CHIP_HEIGHT, 0.0f);
-            BlockData* block = CreateMapBlock(type, pos);
 
-            if (block != nullptr)
-                g_MapChip[y][x].data = block;
+            // 敵チップなら敵を生成
+            if (type == NORMAL_ENEMY)
+            {
+                if (enemyIndex < ENEMY_MAX)
+                {
+                    NormalEnemyData& e = g_NormalEnemyData[enemyIndex];
+
+                    e.active = true;
+                    e.state = Idle;
+                    e.gravity = true;
+                    e.pos = pos;
+                    e.vel = VGet(0, 0, 0);
+                    e.boxCollision.width = 45.0f;
+                    e.boxCollision.height = 45.0f;
+
+                    enemyIndex++;
+                }
+
+                // 敵チップはブロックを生成しないので continue
+                continue;
+            }
+
+            // ブロック生成
+            if (type != MAP_CHIP_NONE)
+            {
+                BlockData* block = CreateMapBlock(type, pos);
+                if (block != nullptr)
+                    g_MapChip[y][x].data = block;
+            }
         }
     }
 }
