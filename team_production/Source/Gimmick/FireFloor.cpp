@@ -70,11 +70,10 @@ void StepFireFloor()
         FireFloorData& f = g_FireFloor[i];
         if (!f.active) continue;
 
-        if (f.damageTimer > 0) --f.damageTimer;
+        // ここでは damanging をリセットしない
+        // f.damaging = true; は削除
 
-        // デフォルトはダメージあり
-        f.damaging = true;
-
+        // 被覆ブロックがある場合だけ判定
         if (f.coverBlockIndex >= 0 && f.coverBlockIndex < BLOCK_MAX)
         {
             if (!g_Block[f.coverBlockIndex].active)
@@ -83,12 +82,11 @@ void StepFireFloor()
             }
             else
             {
-                f.damaging = false;
+                f.damaging = false; // ブロックが乗っている間は無効（必要なければ削除可能）
             }
         }
     }
 }
-
 void UpdateFireFloor(PlayerData& player)
 {
     for (int fi = 0; fi < FIREFLOOR_MAX; ++fi)
@@ -101,9 +99,22 @@ void UpdateFireFloor(PlayerData& player)
         float fw = f.width;
         float fh = f.height;
 
-        // =========================
-        // NormalBlock 判定
-        // =========================
+
+
+        float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
+        float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
+        float pw = player.boxCollision.width;
+        float ph = player.boxCollision.height;
+
+        bool playerHit =
+            (px < fx + fw) &&
+            (px + pw > fx) &&
+            (py < fy + fh) &&
+            (py + ph > fy);
+
+
+        // NormalBlock / WoodBlock 判定（火床無効化には関与しない）
+
         for (int bi = 0; bi < BLOCK_MAX; ++bi)
         {
             BlockData& b = g_Block[bi];
@@ -117,74 +128,42 @@ void UpdateFireFloor(PlayerData& player)
             if (!CheckSquareSquare(fx, fy, fw, fh, bx, by, bw, bh))
                 continue;
 
-            bool onTop = fabs((by + bh) - fy) <= 2.0f;
-
-            switch (b.blockType)
+            if (b.blockType == B_WOOD_BLOCK)
             {
-            case B_NORMAL_BLOCK:
-                if (onTop)
-                {
-                    f.coverBlockIndex = bi;
-                    f.damaging = false;
-                }
-                break;
-
-            case B_WOOD_BLOCK:
                 b.active = false;
-                break;
-
-            default:
-                break;
             }
         }
 
-        // =========================
+        
         // IceBlock 判定
-        // =========================
+
+      // IceBlock 判定
         for (int bi = 0; bi < BLOCK_MAX; ++bi)
         {
             BlockData& b = g_IceBlock[bi];
             if (!b.active) continue;
 
-            float bx = b.pos.x;
-            float by = b.pos.y;
-            float bw = b.width;
-            float bh = b.height;
-
-            if (!CheckSquareSquare(fx, fy, fw, fh, bx, by, bw, bh))
+            if (!CheckSquareSquare(f.pos.x, f.pos.y, f.width, f.height,
+                b.pos.x, b.pos.y, b.width, b.height))
                 continue;
 
-            // IceBlock は消えて火を消す
+            // IceBlock に当たったら永久に冷却状態
             b.active = false;
-
             f.damaging = false;
-            f.coverBlockIndex = -1;
 
             if (g_FireFloorCoolHandle != -1)
                 f.handle = g_FireFloorCoolHandle;
         }
 
-        // =========================
-        // Player 判定
-        // =========================
-        float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X;
-        float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y;
-        float pw = player.boxCollision.width;
-        float ph = player.boxCollision.height;
-
-        bool hit =
-            (px < fx + fw) &&
-            (px + pw > fx) &&
-            (py < fy + fh) &&
-            (py + ph > fy);
-
-        if (hit && f.damaging)
+      
+        // プレイヤー判定（damagingがtrueの場合のみ）
+    
+        if (playerHit && f.damaging)
         {
             player.state = DEAD;
         }
     }
 }
-
 void DrawFireFloor()
 {
     extern Camera camera;
