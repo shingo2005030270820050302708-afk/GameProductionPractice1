@@ -21,7 +21,7 @@ void InitNormalEnemy()
         g_NormalEnemyData[i].active = false;
         g_NormalEnemyData[i].pos = VGet(0, 0, 0);
         g_NormalEnemyData[i].vel = VGet(0, 0, 0);
-        g_NormalEnemyData[i].state = Idle;
+        g_NormalEnemyData[i].state = Move;
         g_NormalEnemyData[i].gravity = false;
     }
 }
@@ -44,7 +44,7 @@ void StartNormalEnemy()
         NormalEnemyData& e = g_NormalEnemyData[i];
 
         e.active = false;
-        e.state = Idle;
+        e.state = Move;
         e.gravity = true;
         e.vel = VGet(0.0f, 0.0f, 0.0f);
         e.deathTimer = 0;
@@ -136,16 +136,16 @@ void StepNormalEnemy(const PlayerData& player)
 
             if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
             {
+                // 投げられているブロック → 敵は死ぬ
                 if (b.state == BLOCK_THROW)
                 {
-                    // 投げられているブロック → 敵は死ぬ
                     e.state = Dead;
+                    return;
                 }
-                else
-                {
-                    // 投げられていないブロック → 地形扱いで押し戻す
-                    ResolveEnemyBlockCollision(e, &b);
-                }
+
+                // 投げられていないブロック → 押し戻す
+                ResolveEnemyBlockCollision(e, &b);
+
 
                 break;
             }
@@ -219,9 +219,6 @@ void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
 {
     switch (e.state)
     {
-    case Idle:
-        UpdateIdle(e, player);
-        break;
     case Move:
         UpdateMove(e, player);
         break;
@@ -230,41 +227,62 @@ void UpdateNormalEnemy(NormalEnemyData& e, const PlayerData& player)
         break;
     case Dead:
         UpdateDead(e);
-        break;
-    }
-
-}
-
-void UpdateIdle(NormalEnemyData& e, const PlayerData& player)
-{
-    float dx = player.posX - e.pos.x;
-
-    if (fabsf(dx) < 1200.0f)
-    {
-        e.state = Move;
+        return;
     }
 
 }
 
 void UpdateMove(NormalEnemyData& e, const PlayerData& player)
 {
-    float vx = player.posX - e.pos.x;
-    float dir = (vx > 0) ? 1.0f : -1.0f;
+    e.walkTimer += 1.0f;
 
-    // 目の前にブロックがあるなら止まる
-    if (IsBlockInFront(e, dir))
+    if (e.walkTimer > e.changeInterval)
     {
+        e.walkTimer = 0;
+
+        int r = GetRand(2);
+
+        if (r == 0) e.moveX = -0.5f;
+        else if (r == 1) e.moveX = 0.5f;
+        else e.moveX = 0.0f;
+
+        e.isTurn = (e.moveX < 0);
+
+        e.changeInterval = 60 + GetRand(120);
+    }
+
+    // 速度だけ設定
+    const float speed = 0.5f;
+    e.vel.x = e.moveX * speed;
+
+    // 重力
+    if (e.gravity)
+    {
+        e.vel.y += 0.5f;
+        if (e.vel.y > 8.0f) e.vel.y = 8.0f;
+    }
+
+    // プレイヤーが近いなら Attack
+    // ===== プレイヤーが近いなら Attack =====
+    float px = player.posX + PLAYER_WIDTH * 0.5f;
+    float py = player.posY + PLAYER_HEIGHT * 0.5f;
+
+    float ex = e.pos.x + e.boxCollision.width * 0.5f;
+    float ey = e.pos.y + e.boxCollision.height * 0.5f;
+
+    float dx = px - ex;
+    float dy = py - ey;
+    float dist = sqrtf(dx * dx + dy * dy);
+
+    const float attackRange = 80.0f;
+
+    if (dist < attackRange)
+    {
+        e.state = Attack;
         e.vel.x = 0;
         return;
     }
 
-    // 何もなければ歩く
-    e.vel.x = dir * 0.5f;
-
-    if (fabsf(vx) < 500.0f)
-    {
-        e.state = Attack;
-    }
 }
 
 void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
@@ -272,19 +290,34 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
     float vx = player.posX - e.pos.x;
     float dir = (vx > 0) ? 1.0f : -1.0f;
 
-    // 目の前にブロックがあるなら止まる
+    e.isTurn = (dir < 0);
+
     if (IsBlockInFront(e, dir))
     {
+        e.moveX = 0;
         e.vel.x = 0;
         return;
     }
 
-    e.vel.x = dir * 0.75f;
+    const float attackSpeed = 0.75f;
+    e.moveX = dir;
+    e.vel.x = e.moveX * attackSpeed;
 
-    if (fabsf(vx) > 500.0f)
+    if (e.gravity)
+    {
+        e.vel.y += 0.5f;
+        if (e.vel.y > 8.0f) e.vel.y = 8.0f;
+    }
+
+    float dx = fabsf(player.posX - e.pos.x);
+    float dy = fabsf(player.posY - e.pos.y);
+
+    if (dx > 300.0f || dy > 150.0f)
     {
         e.state = Move;
+        e.moveX = 0;
     }
+
 }
 
 

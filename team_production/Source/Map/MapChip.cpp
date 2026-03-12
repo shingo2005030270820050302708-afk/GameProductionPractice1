@@ -75,7 +75,7 @@ void CreateMap()
                     NormalEnemyData& e = g_NormalEnemyData[enemyIndex];
 
                     e.active = true;
-                    e.state = Idle;
+                    e.state = Move;
                     e.gravity = true;
                     e.pos = pos;
                     e.vel = VGet(0, 0, 0);
