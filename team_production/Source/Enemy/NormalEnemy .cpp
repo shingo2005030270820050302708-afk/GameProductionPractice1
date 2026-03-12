@@ -43,7 +43,7 @@ void StartNormalEnemy()
     {
         NormalEnemyData& e = g_NormalEnemyData[i];
 
-        e.active = false;        // ← ここ重要！最初は全員 inactive
+        e.active = false;
         e.state = Idle;
         e.gravity = true;
         e.vel = VGet(0.0f, 0.0f, 0.0f);
