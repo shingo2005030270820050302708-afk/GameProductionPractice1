@@ -166,6 +166,7 @@ void StepBlock()
         {
             MapChipData chip = GetMapChipData(x, y);
             if (chip.mapChip == MAP_CHIP_NONE) continue;
+            if (chip.mapChip == COIN_BLOCK) continue;
             if (!chip.data || !chip.data->active) continue;
 
             BlockData* mapBlock = chip.data;
@@ -321,6 +322,24 @@ void UpdateBlock(PlayerData& player)
             }
             else if (IsTriggerKey(KEY_X))
             {
+                float bx = b.pos.x;
+                float by = b.pos.y;
+                float bw = b.width;
+                float bh = b.height;
+
+                int leftTile = (int)(bx / MAP_CHIP_WIDTH);
+                int rightTile = (int)((bx + bw - 1) / MAP_CHIP_WIDTH);
+                int topTile = (int)(by / MAP_CHIP_HEIGHT);
+                int bottomTile = (int)((by + bh - 1) / MAP_CHIP_HEIGHT);
+
+                for (int y = topTile; y <= bottomTile; y++)
+                {
+                    for (int x = leftTile; x <= rightTile; x++)
+                    {
+                        MapChipData chip = GetMapChipData(x, y);
+                        if (chip.mapChip == COIN_BLOCK) continue;
+                    }
+                }
                 b.state = BLOCK_THROW;
                 b.hold = false;
                 b.gravity = true;

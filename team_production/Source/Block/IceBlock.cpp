@@ -66,44 +66,30 @@ void StartIceBlock()
 
 void StepIceBlock()
 {
-
     for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_IceBlock[i];
         if (!b.active) continue;
 
-        if (IsBlockOnAnotherBlock(b, g_IceBlock, BLOCK_MAX) ||
-            IsBlockOnAnotherBlock(b, g_Block, BLOCK_MAX))
-        {
-            b.vel.y = 0;
-            b.gravity = false;
-            b.state = BLOCK_STAY;
-        }
-    }
-
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        BlockData& b = g_IceBlock[i];
-        if (!b.active) continue;
+        b.prevPos = b.pos;  // ← ここだけでOK
 
         switch (b.state)
         {
+        case BLOCK_PUSH:
+            b.pos.x = GetPlayer()->isTurn ? GetPlayer()->posX - 35 : GetPlayer()->posX + 65;
+            break;
         case BLOCK_LIFT:
             b.pos.x = GetPlayer()->posX + 5;
             b.pos.y = GetPlayer()->posY - 25;
             break;
-
         case BLOCK_THROW:
         case BLOCK_STAY:
-        {
-            if (b.gravity)
-                b.vel.y += 0.5f;
+            if (b.gravity) b.vel.y += 0.5f;
 
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
 
             CheckBlockMapCollision(b);
-
             if (b.vel.y >= 0)
             {
                 if (IsBlockOnAnotherBlock(b, g_Block, BLOCK_MAX))
@@ -128,27 +114,23 @@ void StepIceBlock()
             }
             break;
         }
-        }
     }
 }
 
-
-
-
 void UpdateIceBlock(PlayerData& player)
 {
+
     float liftPadding = 50.0f;
 
-    // ===============================
-    // プレイヤーとの衝突
-    // ===============================
     for (int i = 0; i < BLOCK_MAX; i++)
     {
         BlockData& b = g_IceBlock[i];
         if (!b.active) continue;
 
+        // プレイヤーが持っているブロック自身は衝突判定をスキップ
         if (&b == player.holdingBlock) continue;
 
+        // 当たり判定用の矩形
         float px = player.posX;
         float py = player.posY + 5;
         float pw = player.boxCollision.width;
@@ -162,27 +144,22 @@ void UpdateIceBlock(PlayerData& player)
         if (!CheckSquareSquare(px, py, pw, ph, bx, by, bw, bh))
             continue;
 
+        // 衝突解決
         ResolvePlayerVsDynamicBlock(GetPlayer(), &b);
     }
-
-    // ===============================
-    // 持ち上げ・投げる処理
-    // ===============================
     PlayerData* p = GetPlayer();
-
     for (int bi = 0; bi < BLOCK_MAX; bi++)
     {
         BlockData& b = g_IceBlock[bi];
-        if (!b.active) continue;
-
+        if (!b.active)
+            continue;
         float px = player.posX + PLAYER_BOX_COLLISION_OFFSET_X - liftPadding;
         float py = player.posY + PLAYER_BOX_COLLISION_OFFSET_Y - liftPadding;
         float pw = player.boxCollision.width + liftPadding * 2;
         float ph = player.boxCollision.height + liftPadding * 2;
-
+        // Block の当たり判定
         int bw, bh;
         GetGraphSize(b.handle, &bw, &bh);
-
         float bx = b.pos.x;
         float by = b.pos.y;
 
@@ -218,33 +195,59 @@ void UpdateIceBlock(PlayerData& player)
                 b.hold = false;
                 player.holdingBlock = nullptr;
 
+                // プレイヤーと重ならないように位置補正
                 float px = player.posX;
                 float py = player.posY;
                 float pw = player.boxCollision.width;
                 float ph = player.boxCollision.height;
 
+                float bx = b.pos.x;
+                float by = b.pos.y;
                 float bw = b.width;
                 float bh = b.height;
 
+                // 下に置く
                 b.pos.x = px + pw / 2 - bw / 2;
-                b.pos.y = py + ph + 2;
+                b.pos.y = py + ph + 2; // 少し下に
 
+                // プレイヤーと重なっていたら補正
                 if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
                 {
+                    // プレイヤーの右に置く
                     b.pos.x = px + pw + 4;
                     b.pos.y = py;
                 }
 
+                // それでも重なれば左
                 if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
                 {
                     b.pos.x = px - bw - 4;
                     b.pos.y = py;
                 }
 
+                // 最後に重力ON
                 b.gravity = true;
             }
             else if (IsTriggerKey(KEY_X))
             {
+                float bx = b.pos.x;
+                float by = b.pos.y;
+                float bw = b.width;
+                float bh = b.height;
+
+                int leftTile = (int)(bx / MAP_CHIP_WIDTH);
+                int rightTile = (int)((bx + bw - 1) / MAP_CHIP_WIDTH);
+                int topTile = (int)(by / MAP_CHIP_HEIGHT);
+                int bottomTile = (int)((by + bh - 1) / MAP_CHIP_HEIGHT);
+
+                for (int y = topTile; y <= bottomTile; y++)
+                {
+                    for (int x = leftTile; x <= rightTile; x++)
+                    {
+                        MapChipData chip = GetMapChipData(x, y);
+                        if (chip.mapChip == COIN_BLOCK) continue;
+                    }
+                }
                 b.state = BLOCK_THROW;
                 b.hold = false;
                 b.gravity = true;
@@ -252,9 +255,10 @@ void UpdateIceBlock(PlayerData& player)
 
                 b.vel.x = (p->isTurn ? -6.0f : 6.0f);
                 b.vel.y = -8.0f;
-
                 SetPlayerAnimation(PLAYER_ANIM_THROW);
                 g_PlayerData.isThrowing = true;
+
+
                 g_PlayerData.throwAnimTimer = 15;
             }
         }
@@ -262,6 +266,7 @@ void UpdateIceBlock(PlayerData& player)
         }
     }
 }
+
 void DrawIceBlock()
 {
     for (int i = 0; i < BLOCK_MAX; i++)
