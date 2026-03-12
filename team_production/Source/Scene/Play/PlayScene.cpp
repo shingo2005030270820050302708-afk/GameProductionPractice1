@@ -68,7 +68,7 @@ void PlayScene::Load()
 void PlayScene::Start()
 {
     StartPlayer();
-    StartNormalEnemy();
+    //StartNormalEnemy();
     StartBlockHub();
 	StartFireFloor();
        

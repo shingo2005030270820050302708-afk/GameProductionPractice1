@@ -123,7 +123,7 @@ void StepNormalEnemy(const PlayerData& player)
             }
         }*/
 
-        /*for (int j = 0; j < B_BLOCK_MAX; j++)
+        for (int j = 0; j < B_BLOCK_MAX; j++)
         {
             BlockData& b = g_IceBlock[j];
             if (!b.active) continue;
@@ -136,11 +136,20 @@ void StepNormalEnemy(const PlayerData& player)
 
             if (CheckSquareSquare(ex, ey, ew, eh, bx, by, bw, bh))
             {
-                e.state = Dead;
-                e.active = false;
+                if (b.state == BLOCK_THROW)
+                {
+                    // 投げられているブロック → 敵は死ぬ
+                    e.state = Dead;
+                }
+                else
+                {
+                    // 投げられていないブロック → 地形扱いで押し戻す
+                    ResolveEnemyBlockCollision(e, &b);
+                }
+
                 break;
             }
-        }*/
+        }
 
         /*for (int j = 0; j < B_BLOCK_MAX; j++)
         {
@@ -281,12 +290,8 @@ void UpdateAttack(NormalEnemyData& e, const PlayerData& player)
 
 void UpdateDead(NormalEnemyData& e)
 {
-    e.deathTimer++;
+   e.active = false;
 
-    if (e.deathTimer > 15)
-    {
-        e.active = false;
-    }
 }
 
 void DrawNormalEnemy()
