@@ -3,6 +3,9 @@
 #include <cstdio>
 #include "MapBlock.h"
 #include "../Enemy/NormalEnemy.h"
+#include "../Gimmick/FireFloor.h"
+#include "../Block/BlockManager.h"
+#include "../Block/IceBlock.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = {};
 
@@ -46,6 +49,9 @@ void LoadMapChipData(const char* path)
             case 7: g_MapChip[y][x].mapChip = GOAL_BLOCK; break;
 			case 8: g_MapChip[y][x].mapChip = COIN_BLOCK; break;
             case 9: g_MapChip[y][x].mapChip = NORMAL_ENEMY; break;
+            case 10: g_MapChip[y][x].mapChip = FIRE_FLOOR_BLOCK; break;
+            case 11: g_MapChip[y][x].mapChip = H_NORMAL_BLOCK; break;
+            case 12: g_MapChip[y][x].mapChip = H_ICE_BLOCK; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
             g_MapChip[y][x].data = nullptr;
@@ -86,6 +92,23 @@ void CreateMap()
                 }
 
                 // ìGÉ`ÉbÉvÇÕÉuÉçÉbÉNÇê∂ê¨ÇµÇ»Ç¢ÇÃÇ≈ continue
+                continue;
+            }
+
+            if (type == FIRE_FLOOR_BLOCK)
+            {
+                CreateFireFloorIfNotExist(pos); // ìÒèdìoò^ñhé~
+                continue;
+            }
+            if (type == H_NORMAL_BLOCK)
+            {
+                CreateBlock(B_NORMAL_BLOCK, pos);
+                continue;
+            }
+
+            if (type == H_ICE_BLOCK)
+            {
+                CreateIceBlock(B_ICE_BLOCK, pos);
                 continue;
             }
 

@@ -3,7 +3,7 @@
 #include "../Animation/Animation.h"
 
 
-#define BLOCK_MAX 40000
+#define BLOCK_MAX 20000
 
 constexpr int MAP_CHIP_X_NUM = 64;  
 constexpr int MAP_CHIP_Y_NUM = 64;
@@ -29,7 +29,11 @@ enum MapChipType
     GOAL_BLOCK,
 	COIN_BLOCK,
     NORMAL_ENEMY,
+    FIRE_FLOOR_BLOCK,
+    H_NORMAL_BLOCK,
+	H_ICE_BLOCK,
     BLOCK_TYPE_MAX,
+	
 
 };
 enum BlockCategory

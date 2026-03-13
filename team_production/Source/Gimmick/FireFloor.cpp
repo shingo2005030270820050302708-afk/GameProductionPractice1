@@ -22,7 +22,7 @@ void InitFireFloor()
         g_FireFloor[i].active = false;
         g_FireFloor[i].handle = -1;
         g_FireFloor[i].pos = VGet(0, 0, 0);
-        g_FireFloor[i].width = 96;
+        g_FireFloor[i].width = 32;
         g_FireFloor[i].height = 32;
         g_FireFloor[i].damaging = true;
         g_FireFloor[i].coverBlockIndex = -1;
@@ -33,8 +33,26 @@ void InitFireFloor()
 
 void LoadFireFloor()
 {
-    g_FireFloorHandle = LoadGraph("Data/Gimmick/FireFloor.png");
-    g_FireFloorCoolHandle = LoadGraph("Data/Gimmick/CoolFireFloor.png"); 
+    g_FireFloorHandle = LoadGraph("Data/Gimmick/FireFloor2.png");
+    g_FireFloorCoolHandle = LoadGraph("Data/Gimmick/CoolFireFloor2.png");
+}
+
+FireFloorData* CreateFireFloorIfNotExist(VECTOR pos)
+{
+    // Ç∑Ç≈Ç…ìØÇ∂ç¿ïWÇ… active Ç» FireFloor Ç™Ç†ÇÈÇ©ämîF
+    for (int i = 0; i < FIREFLOOR_MAX; ++i)
+    {
+        if (g_FireFloor[i].active)
+        {
+            if (g_FireFloor[i].pos.x == pos.x && g_FireFloor[i].pos.y == pos.y)
+            {
+                return &g_FireFloor[i]; // ä˘ë∂ÇÃÇ‡ÇÃÇï‘ÇµÇƒêVãKçÏê¨ÇµÇ»Ç¢
+            }
+        }
+    }
+
+    // Ç»ÇØÇÍÇŒêVãKçÏê¨
+    return CreateFireFloor(pos);
 }
 
 FireFloorData* CreateFireFloor(VECTOR pos)
@@ -57,11 +75,7 @@ FireFloorData* CreateFireFloor(VECTOR pos)
 
 void StartFireFloor()
 {
-    for (int i = 0; i < FIREFLOOR_MAX; i++)
-        g_FireFloor[i].active = false;
-
-    VECTOR pos = VGet(32*8, 831, 0);
-    CreateFireFloor(pos);
+  
 }
 void StepFireFloor()
 {
@@ -171,17 +185,15 @@ void DrawFireFloor()
     for (int i = 0; i < FIREFLOOR_MAX; ++i)
     {
         FireFloorData& f = g_FireFloor[i];
-        if (!f.active) continue;
+        if (!f.active) continue;  // inactive ÇÕï`âÊÇµÇ»Ç¢
+        if (f.handle == -1) continue; // handle Ç™ñ≥å¯Ç»ÇÁï`âÊÇµÇ»Ç¢
 
-        if (f.handle != -1)
-        {
-            DrawGraph(
-                (int)(f.pos.x - camera.GetX()),
-                (int)(f.pos.y - camera.GetY()),
-                f.handle,
-                TRUE
-            );
-        }
+        DrawGraph(
+            (int)(f.pos.x - camera.GetX()),
+            (int)(f.pos.y - camera.GetY()),
+            f.handle,
+            TRUE
+        );
     }
 }
 void FinFireFloor()

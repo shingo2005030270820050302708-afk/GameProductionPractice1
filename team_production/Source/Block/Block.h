@@ -18,4 +18,7 @@ void FinBlock();
 void CheckBlockMapCollision(BlockData& b);
 bool IsBlockOnAnotherBlock(const BlockData& block, BlockData* blockArray, int blockMax);
 
+BlockData* CreateBlock(BlockType type, VECTOR pos);
+
+
 

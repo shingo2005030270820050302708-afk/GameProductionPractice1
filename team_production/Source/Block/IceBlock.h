@@ -16,3 +16,5 @@ void FinIceBlock();
 // ブロックとマップチップの当たり判定
 void CheckBlockMapCollision(BlockData& b);
 
+BlockData* CreateIceBlock(BlockType type, VECTOR pos);
+

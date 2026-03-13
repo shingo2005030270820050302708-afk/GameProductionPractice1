@@ -54,14 +54,6 @@ void LoadIceBlock()
 
 void StartIceBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        g_IceBlock[i].state = BLOCK_STAY;
-        g_IceBlock[i].gravity = false;
-        g_IceBlock[i].vel = VGet(0, 0, 0);
-    }
-    VECTOR pos = VGet(100, 300, 0);
-    CreateIceBlock(B_ICE_BLOCK, pos);
 }
 
 void StepIceBlock()

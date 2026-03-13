@@ -16,20 +16,20 @@ struct FireFloorData
     float width = MAP_CHIP_WIDTH;
     float height = MAP_CHIP_HEIGHT;
 
-    // true のときプレイヤーにダメージを与える
     bool damaging = true;
-
-    // 被覆しているブロックのインデックス（-1 = なし）
     int coverBlockIndex = -1;
-
-    // プレイヤーに与えるダメージのクールダウン（フレーム単位）
     int damageTimer = 0;
-    int damageCooldown = 60; // 調整可能
+    int damageCooldown = 60;
 };
 
 extern FireFloorData g_FireFloor[FIREFLOOR_MAX];
 extern int g_FireFloorHandle;
 extern int g_FireFloorCoolHandle;
+
+// 追加：CreateFireFloor を宣言
+FireFloorData* CreateFireFloorIfNotExist(VECTOR pos);
+
+FireFloorData* CreateFireFloor(VECTOR pos);
 
 void InitFireFloor();
 void LoadFireFloor();

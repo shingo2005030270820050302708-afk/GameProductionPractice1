@@ -56,14 +56,14 @@ void PlayScene::Load()
     case 4: mapPath = "Data/Map/Stage5.bin"; break;
     default: mapPath = "Data/Map/DefaultStage.bin"; break;
     }
-
+    LoadFireFloor();
+    LoadBlockHub();
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
-
     LoadPlayer();
     LoadNormalEnemy();
-    LoadBlockHub();
-	LoadFireFloor();
-    
+   
+
+  
 }
 void PlayScene::Start()
 {
@@ -113,6 +113,7 @@ void PlayScene::Draw()
     DrawNormalEnemy();
     DrawBlockHub();
 	DrawFireFloor();
+    SetFontSize(64);
     char buf[32];
     sprintf_s(buf, "DeathCount: %d", gData.deathCount);
     DrawString(60, 20, buf, GetColor(255, 0, 0));

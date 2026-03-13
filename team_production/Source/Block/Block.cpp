@@ -81,17 +81,7 @@ void LoadBlock()
 
 void StartBlock()
 {
-    for (int i = 0; i < BLOCK_MAX; i++)
-    {
-        g_Block[i].state = BLOCK_STAY;
-        g_Block[i].gravity = false;
-        g_Block[i].vel = VGet(0, 0, 0);
-    }
-
-    CreateBlock(B_NORMAL_BLOCK, VGet(200, 800, 0));
-    CreateBlock(B_NORMAL_BLOCK, VGet(300, 800, 0));
-    CreateBlock(B_NORMAL_BLOCK, VGet(400, 800, 0));
-    CreateBlock(B_NORMAL_BLOCK, VGet(500, 800, 0));
+   
 }
 
 void StepBlock()
