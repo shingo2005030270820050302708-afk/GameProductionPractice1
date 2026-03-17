@@ -8,6 +8,8 @@
 #include "../../Enemy/NormalEnemy.h"
 #include "../../../Data/Camera/Camera.h"
 #include "../../Gimmick/FireFloor.h"
+#include "../../Gimmick/Laser.h"
+#include "../../Gimmick/Switch.h"
 
 void PlayScene::Init()  
 {
@@ -19,7 +21,8 @@ void PlayScene::Init()
     InitNormalEnemy();
     InitBlockHub();
 	InitFireFloor();
-   
+	InitLaser();
+	InitSwitch();
 }
 void PlayScene::Load()
 {
@@ -57,6 +60,8 @@ void PlayScene::Load()
     default: mapPath = "Data/Map/DefaultStage.bin"; break;
     }
     LoadFireFloor();
+	LoadLaser();
+    LoadSwitch();
     LoadBlockHub();
     LoadMapManager(mapPath); // ステージに応じたマップ読み込み
     LoadPlayer();
@@ -71,7 +76,7 @@ void PlayScene::Start()
     //StartNormalEnemy();
     StartBlockHub();
 	StartFireFloor();
-       
+	StartLaser();
 }
 void PlayScene::Step() 
 {
@@ -79,6 +84,7 @@ void PlayScene::Step()
     StepNormalEnemy(g_PlayerData);
     StepBlockHub();
 	StepFireFloor();
+	StepLaser();
 }
 void PlayScene::Update()
 {
@@ -89,6 +95,8 @@ void PlayScene::Update()
     camera.Update(g_PlayerData);
     UpdateMapBlock();
     UpdateFireFloor(g_PlayerData);
+	UpdateLaser(g_PlayerData);
+	UpdateSwitches(g_PlayerData);
 
     if (CheckHitKey(KEY_INPUT_R))
     {
@@ -113,6 +121,8 @@ void PlayScene::Draw()
     DrawNormalEnemy();
     DrawBlockHub();
 	DrawFireFloor();
+	DrawLaser();
+    DrawSwitches();
     SetFontSize(64);
     char buf[32];
     sprintf_s(buf, "DeathCount: %d", gData.deathCount);

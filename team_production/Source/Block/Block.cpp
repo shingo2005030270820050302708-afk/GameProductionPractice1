@@ -5,6 +5,7 @@
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
 #include "../../Data/Camera/Camera.h"
+#include "../Gimmick/FireFloor.h"
 
 
 BlockData g_Block[BLOCK_MAX];
@@ -15,6 +16,8 @@ bool IsBlockOnAnotherBlock(const BlockData& block, BlockData* blockArray, int bl
     for (int i = 0; i < blockMax; i++) {
         const BlockData& other = blockArray[i];
         if (!other.active) continue;
+
+
         if (&other == &block) continue;
 
         // 下方向に1ピクセルだけずらして当たり判定
@@ -70,7 +73,6 @@ void InitBlock()
         g_Block[i].breakable = false;
         g_Block[i].width = 32;
         g_Block[i].height = 32;
-        int X = 0;
     }
 }
 void LoadBlock()
@@ -91,52 +93,81 @@ void StepBlock()
         BlockData& b = g_Block[i];
         if (!b.active) continue;
 
-        b.prevPos = b.pos;  // ← ここだけでOK
+        b.prevPos = b.pos;
 
         switch (b.state)
         {
+
         case BLOCK_PUSH:
             b.pos.x = GetPlayer()->isTurn ? GetPlayer()->posX - 35 : GetPlayer()->posX + 65;
             break;
+
         case BLOCK_LIFT:
             b.pos.x = GetPlayer()->posX + 5;
             b.pos.y = GetPlayer()->posY - 25;
             break;
+
         case BLOCK_THROW:
         case BLOCK_STAY:
-            if (b.gravity) b.vel.y += 0.5f;
+
+            if (b.gravity)
+                b.vel.y += 0.5f;
 
             b.pos.x += b.vel.x;
             b.pos.y += b.vel.y;
 
             CheckBlockMapCollision(b);
+
+            // StepBlock() 内の落下処理に追加
             if (b.vel.y >= 0)
             {
-                if (IsBlockOnAnotherBlock(b, g_Block, BLOCK_MAX))
+                // FireFloor 上判定
+                for (int fi = 0; fi < FIREFLOOR_MAX; fi++)
                 {
-                    b.vel.y = 0;
-                    b.gravity = false;
-                    b.state = BLOCK_STAY;
+                    FireFloorData& f = g_FireFloor[fi];
+                    if (!f.active) continue;
+
+                    if (CheckSquareSquare(
+                        b.pos.x,
+                        b.pos.y + b.height,
+                        b.width,
+                        1,
+                        f.pos.x,
+                        f.pos.y,
+                        f.width,
+                        f.height))
+                    {
+                        b.pos.y = f.pos.y - b.height;
+                        b.vel.y = 0;
+                        b.gravity = false;
+                        b.state = BLOCK_STAY;
+                    }
                 }
 
-                // MapChipの上判定
-                MapChipData chip = GetMapChipData(
-                    (int)((b.pos.x + b.width / 2) / MAP_CHIP_WIDTH),
-                    (int)((b.pos.y + b.height + 1) / MAP_CHIP_HEIGHT)
-                );
-
-                if (chip.mapChip != MAP_CHIP_NONE)
+                // MapChip 上判定（コインやスイッチは無視）
+                if (b.state == BLOCK_STAY) // ← 持っている・投げているときは判定スキップ
                 {
-                    b.vel.y = 0;
-                    b.gravity = false;
-                    b.state = BLOCK_STAY;
+                    int centerX = (int)(b.pos.x + b.width / 2) / MAP_CHIP_WIDTH;
+                    int bottomY = (int)(b.pos.y + b.height) / MAP_CHIP_HEIGHT;
+
+                    MapChipData chip = GetMapChipData(centerX, bottomY);
+
+                    if (chip.mapChip != MAP_CHIP_NONE &&
+                        chip.mapChip != COIN_BLOCK &&
+                        chip.mapChip != SWITCH_BLOCK) // ← スイッチも無視
+                    {
+                        b.pos.y = bottomY * MAP_CHIP_HEIGHT - b.height;
+                        b.vel.y = 0;
+                        b.gravity = false;
+                        b.state = BLOCK_STAY;
+                    }
                 }
             }
             break;
         }
     }
 }
-    void CheckBlockMapCollision(BlockData& b)
+void CheckBlockMapCollision(BlockData& b)
 {
     if (!b.active) return;
 
@@ -155,50 +186,61 @@ void StepBlock()
         for (int x = leftTile; x <= rightTile; x++)
         {
             MapChipData chip = GetMapChipData(x, y);
-            if (chip.mapChip == MAP_CHIP_NONE) continue;
-            if (chip.mapChip == COIN_BLOCK) continue;
-            if (!chip.data || !chip.data->active) continue;
+
+            if (chip.mapChip == MAP_CHIP_NONE)
+                continue;
+
+            // コインは完全無視
+            if (chip.mapChip == COIN_BLOCK)
+                continue;
+
+            if (!chip.data) continue;
+            if (!chip.data->active) continue;
 
             BlockData* mapBlock = chip.data;
-            if (CheckSquareSquare(bx, by, bw, bh, mapBlock->pos.x, mapBlock->pos.y, mapBlock->width, mapBlock->height))
+
+            if (!CheckSquareSquare(bx, by, bw, bh,
+                mapBlock->pos.x,
+                mapBlock->pos.y,
+                mapBlock->width,
+                mapBlock->height))
+                continue;
+
+            float overlapTop = (by + bh) - mapBlock->pos.y;
+            float overlapBottom = (mapBlock->pos.y + mapBlock->height) - by;
+            float overlapLeft = (bx + bw) - mapBlock->pos.x;
+            float overlapRight = (mapBlock->pos.x + mapBlock->width) - bx;
+
+            float minOverlapX = min(overlapLeft, overlapRight);
+            float minOverlapY = min(overlapTop, overlapBottom);
+
+            if (minOverlapY < minOverlapX)
             {
-                float overlapTop = (by + bh) - mapBlock->pos.y;
-                float overlapBottom = (mapBlock->pos.y + mapBlock->height) - by;
-                float overlapLeft = (bx + bw) - mapBlock->pos.x;
-                float overlapRight = (mapBlock->pos.x + mapBlock->width) - bx;
-
-                float minOverlapX = (overlapLeft < overlapRight) ? overlapLeft : overlapRight;
-                float minOverlapY = (overlapTop < overlapBottom) ? overlapTop : overlapBottom;
-
-                if (minOverlapY < minOverlapX)
+                if (overlapTop < overlapBottom)
                 {
-                    if (overlapTop < overlapBottom)
-                    {
-                        b.pos.y = mapBlock->pos.y - bh;
-                        b.vel.y = 0;
-                        b.gravity = false;
-                        b.state = BLOCK_STAY;
-                    }
-                    else
-                    {
-                        b.pos.y = mapBlock->pos.y + mapBlock->height;
-                        b.vel.y = 0;
-                    }
+                    b.pos.y = mapBlock->pos.y - bh;
+                    b.vel.y = 0;
+                    b.gravity = false;
+                    b.state = BLOCK_STAY;
                 }
                 else
                 {
-                    if (overlapLeft < overlapRight)
-                        b.pos.x = mapBlock->pos.x - bw;
-                    else
-                        b.pos.x = mapBlock->pos.x + mapBlock->width;
-
-                    b.vel.x = 0;
+                    b.pos.y = mapBlock->pos.y + mapBlock->height;
+                    b.vel.y = 0;
                 }
+            }
+            else
+            {
+                if (overlapLeft < overlapRight)
+                    b.pos.x = mapBlock->pos.x - bw;
+                else
+                    b.pos.x = mapBlock->pos.x + mapBlock->width;
+
+                b.vel.x = 0;
             }
         }
     }
 }
-
 void UpdateBlock(PlayerData& player)
 {
 
@@ -264,7 +306,7 @@ void UpdateBlock(PlayerData& player)
                 b.gravity = false;
 
                 player.holdingBlock = &b;
-                return;   
+                break;
             }
         }
         break;
@@ -277,37 +319,31 @@ void UpdateBlock(PlayerData& player)
                 b.hold = false;
                 player.holdingBlock = nullptr;
 
-                // プレイヤーと重ならないように位置補正
-                float px = player.posX;
-                float py = player.posY;
-                float pw = player.boxCollision.width;
-                float ph = player.boxCollision.height;
+                // ★ここでプレイヤーの本当の座標を使う
+                float ppx = player.posX;
+                float ppy = player.posY;
+                float ppw = player.boxCollision.width;
+                float pph = player.boxCollision.height;
 
-                float bx = b.pos.x;
-                float by = b.pos.y;
                 float bw = b.width;
                 float bh = b.height;
 
-                // 下に置く
-                b.pos.x = px + pw / 2 - bw / 2;
-                b.pos.y = py + ph + 2; // 少し下に
+                float placeX;
+                float placeY;
 
-                // プレイヤーと重なっていたら補正
-                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
+                if (player.isTurn) // 左向き
                 {
-                    // プレイヤーの右に置く
-                    b.pos.x = px + pw + 4;
-                    b.pos.y = py;
+                    placeX = ppx - bw - 4;
+                }
+                else
+                {
+                    placeX = ppx + ppw + 4;
                 }
 
-                // それでも重なれば左
-                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
-                {
-                    b.pos.x = px - bw - 4;
-                    b.pos.y = py;
-                }
+                placeY = ppy + pph - bh;
 
-                // 最後に重力ON
+                b.pos.x = placeX;
+                b.pos.y = placeY;
                 b.gravity = true;
             }
             else if (IsTriggerKey(KEY_X))

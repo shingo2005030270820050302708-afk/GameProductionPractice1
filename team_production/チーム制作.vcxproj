@@ -153,6 +153,8 @@
     <ClCompile Include="Source\FPS\Fps.cpp" />
     <ClCompile Include="Source\Gimmick\FireFloor.cpp" />
     <ClCompile Include="Source\Gimmick\GimmickManager.cpp" />
+    <ClCompile Include="Source\Gimmick\Laser.cpp" />
+    <ClCompile Include="Source\Gimmick\Switch.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Map\MapBlock.cpp" />
@@ -191,6 +193,8 @@
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
     <ClInclude Include="Source\Gimmick\FireFloor.h" />
     <ClInclude Include="Source\Gimmick\GimmickManager.h" />
+    <ClInclude Include="Source\Gimmick\Laser.h" />
+    <ClInclude Include="Source\Gimmick\Switch.h" />
     <ClInclude Include="Source\Input\Input.h" />
     <ClInclude Include="Source\Map\MapBlock.h" />
     <ClInclude Include="Source\Map\MapChip.h" />

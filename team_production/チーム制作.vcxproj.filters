@@ -171,6 +171,12 @@
     <ClCompile Include="Source\Enemy\NormalEnemy .cpp">
       <Filter>Source\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Gimmick\Laser.cpp">
+      <Filter>Source\Gimmick</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Gimmick\Switch.cpp">
+      <Filter>Source\Gimmick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Player\Character.h">
@@ -282,6 +288,12 @@
       <Filter>Source\Gimmick</Filter>
     </ClInclude>
     <ClInclude Include="Source\Gimmick\GimmickManager.h">
+      <Filter>Source\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gimmick\Laser.h">
+      <Filter>Source\Gimmick</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gimmick\Switch.h">
       <Filter>Source\Gimmick</Filter>
     </ClInclude>
   </ItemGroup>

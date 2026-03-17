@@ -32,6 +32,9 @@ enum MapChipType
     FIRE_FLOOR_BLOCK,
     H_NORMAL_BLOCK,
 	H_ICE_BLOCK,
+    LASER_BLOCK,
+    SWITCH_BLOCK,
+    DELETE_BLOCK,
     BLOCK_TYPE_MAX,
 	
 
@@ -85,6 +88,11 @@ struct BlockData
 
 struct MapChipData
 {
-    int mapChip = 0;       
+    int mapChip = 0;       // チップ種類
     BlockData* data = nullptr;
+
+    // スイッチで消えるフラグ
+    bool disappearWithSwitch = false;
+    int linkedSwitchX = -1;
+    int linkedSwitchY = -1;
 };

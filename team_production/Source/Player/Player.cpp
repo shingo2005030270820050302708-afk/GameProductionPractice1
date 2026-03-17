@@ -13,7 +13,7 @@
 #define PLAYER_DEFAULT_POS_Y (640.0f)
 
 // Playerの諸々のステータス
-#define PLAYER_MOVE_SPEED (3.0f)
+#define PLAYER_MOVE_SPEED (2.5f)
 #define PLAYER_JUMP_POWER (11.5f)
 #define PLAYER_GRAVITY (0.4f)
 
@@ -41,7 +41,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
     {4, 8, 64, 64},//DEATH
     {4, 4, 64, 64},//HURT
     {6, 4, 40, 64},//THROW
-    {6, 6, 40, 64},//DUST1(RUN,PUSH)
+    {10, 6, 40, 64},//DUST1(RUN,PUSH)
     {6, 5, 64, 64},//DUST2(JUMP)
 
 };
@@ -121,6 +121,11 @@ void StepPlayer()
 void UpdatePlayer()
 {
     if (!g_PlayerData.active) return;
+
+    if (g_PlayerData.state == NORMAL)
+    {
+        StepPlayer();
+    }
 
     if (g_PlayerData.posY > 900.0f && g_PlayerData.state != DEAD)
     {

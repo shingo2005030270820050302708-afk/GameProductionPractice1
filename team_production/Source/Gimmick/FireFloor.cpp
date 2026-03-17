@@ -120,12 +120,13 @@ void UpdateFireFloor(PlayerData& player)
         float pw = player.boxCollision.width;
         float ph = player.boxCollision.height;
 
+        float footY = py + ph;
+
         bool playerHit =
             (px < fx + fw) &&
             (px + pw > fx) &&
-            (py < fy + fh) &&
-            (py + ph > fy);
-
+            (footY >= fy) &&
+            (footY <= fy + 1);
 
         // NormalBlock / WoodBlock 判定（火床無効化には関与しない）
 
@@ -172,9 +173,12 @@ void UpdateFireFloor(PlayerData& player)
       
         // プレイヤー判定（damagingがtrueの場合のみ）
     
-        if (playerHit && f.damaging)
+        if (playerHit && f.damaging && player.state == NORMAL)
         {
             player.state = DEAD;
+            player.deadTimer = 0;
+            player.moveX = 0;
+            player.moveY = -6.0f;
         }
     }
 }

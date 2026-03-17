@@ -6,6 +6,8 @@
 #include "../Gimmick/FireFloor.h"
 #include "../Block/BlockManager.h"
 #include "../Block/IceBlock.h"
+#include "../Gimmick/Laser.h"
+#include "../Gimmick/Switch.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = {};
 
@@ -52,6 +54,8 @@ void LoadMapChipData(const char* path)
             case 10: g_MapChip[y][x].mapChip = FIRE_FLOOR_BLOCK; break;
             case 11: g_MapChip[y][x].mapChip = H_NORMAL_BLOCK; break;
             case 12: g_MapChip[y][x].mapChip = H_ICE_BLOCK; break;
+            case 13: g_MapChip[y][x].mapChip = LASER_BLOCK; break;
+            case 14: g_MapChip[y][x].mapChip = SWITCH_BLOCK; break;
             default: g_MapChip[y][x].mapChip = MAP_CHIP_NONE; break;
             }
             g_MapChip[y][x].data = nullptr;
@@ -98,6 +102,41 @@ void CreateMap()
             if (type == FIRE_FLOOR_BLOCK)
             {
                 CreateFireFloorIfNotExist(pos); // ìÒèdìoò^ñhé~
+                continue;
+            }
+            if (type == LASER_BLOCK)
+            {
+                VECTOR pos = VGet(x * MAP_CHIP_WIDTH + MAP_CHIP_WIDTH / 2.0f, y * MAP_CHIP_HEIGHT, 0.0f);
+                float length = MAP_CHIP_HEIGHT * MAP_CHIP_Y_NUM; // ç≈ëÂí∑Ç≥ÅAâ∫Ç…å¸Ç©Ç¡ÇƒêLÇ—ÇÈ
+                CreateLaserIfNotExist(pos, length); // ìÒèdìoò^ñhé~
+                continue;
+            }
+            if (type == SWITCH_BLOCK)
+            {
+                int mapX = x;
+                int mapY = y;
+
+                // ä˘Ç… LoadSwitch() Ç≈ÉçÅ[ÉhçœÇ›ÇÃâÊëúÇégÇ§
+                extern SwitchData g_Switch[SWITCH_MAX]; // Ç‡ÇµÇ‹Çæ extern Ç™ïKóvÇ»ÇÁ
+                int handleNormal = g_Switch[0].handleNormal;
+                int handlePressed = g_Switch[0].handlePressed;
+
+                // blockIndex ÇÕÇ‹ÇæåàÇ‹Ç¡ÇƒÇ¢Ç»Ç¢èÍçáÇÕ -1
+                CreateSwitch(mapX, mapY, -1, handleNormal, handlePressed);
+
+                // ÉXÉCÉbÉ`Ç…ïRïtÇ≠ DELETE_BLOCK ÇÃà íuÇìoò^
+                for (int by = 0; by < MAP_CHIP_Y_NUM; by++)
+                {
+                    for (int bx = 0; bx < MAP_CHIP_X_NUM; bx++)
+                    {
+                        if (g_MapChip[by][bx].mapChip == DELETE_BLOCK)
+                        {
+                            g_MapChip[by][bx].linkedSwitchX = mapX;
+                            g_MapChip[by][bx].linkedSwitchY = mapY;
+                        }
+                    }
+                }
+
                 continue;
             }
             if (type == H_NORMAL_BLOCK)

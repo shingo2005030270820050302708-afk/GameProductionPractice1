@@ -187,37 +187,31 @@ void UpdateIceBlock(PlayerData& player)
                 b.hold = false;
                 player.holdingBlock = nullptr;
 
-                // プレイヤーと重ならないように位置補正
-                float px = player.posX;
-                float py = player.posY;
-                float pw = player.boxCollision.width;
-                float ph = player.boxCollision.height;
+                // ★ここでプレイヤーの本当の座標を使う
+                float ppx = player.posX;
+                float ppy = player.posY;
+                float ppw = player.boxCollision.width;
+                float pph = player.boxCollision.height;
 
-                float bx = b.pos.x;
-                float by = b.pos.y;
                 float bw = b.width;
                 float bh = b.height;
 
-                // 下に置く
-                b.pos.x = px + pw / 2 - bw / 2;
-                b.pos.y = py + ph + 2; // 少し下に
+                float placeX;
+                float placeY;
 
-                // プレイヤーと重なっていたら補正
-                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
+                if (player.isTurn) // 左向き
                 {
-                    // プレイヤーの右に置く
-                    b.pos.x = px + pw + 4;
-                    b.pos.y = py;
+                    placeX = ppx - bw - 4;
+                }
+                else
+                {
+                    placeX = ppx + ppw + 4;
                 }
 
-                // それでも重なれば左
-                if (CheckSquareSquare(px, py, pw, ph, b.pos.x, b.pos.y, bw, bh))
-                {
-                    b.pos.x = px - bw - 4;
-                    b.pos.y = py;
-                }
+                placeY = ppy + pph - bh;
 
-                // 最後に重力ON
+                b.pos.x = placeX;
+                b.pos.y = placeY;
                 b.gravity = true;
             }
             else if (IsTriggerKey(KEY_X))

@@ -32,6 +32,7 @@ void LoadMapBlock()
     g_MapBlocksHandle[MIDDLE_BLOCK] = LoadGraph("Data/Map/M_Block.png"); //中央のブロック画像
     g_MapBlocksHandle[GOAL_BLOCK] = LoadGraph("Data/Map/Goal.png"); //中央のブロック画像
 	g_MapBlocksHandle[COIN_BLOCK] = LoadGraph("Data/Map/golden.rotate.png"); //コインブロック画像
+    g_MapBlocksHandle[DELETE_BLOCK] = LoadGraph("Data/Map/IndustrialTile_27.png");
 }
 // ブロック生成
 BlockData* CreateMapBlock(MapChipType type, VECTOR pos)
